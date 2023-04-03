@@ -12,8 +12,8 @@ const MenuItemSelectionDisplay = ({ menuItems, order, onUpdate }) => {
                             info={menuItem} 
                             subtract={
                                 order.some(
-                                    menuItem => menuItem.name === menuItem
-                                    && menuItem.quantity > 0
+                                    item => item.name === menuItem.name
+                                    && item.quantity > 0
                                 )
                             }
                             onUpdate={onUpdate}

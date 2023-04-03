@@ -57,7 +57,7 @@ const MenuItemCard = ({ info, subtract, onUpdate }) => {
           <Button 
             size="md" fontSize="1.5rem" 
             colorScheme='primary' variant='solid'
-            onClick={() => onUpdate(info.name, info.price, false)} disabled={!subtract}
+            onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
             p={3} px="2em"
           >{"-"}</Button>
           <Button 
