@@ -35,6 +35,7 @@ const MenuCategorySelectionDisplay = ({ selectedCategory, onSelectCategory }) =>
                             selectedCategory === categoryName ?
                                 "primary.300" : ""
                         }
+                        cursor="pointer"
                         >
                             <Text
                                 textAlign="center"

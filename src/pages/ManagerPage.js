@@ -16,11 +16,11 @@ import {
   Center,
 } from "@chakra-ui/react";
 import BaseLayout from "../components/baseLayout";
-import CreateDuelForm from "../components/playContent/createDuelForm";
-import WaitingDuelsTable from "../components/playContent/waitingDuelsTable";
-import OngoingDuelsTable from "../components/playContent/ongoingDuelsTable";
-import FinishedDuelsTable from "../components/playContent/finishedDuelsTable";
-import DuelCounter from "../components/playContent/duelCounter";
+import CreateDuelForm from "../components/manager/createDuelForm";
+import WaitingDuelsTable from "../components/manager/waitingDuelsTable";
+import OngoingDuelsTable from "../components/manager/ongoingDuelsTable";
+import FinishedDuelsTable from "../components/manager/finishedDuelsTable";
+import DuelCounter from "../components/manager/duelCounter";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 
