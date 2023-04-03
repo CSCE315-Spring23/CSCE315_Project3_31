@@ -66,6 +66,10 @@ const ServerPage = () => {
       if (order.at(i).name === menuItemName) {
         new_order = [...order];
         new_order.at(i).quantity += add ? 1 : -1;
+        if (new_order.at(i).quantity === 0) 
+          new_order = new_order.filter(
+            (_, index) => index !== i
+          );
         setOrder(new_order);
         return;
       }
