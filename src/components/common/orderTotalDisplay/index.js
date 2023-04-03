@@ -9,6 +9,8 @@ import {
   ModalCloseButton,
   ModalFooter,
   useDisclosure,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 
 const OrderTotalDisplay = ({ order }) => {
@@ -20,7 +22,7 @@ const OrderTotalDisplay = ({ order }) => {
   return (
     <Flex flexDirection="column" justify="center" py="0.5em" border="solid 1px" borderColor="grey.100" rounded="md" boxShadow="lg">
       <Box mt={2} mx="auto">
-        <Text fontSize="1.5rem"><b>Total: </b>${total}</Text>
+        <Text fontSize="1.5rem"><b>Total: </b>${total.toFixed(2)}</Text>
       </Box>
       <Box fontSize="1.2rem" my={2} mx="auto">
         <Button 
@@ -34,24 +36,52 @@ const OrderTotalDisplay = ({ order }) => {
           View Order
         </Button>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
-            <ModalHeader>Confirm Your Order</ModalHeader>
+            <ModalHeader>
+              <Text textStyle="body2Semi">Confirm Your Order</Text>
+            </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Grid templateColumns='repeat(3, 1fr)' gap={0}>
+              <GridItem>
+                <Text textStyle="body3Semi">Item</Text>
+              </GridItem>
+              <GridItem>
+                <Text textStyle="body3Semi">Price</Text>
+              </GridItem>
+              <GridItem>
+                <Text textStyle="body3Semi">Quantity</Text>
+              </GridItem>
+            </Grid>
             {
               order.map(
                 menuItem => 
-                <Box>
-                  {menuItem.name} | {menuItem.price} | {menuItem.quantity}
-                </Box>
+                <Grid templateColumns='repeat(3, 1fr)' gap={0}>
+                  <GridItem>
+                    <Text textStyle="body3">{menuItem.name}</Text>
+                  </GridItem>
+                  <GridItem>
+                    <Text textStyle="body3">{menuItem.price}</Text>
+                  </GridItem>
+                  <GridItem>
+                    <Text textStyle="body3">{menuItem.quantity}</Text>
+                  </GridItem>
+                </Grid>
               )
             }
+            <Flex justify='space-between' pt={7}>
+              <Text textStyle="body2Semi">Order Total:</Text>
+              <Text textStyle="body2">${total.toFixed(2)}</Text>
+            </Flex>
           </ModalBody>
           <ModalFooter justifyContent="center">
             <Button colorScheme="primary" mr={3} onClick={onClose}>
-              Ok
+              Confirm
+            </Button>
+            <Button colorScheme="primary" variant='outline' onClick={onClose}>
+              Cancel
             </Button>
           </ModalFooter>
         </ModalContent>

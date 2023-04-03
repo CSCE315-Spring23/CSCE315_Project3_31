@@ -62,37 +62,50 @@ const InADuelAlert = ({ duelLink }) => {
 
 const CustomerPage = () => {
   const [category, setCategory] = useState("Sandwiches");
-  const [order, setOrder] = useState(
-    [
-      {
-        name: "Food 1",
-        price: 5.00,
-        quantity: 7
-      },
-      {
-        name: "Food 2",
-        price: 5.50,
-        quantity: 3
+  const [order, setOrder] = useState([]);
+
+  const handleUpdate = (menuItemName, price, add) => {
+    let new_order;
+    for (let i = 0; i < order.length; i++) {
+      if (order.at(i).name === menuItemName) {
+        new_order = [...order];
+        new_order.at(i).quantity += add ? 1 : -1;
+        setOrder(new_order);
+        return;
       }
-    ]
-  );
+    }
+    new_order = [...order, { name: menuItemName, price: price, quantity: 1}];
+    setOrder(new_order);
+  }
 
   const menuItems = [
     {
-      name: "Food",
+      name: "Food 1",
       price: 1.00
     },
     {
-      name: "Food",
-      price: 1.00
+      name: "Food 2",
+      price: 2.00
     },
     {
-      name: "Food",
-      price: 1.00
+      name: "Food 3",
+      price: 3.00
     },
     {
-      name: "Food",
-      price: 1.00
+      name: "Food 4",
+      price: 4.00
+    },
+    {
+      name: "Food 5",
+      price: 5.00
+    },
+    {
+      name: "Food 6",
+      price: 6.00
+    },
+    {
+      name: "Food 7",
+      price: 7.00
     }
   ];
 
@@ -108,7 +121,7 @@ const CustomerPage = () => {
             </Box>
           </Box>
           <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} onUpdate={setOrder} />
+            <MenuItemSelectionDisplay menuItems={menuItems} order={order} onUpdate={handleUpdate} />
           </Flex>
         </>
       }

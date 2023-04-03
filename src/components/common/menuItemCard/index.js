@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const MenuItemCard = ({ info, onUpdate }) => {
+const MenuItemCard = ({ info, subtract, onUpdate }) => {
   const border = useColorModeValue(
     "solid 1px rgb(0, 0, 0, 0.5)",
     "solid 1px #7d7dff"
@@ -29,21 +29,21 @@ const MenuItemCard = ({ info, onUpdate }) => {
       boxShadow={shadow}
       width="18em"
       height="fit-content"
-      py={5}
+      paddingBottom={5}
       _hover={isMobile ? "" : onHover}
       transition="border-color 0.25s ease, box-shadow 0.25s ease"
     >
       <Box
         mx="auto"
-        borderRadius="100%"
-        width="10em"
-        height="10em"
+        width="18em"
+        height="18em"
+        rounded='md'
         overflow="hidden"
         bg="black"
       >
         {info.image ? <img src={info.image} /> : ""}
       </Box>
-      <Text margin="5px auto 0" width="fit-content" textStyle="body2Semi">
+      <Text margin="5px auto 0" mt={5} width="fit-content" textStyle="body2Semi">
         {info.name}
       </Text>
       <Text
@@ -51,19 +51,19 @@ const MenuItemCard = ({ info, onUpdate }) => {
         width="fit-content"
         textStyle="body3"
       >
-        Price: ${info.price}
+        Price: ${info.price.toFixed(2)}
       </Text>
       <Flex justify='center' gap={1} pt={2}>
           <Button 
             size="md" fontSize="1.5rem" 
             colorScheme='primary' variant='solid'
-            onClick={() => {}} disabled={false}
+            onClick={() => onUpdate(info.name, info.price, false)} disabled={!subtract}
             p={3} px="2em"
           >{"-"}</Button>
           <Button 
             size="md" fontSize="1.5rem"
             colorScheme='primary' variant='solid'
-            onClick={() => {}} disabled={false}
+            onClick={() => onUpdate(info.name, info.price, true)}
             p={3} px="2em"
           >{"+"}</Button>
         </Flex>
