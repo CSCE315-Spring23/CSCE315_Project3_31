@@ -14,27 +14,12 @@ export default class Database {
         console.log(err);
       }
     );
-    console.log((Date.now() - time) / 1000);
     return response;
   }
-  static async getSubmissionsByDuelIdAndUid(id, uid) {
-    let res = await this._getModel(`general/playerduelsubmissions/${id}/${uid}`);
-    if (res?.submissions) return res.submissions;
-    else console.log("Couldn't get submissions.");
-    return [];
-  }
 
-  static async addDuel(params) {
-    const duel = await fetch(`${backendOrigin}/duels/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(params)
-    }).then(
-      res => res.json()
-    ).catch((err) => console.log(err));
-    return duel;
+  static async getMenuItems() {
+    let res = await this._getModel('menu');
+    return res;
   }
 
   static async addMessage(params) {
@@ -48,18 +33,6 @@ export default class Database {
       res => res.json()
     ).catch((err) => console.log(err));
     return message;
-  }
-
-  static async addPlayer() {
-    const player = await fetch(`${backendOrigin}/players/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(
-      res => res.json()
-    ).catch((err) => console.log(err));
-    return player;
   }
 }
 

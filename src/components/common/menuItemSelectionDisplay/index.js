@@ -5,7 +5,7 @@ const MenuItemSelectionDisplay = ({ menuItems, order, onUpdate }) => {
     return (
         <Grid templateColumns='repeat(3, 1fr)' gap={2}>
             {
-                menuItems.map(
+                menuItems?.length ? menuItems.map(
                     menuItem => 
                     <GridItem>
                         <MenuItemCard 
@@ -19,7 +19,7 @@ const MenuItemSelectionDisplay = ({ menuItems, order, onUpdate }) => {
                             onUpdate={onUpdate}
                         />
                     </GridItem>
-                )
+                ) : ""
             }
         </Grid>
     );

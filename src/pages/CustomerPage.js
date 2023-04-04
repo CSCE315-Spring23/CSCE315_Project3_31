@@ -63,6 +63,15 @@ const InADuelAlert = ({ duelLink }) => {
 const CustomerPage = () => {
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    const updateMenu = async () => {
+      const menu = await Database.getMenuItems();
+      setMenuItems(menu);
+    }
+    updateMenu();
+  }, []);
 
   const handleUpdate = (menuItemName, price, add) => {
     let new_order;
@@ -81,37 +90,6 @@ const CustomerPage = () => {
     new_order = [...order, { name: menuItemName, price: price, quantity: 1}];
     setOrder(new_order);
   }
-
-  const menuItems = [
-    {
-      name: "Food 1",
-      price: 1.00
-    },
-    {
-      name: "Food 2",
-      price: 2.00
-    },
-    {
-      name: "Food 3",
-      price: 3.00
-    },
-    {
-      name: "Food 4",
-      price: 4.00
-    },
-    {
-      name: "Food 5",
-      price: 5.00
-    },
-    {
-      name: "Food 6",
-      price: 6.00
-    },
-    {
-      name: "Food 7",
-      price: 7.00
-    }
-  ];
 
   return (
     <BaseLayout
