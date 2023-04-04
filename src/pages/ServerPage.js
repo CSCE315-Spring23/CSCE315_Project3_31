@@ -24,41 +24,18 @@ import MenuCategorySelectionDisplay from "../components/common/menuCategorySelec
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 
 
-const InADuelAlert = ({ duelLink }) => {
-  const navigate = useNavigate();
-  const [navigating, setNavigating] = useState(false);
-  const backgroundColor = useColorModeValue("#ffa987", "");
-
-  return (
-    <Alert
-      width={["19em", "25em", "45em", "60em", "72em"]}
-      height={[null, null, "3em", "4em"]}
-      status="warning"
-      variant="left-accent"
-      backgroundColor={backgroundColor}
-    >
-      <AlertIcon />
-      <AlertTitle>You are currently in a duel!</AlertTitle>
-      <Button
-        variant="solid"
-        colorScheme="primary"
-        isLoading={navigating}
-        ml={5}
-        transform={[null, "scale(0.9)", null, "none"]}
-        onClick={() => {
-          setNavigating(true);
-          window.location.href = duelLink;
-        }}
-      >
-        Return
-      </Button>
-    </Alert>
-  );
-};
-
 const ServerPage = () => {
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    const updateMenu = async () => {
+      const menu = await Database.getMenuItems();
+      setMenuItems(menu);
+    }
+    updateMenu();
+  }, []);
 
   const handleUpdate = (menuItemName, price, add) => {
     let new_order;
@@ -78,37 +55,6 @@ const ServerPage = () => {
     setOrder(new_order);
   }
 
-  const menuItems = [
-    {
-      name: "Food 1",
-      price: 1.00
-    },
-    {
-      name: "Food 2",
-      price: 2.00
-    },
-    {
-      name: "Food 3",
-      price: 3.00
-    },
-    {
-      name: "Food 4",
-      price: 4.00
-    },
-    {
-      name: "Food 5",
-      price: 5.00
-    },
-    {
-      name: "Food 6",
-      price: 6.00
-    },
-    {
-      name: "Food 7",
-      price: 7.00
-    }
-  ];
-
   return (
     <BaseLayout
       content={
@@ -124,7 +70,7 @@ const ServerPage = () => {
             </Box>
           </Box>
           <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} order={order} onUpdate={handleUpdate} />
+            <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
           </Flex>
         </>
       }

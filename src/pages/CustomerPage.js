@@ -62,6 +62,15 @@ const InADuelAlert = ({ duelLink }) => {
 const CustomerPage = () => {
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    const updateMenu = async () => {
+      const menu = await Database.getMenuItems();
+      setMenuItems(menu);
+    };
+    updateMenu();
+  }, []);
 
   const handleUpdate = (menuItemName, price, add) => {
     let new_order;
@@ -78,12 +87,6 @@ const CustomerPage = () => {
     new_order = [...order, { name: menuItemName, price: price, quantity: 1 }];
     setOrder(new_order);
   };
-
-  const menuItems = [];
-  // TODO: Replace loop with a funciton call once database is setup
-  for (let i = 1; i <= 8; ++i) {
-    menuItems.push({ name: "Item " + i, price: i });
-  }
 
   return (
     <BaseLayout
@@ -102,6 +105,7 @@ const CustomerPage = () => {
           <Flex justify="flex-end">
             <MenuItemSelectionDisplay
               menuItems={menuItems}
+              category={category}
               order={order}
               onUpdate={handleUpdate}
             />
