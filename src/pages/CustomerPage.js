@@ -103,7 +103,7 @@ const CustomerPage = () => {
             </Box>
           </Box>
           <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} order={order} onUpdate={handleUpdate} />
+            <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
           </Flex>
         </>
       }
