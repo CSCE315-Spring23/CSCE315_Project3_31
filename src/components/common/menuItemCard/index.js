@@ -43,7 +43,7 @@ const MenuItemCard = ({ info, subtract, onUpdate }) => {
       >
         {info.image ? <img src={info.image} /> : ""}
       </Box>
-      <Text margin="5px auto 0" mt={5} width="fit-content" textStyle="body2Semi">
+      <Text width='10em' mx='auto' textAlign='center' textStyle="body2Semi">
         {info.name}
       </Text>
       <Text
