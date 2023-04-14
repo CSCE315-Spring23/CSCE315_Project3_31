@@ -27,7 +27,6 @@ import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 
-
 const InADuelAlert = ({ duelLink }) => {
   const navigate = useNavigate();
   const [navigating, setNavigating] = useState(false);
@@ -69,7 +68,7 @@ const CustomerPage = () => {
     const updateMenu = async () => {
       const menu = await Database.getMenuItems();
       setMenuItems(menu);
-    }
+    };
     updateMenu();
   }, []);
 
@@ -79,31 +78,37 @@ const CustomerPage = () => {
       if (order.at(i).name === menuItemName) {
         new_order = [...order];
         new_order.at(i).quantity += add ? 1 : -1;
-        if (new_order.at(i).quantity === 0) 
-          new_order = new_order.filter(
-            (_, index) => index !== i
-          );
+        if (new_order.at(i).quantity === 0)
+          new_order = new_order.filter((_, index) => index !== i);
         setOrder(new_order);
         return;
       }
     }
-    new_order = [...order, { name: menuItemName, price: price, quantity: 1}];
+    new_order = [...order, { name: menuItemName, price: price, quantity: 1 }];
     setOrder(new_order);
-  }
+  };
 
   return (
     <BaseLayout
       content={
         <>
           {console.log(order)}
-          <Box position='fixed'>
-            <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
+          <Box position="fixed">
+            <MenuCategorySelectionDisplay
+              selectedCategory={category}
+              onSelectCategory={setCategory}
+            />
             <Box mt="1em">
               <OrderTotalDisplay order={order} />
             </Box>
           </Box>
-          <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
+          <Flex justify="flex-end">
+            <MenuItemSelectionDisplay
+              menuItems={menuItems}
+              category={category}
+              order={order}
+              onUpdate={handleUpdate}
+            />
           </Flex>
         </>
       }
