@@ -52,6 +52,7 @@ const MenuPage = () => {
               menuItems={menuItems}
               readOnly={true}
               category={category}
+              order={order}
             />
           </Flex>
         </>
