@@ -21,14 +21,15 @@ import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
-import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
+import ItemSelectionDisplay from "../components/manager/itemSelectionDisplay";
 
 
 const ManagerPage = () => {
-  const [lookingAtMenu, setLookingAtMenu] = useState(false);
+  const [lookingAtMenu, setLookingAtMenu] = useState(true);
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
+  const [inventoryItems, setInventoryItems] = useState([]);
 
   useEffect(() => {
     const updateMenu = async () => {
@@ -83,8 +84,12 @@ const ManagerPage = () => {
               <OrderHistoryDisplay />
             </Box>
           </Box>
-          <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
+          <Flex justify='center'>
+            <ItemSelectionDisplay 
+              isMenu={lookingAtMenu} 
+              items={lookingAtMenu ? menuItems : inventoryItems} 
+              category={category} onUpdate={handleUpdate} 
+            />
           </Flex>
         </>
       }

@@ -18,7 +18,6 @@ import {
 import BaseLayout from "../components/baseLayout";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
-import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 
