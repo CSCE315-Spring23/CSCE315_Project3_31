@@ -36,10 +36,18 @@ const ManagerPage = () => {
       const menu = await Database.getMenuItems();
       setMenuItems(menu);
     }
+    const updateInventory = async () => {
+      const inventory = await Database.getInventoryItems();
+      console.log(inventory);
+      setInventoryItems(inventory);
+    }
     if (!menuItems.length) {
       updateMenu();
     }
-  }, [menuItems]);
+    if (!inventoryItems.length) {
+      updateInventory();
+    }
+  }, [menuItems, inventoryItems]);
 
   const handleUpdate = (menuItemName, price, add) => {
     let new_order;
@@ -63,7 +71,7 @@ const ManagerPage = () => {
     <BaseLayout
       content={
         <>
-          <Box position='fixed'>
+          <Box position='fixed' width="15em">
             <Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
               <Text textStyle="body3Semi" textAlign="center">Viewing:</Text>
               <Button 
@@ -79,7 +87,10 @@ const ManagerPage = () => {
                 p={3} px="2em"
               >Inventory</Button>
             </Flex>
-            <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
+            {
+              lookingAtMenu ?
+              <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> : ""
+            }
             <Box mt="1em">
               <OrderHistoryDisplay />
             </Box>
