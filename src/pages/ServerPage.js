@@ -34,8 +34,10 @@ const ServerPage = () => {
       const menu = await Database.getMenuItems();
       setMenuItems(menu);
     }
-    updateMenu();
-  }, []);
+    if (!menuItems.length) {
+      updateMenu();
+    }
+  }, [menuItems]);
 
   const handleUpdate = (menuItemName, price, add) => {
     let new_order;
