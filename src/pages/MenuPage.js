@@ -20,6 +20,7 @@ import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
+import nameToUrl from "../imageMapping";
 
 
 const MenuPage = () => {
@@ -30,6 +31,10 @@ const MenuPage = () => {
   useEffect(() => {
     const updateMenu = async () => {
       const menu = await Database.getMenuItems();
+      for (let i = 0; i < menu.length; i++) {
+        let imageUrl = nameToUrl[menu[i].name];
+        if (imageUrl) menu[i].image = imageUrl;
+      }
       setMenuItems(menu);
     };
     updateMenu();

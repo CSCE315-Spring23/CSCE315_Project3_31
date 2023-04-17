@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
+import nameToUrl from "../imageMapping";
 
 
 const CustomerPage = () => {
@@ -31,6 +32,10 @@ const CustomerPage = () => {
   useEffect(() => {
     const updateMenu = async () => {
       const menu = await Database.getMenuItems();
+      for (let i = 0; i < menu.length; i++) {
+        let imageUrl = nameToUrl[menu[i].name];
+        if (imageUrl) menu[i].image = imageUrl;
+      }
       setMenuItems(menu);
     };
     updateMenu();

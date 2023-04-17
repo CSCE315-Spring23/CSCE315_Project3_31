@@ -39,7 +39,7 @@ const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
         height="18em"
         rounded='md'
         overflow="hidden"
-        bg="black"
+        bg="white"
       >
         {info.image ? <img src={info.image} /> : ""}
       </Box>
