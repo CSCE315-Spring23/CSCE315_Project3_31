@@ -89,7 +89,16 @@ const ManagerPage = () => {
             </Flex>
             {
               lookingAtMenu ?
-              <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> : ""
+                <Flex flexDirection="column" justify="center" gap="1em">
+                  <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
+                  <Button 
+                  size="md" fontSize="1.5rem" 
+                  colorScheme='primary' variant='solid'
+                  onClick={() => {}}
+                  p={3} px="2em"
+                >New Menu Item</Button>
+                </Flex> 
+                : ""
             }
             <Box mt="1em">
               <OrderHistoryDisplay />
@@ -102,6 +111,35 @@ const ManagerPage = () => {
               category={category} onUpdate={handleUpdate} 
             />
           </Flex>
+          <Box position="absolute" right="10em" top="4em" width="15em">
+            <Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
+              <Text textStyle="body3Semi" textAlign="center">Reports:</Text>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => {}}
+                p={3} px="2em"
+              >X-Z Reports</Button>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => {}}
+                p={3} px="2em"
+              >Sales Report</Button>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => {}}
+                p={3} px="2em"
+              >Excess Report</Button>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => {}}
+                p={3} px="2em"
+              >Restock Report</Button>
+            </Flex>
+          </Box>
         </>
       }
     />
