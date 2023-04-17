@@ -8,6 +8,7 @@ import {
   Tab,
   useColorModeValue,
   Box,
+  Text,
   Alert,
   AlertIcon,
   AlertTitle,
@@ -18,13 +19,13 @@ import {
 import BaseLayout from "../components/baseLayout";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
-import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 
 
 const ManagerPage = () => {
+  const [lookingAtMenu, setLookingAtMenu] = useState(false);
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
@@ -62,7 +63,21 @@ const ManagerPage = () => {
       content={
         <>
           <Box position='fixed'>
-            
+            <Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
+              <Text textStyle="body3Semi" textAlign="center">Viewing:</Text>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => setLookingAtMenu(true)} isDisabled={lookingAtMenu === true}
+                p={3} px="2em"
+              >Menu</Button>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => setLookingAtMenu(false)} isDisabled={lookingAtMenu === false}
+                p={3} px="2em"
+              >Inventory</Button>
+            </Flex>
             <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
             <Box mt="1em">
               <OrderHistoryDisplay />
