@@ -1,7 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import MenuItemCard from '../menuItemCard';
 
-const MenuItemSelectionDisplay = ({ menuItems, category, order, onUpdate }) => {
+const MenuItemSelectionDisplay = ({ menuItems, readOnly, category, order, onUpdate }) => {
     return (
         <Grid templateColumns='repeat(3, 1fr)' gap={2}>
             {
@@ -11,6 +11,7 @@ const MenuItemSelectionDisplay = ({ menuItems, category, order, onUpdate }) => {
                         <GridItem>
                             <MenuItemCard 
                                 info={menuItem} 
+                                readOnly={readOnly}
                                 subtract={
                                     order.some(
                                         item => item.name === menuItem.name
