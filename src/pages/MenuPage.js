@@ -18,13 +18,12 @@ import {
 import BaseLayout from "../components/baseLayout";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
-import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 import nameToUrl from "../imageMapping";
 
 
-const CustomerPage = () => {
+const MenuPage = () => {
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
@@ -41,22 +40,6 @@ const CustomerPage = () => {
     updateMenu();
   }, []);
 
-  const handleUpdate = (menuItemName, price, add) => {
-    let new_order;
-    for (let i = 0; i < order.length; i++) {
-      if (order.at(i).name === menuItemName) {
-        new_order = [...order];
-        new_order.at(i).quantity += add ? 1 : -1;
-        if (new_order.at(i).quantity === 0)
-          new_order = new_order.filter((_, index) => index !== i);
-        setOrder(new_order);
-        return;
-      }
-    }
-    new_order = [...order, { name: menuItemName, price: price, quantity: 1 }];
-    setOrder(new_order);
-  };
-
   return (
     <BaseLayout
       content={
@@ -67,16 +50,13 @@ const CustomerPage = () => {
               selectedCategory={category}
               onSelectCategory={setCategory}
             />
-            <Box mt="1em">
-              <OrderTotalDisplay order={order} />
-            </Box>
           </Box>
           <Flex justify="flex-end">
             <MenuItemSelectionDisplay
               menuItems={menuItems}
+              readOnly={true}
               category={category}
               order={order}
-              onUpdate={handleUpdate}
             />
           </Flex>
         </>
@@ -85,4 +65,4 @@ const CustomerPage = () => {
   );
 };
 
-export default CustomerPage;
+export default MenuPage;

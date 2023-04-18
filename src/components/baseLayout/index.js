@@ -66,6 +66,15 @@ const HamburgerMenu = () => {
                 <Link
                   as={ReactLink}
                   _hover={{ textDecoration: "none" }}
+                  to="/menu"
+                >
+                  Menu
+                </Link>
+              </ListItem>
+              <ListItem mx={0}>
+                <Link
+                  as={ReactLink}
+                  _hover={{ textDecoration: "none" }}
                   to="/customer"
                 >
                   Customer
@@ -140,6 +149,9 @@ const BaseNavbar = () => {
         spacing="1.5em"
         width="fit-content"
       >
+        <Link as={ReactLink} _hover={{ textDecoration: "none" }} to="/menu">
+          Menu
+        </Link>
         <Link as={ReactLink} _hover={{ textDecoration: "none" }} to="/customer">
           Customer
         </Link>

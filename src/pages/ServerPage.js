@@ -22,6 +22,7 @@ import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
+import nameToUrl from "../imageMapping";
 
 
 const ServerPage = () => {
@@ -32,6 +33,10 @@ const ServerPage = () => {
   useEffect(() => {
     const updateMenu = async () => {
       const menu = await Database.getMenuItems();
+      for (let i = 0; i < menu.length; i++) {
+        let imageUrl = nameToUrl[menu[i].name];
+        if (imageUrl) menu[i].image = imageUrl;
+      }
       setMenuItems(menu);
     }
     if (!menuItems.length) {

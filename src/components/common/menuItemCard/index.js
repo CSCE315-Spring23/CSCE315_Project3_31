@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const MenuItemCard = ({ info, subtract, onUpdate }) => {
+const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
   const border = useColorModeValue(
     "solid 1px rgb(0, 0, 0, 0.5)",
     "solid 1px #7d7dff"
@@ -39,7 +39,7 @@ const MenuItemCard = ({ info, subtract, onUpdate }) => {
         height="18em"
         rounded='md'
         overflow="hidden"
-        bg="black"
+        bg="white"
       >
         {info.image ? <img src={info.image} /> : ""}
       </Box>
@@ -53,20 +53,23 @@ const MenuItemCard = ({ info, subtract, onUpdate }) => {
       >
         Price: ${info.price.toFixed(2)}
       </Text>
-      <Flex justify='center' gap={1} pt={2}>
-          <Button 
-            size="md" fontSize="1.5rem" 
-            colorScheme='primary' variant='solid'
-            onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
-            p={3} px="2em"
-          >{"-"}</Button>
-          <Button 
-            size="md" fontSize="1.5rem"
-            colorScheme='primary' variant='solid'
-            onClick={() => onUpdate(info.name, info.price, true)}
-            p={3} px="2em"
-          >{"+"}</Button>
+      {
+        readOnly ? "" :
+        <Flex justify='center' gap={1} pt={2}>
+            <Button 
+              size="md" fontSize="1.5rem" 
+              colorScheme='primary' variant='solid'
+              onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
+              p={3} px="2em"
+            >{"-"}</Button>
+            <Button 
+              size="md" fontSize="1.5rem"
+              colorScheme='primary' variant='solid'
+              onClick={() => onUpdate(info.name, info.price, true)}
+              p={3} px="2em"
+            >{"+"}</Button>
         </Flex>
+      }
     </Box>
   );
 };

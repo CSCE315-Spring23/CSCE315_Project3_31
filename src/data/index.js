@@ -22,6 +22,11 @@ export default class Database {
     return res;
   }
 
+  static async getInventoryItems() {
+    let res = await this._getModel('inventory');
+    return res;
+  }
+
   static async addMessage(params) {
     const message = await fetch(`${backendOrigin}/messages/add`, {
       method: "POST",
