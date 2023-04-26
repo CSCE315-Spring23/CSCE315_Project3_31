@@ -24,6 +24,7 @@ const OrderHistoryDisplay = () => {
   useEffect(() => {
     const updateOrders = async () => {
       const recentOrders = await Database.getRecentOrders();
+      console.log(recentOrders);
       for (let i = 0; i < recentOrders?.length; i++) {
         const menuItems = await Database.getMenuItemsForOrder(recentOrders[i].order_id);
         recentOrders[i] = {...recentOrders[i], menuItems};
@@ -83,10 +84,10 @@ const OrderHistoryDisplay = () => {
                     menuItem => 
                     <Grid templateColumns='repeat(3, 1fr)' gap={0}>
                       <GridItem>
-                        <Text textStyle="body3">{menuItem.menu_item.name}</Text>
+                        <Text textStyle="body3">{menuItem.menuItem.name}</Text>
                       </GridItem>
                       <GridItem>
-                        <Text textStyle="body3">{menuItem.menu_item.price}</Text>
+                        <Text textStyle="body3">{menuItem.menuItem.price}</Text>
                       </GridItem>
                       <GridItem>
                         <Text textStyle="body3">{menuItem.quantity}</Text>
