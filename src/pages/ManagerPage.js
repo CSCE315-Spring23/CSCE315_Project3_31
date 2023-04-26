@@ -23,6 +23,7 @@ import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import ItemSelectionDisplay from "../components/manager/itemSelectionDisplay";
 import nameToUrl from "../imageMapping";
+import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 
 
 const ManagerPage = () => {
@@ -96,12 +97,7 @@ const ManagerPage = () => {
               lookingAtMenu ?
                 <Flex flexDirection="column" justify="center" gap="1em">
                   <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
-                  <Button 
-                  size="md" fontSize="1.5rem" 
-                  colorScheme='primary' variant='solid'
-                  onClick={() => {}}
-                  p={3} px="2em"
-                >New Menu Item</Button>
+                  <CreateMenuItemForm/>
                 </Flex> 
                 : ""
             }

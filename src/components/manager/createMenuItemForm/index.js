@@ -8,7 +8,9 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalFooter,
-  useDisclosure
+  useDisclosure,
+  Textarea,
+  Grid
 } from "@chakra-ui/react";
 
 const CreateMenuItemForm = () => {
@@ -33,7 +35,7 @@ const CreateMenuItemForm = () => {
       >
         New Menu Item
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="md">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay />
         <ModalContent>
             <ModalHeader>
@@ -43,46 +45,85 @@ const CreateMenuItemForm = () => {
           <ModalBody>
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" textAlign="center">
               <Box style={{
-                     width: "100%"
-                   }}>
+                  width: "100%"
+                }}
+              >
                 <Text textStyle="body3">Item Name</Text>
-                <input type="text" name="itemName" 
+                <input type="text" name="itemName"
+                      placeholder="Chicken Sandwich"
                       style={{
                         background: "#f3f3f3",
                         borderRadius: "0.25rem",
                         border: "1px solid",
                         padding: "0.5rem",
-                        width: "75%",
+                        width: "50%",
+                        height: "2.25rem",
                         margin: "0 auto"
                       }}
                 />
               </Box>
               <Box mt={2} style={{
-                     width: "100%"
-                   }}>
+                  width: "20%"
+                }}
+              >
                 <Text textStyle="body3">Cost</Text>
-                <input type="number" name="cost" 
-                      style={{
-                        background: "#f3f3f3",
-                        borderRadius: "0.25rem",
-                        border: "1px solid",
-                        padding: "0.5rem",
-                        width: "75%",
-                        margin: "0 auto"
-                      }}
-                />
+                <Flex flexDirection="row" justify="center">
+                  <Text textStyle="body3">$</Text>
+                  <input type="number" name="cost"
+                        placeholder="00.00"
+                        style={{
+                          background: "#f3f3f3",
+                          borderRadius: "0.25rem",
+                          border: "1px solid",
+                          padding: "0.5rem",
+                          width: "75%",
+                          height: "2.25rem",
+                          margin: "0 auto"
+                        }}
+                  />
+                </Flex>
               </Box>
               <Box mt={2} style={{
-                     width: "100%"
-                   }}>
+                    width: "70%"
+                  }}>
+                <multi-input>
+                  <Text textStyle="body3">Item Type</Text>
+                  <select type="text" name="type" 
+                        list="item-categories" 
+                        style={{
+                          background: "#f3f3f3",
+                          borderRadius: "0.25rem",
+                          border: "1px solid",
+                          padding: "0.5rem",
+                          width: "75%",
+                          height: "2.25rem",
+                          margin: "0 auto",
+                        }}
+                  >
+                    <option value="">- Select Item Type -</option>
+                    <option value="Sandwiches">Sandwiches</option>
+                    <option value="Sides">Sides</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Drinks">Drinks</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </multi-input>
+              </Box>
+              <Box mt={2} 
+                style={{
+                  width: "100%"
+                }}
+              >
                 <Text textStyle="body3">Ingredients</Text>
-                <input type="text" name="ingredients" 
+                <Textarea type="text" name="ingredients"
+                      placeholder="Ingredient | QTY&#10;Ingredient | QTY&#10;Ingredient | QTY&#10;..."
                       style={{
                         background: "#f3f3f3",
                         borderRadius: "0.25rem",
                         border: "1px solid",
                         padding: "0.5rem",
-                        width: "75%",
+                        width: "50%",
+                        height: "6.75rem",
                         margin: "0 auto"
                       }}
                 />
