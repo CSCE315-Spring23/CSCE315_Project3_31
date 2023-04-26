@@ -6,13 +6,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "@fontsource/rubik";
 import "@fontsource/rubik/800.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ChakraProvider theme={theme} resetCSS={true}>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <App />
-  </ChakraProvider>
+	<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+		<ChakraProvider theme={theme} resetCSS={true}>
+			<ColorModeScript initialColorMode={theme.config.initialColorMode} />
+			<App />
+		</ChakraProvider>
+	</GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
