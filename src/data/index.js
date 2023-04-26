@@ -44,6 +44,11 @@ export default class Database {
     ).catch((err) => console.log(err));
     return message;
   }
+  
+  static async getRestockReport(){
+    const response = await fetch("restaurant/restockreport");
+    return response;
+  }
 }
 
 export const handleUID = () => {
@@ -59,3 +64,4 @@ export const getUID = () => {
   let uid = localStorage.getItem('uid');
   return uid;
 }
+
