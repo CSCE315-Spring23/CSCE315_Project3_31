@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import ItemSelectionDisplay from "../components/manager/itemSelectionDisplay";
+import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import { GoogleLogin } from "@react-oauth/google";
 
@@ -136,17 +137,7 @@ const ManagerPage = () => {
 									selectedCategory={category}
 									onSelectCategory={setCategory}
 								/>
-								<Button
-									size="md"
-									fontSize="1.5rem"
-									colorScheme="primary"
-									variant="solid"
-									onClick={() => {}}
-									p={3}
-									px="2em"
-								>
-									New Menu Item
-								</Button>
+								<CreateMenuItemForm/>
 							</Flex>
 						) : (
 							""
