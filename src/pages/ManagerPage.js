@@ -35,7 +35,7 @@ const ManagerPage = () => {
   useEffect(() => {
     const updateMenu = async () => {
       const menu = await Database.getMenuItems();
-      for (let i = 0; i < menu.length; i++) {
+      for (let i = 0; i < menu?.length; i++) {
         let imageUrl = nameToUrl[menu[i].name];
         if (imageUrl) menu[i].image = imageUrl;
       }
@@ -46,10 +46,10 @@ const ManagerPage = () => {
       console.log(inventory);
       setInventoryItems(inventory);
     }
-    if (!menuItems.length) {
+    if (!menuItems?.length) {
       updateMenu();
     }
-    if (!inventoryItems.length) {
+    if (!inventoryItems?.length) {
       updateInventory();
     }
   }, [menuItems, inventoryItems]);

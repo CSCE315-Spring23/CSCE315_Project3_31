@@ -41,7 +41,7 @@ const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
         overflow="hidden"
         bg="white"
       >
-        {info.image ? <img src={info.image} /> : ""}
+        <img src={info.image ? info.image : "https://cdn.cookielaw.org/logos/63dc78c7-5612-4181-beae-47dead0569ee/666a8744-979e-4263-b2c2-093036f7ec5f/d5e0c553-41c6-41f7-b91f-be2f73c122c6/Chick-fil-A-Logo.png"} />
       </Box>
       <Text width='10em' mx='auto' textAlign='center' textStyle="body2Semi">
         {info.name}
