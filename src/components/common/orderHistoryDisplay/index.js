@@ -12,16 +12,30 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import Database from "../../../data";
 
 const OrderHistoryDisplay = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [orders, setOrders] = useState([]);
+  const [orderIndex, setOrderIndex] = useState(0);
 
   useEffect(() => {
-    
-  }, []);
+    const updateOrders = async () => {
+      const recentOrders = await Database.getRecentOrders();
+      for (let i = 0; i < recentOrders?.length; i++) {
+        const menuItems = await Database.getMenuItemsForOrder(recentOrders[i].order_id);
+        recentOrders[i] = {...recentOrders[i], menuItems};
+      }
+      setOrders(recentOrders);
+      setOrderIndex(0);
+    }
+    if (!orders?.length) {
+      updateOrders();
+    }
+
+  }, [orders, orderIndex]);
 
   return (
     <Flex flexDirection="column" justify="center" py="0.5em" border="solid 1px" borderColor="grey.100" rounded="md" boxShadow="lg">
@@ -37,7 +51,7 @@ const OrderHistoryDisplay = () => {
           View Past Orders
         </Button>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size="md">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
             <ModalHeader>
@@ -45,17 +59,59 @@ const OrderHistoryDisplay = () => {
             </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Grid templateColumns='repeat(3, 1fr)' gap={0}>
-              <GridItem>
-                <Text textStyle="body3Semi">Item</Text>
-              </GridItem>
-              <GridItem>
-                <Text textStyle="body3Semi">Price</Text>
-              </GridItem>
-              <GridItem>
-                <Text textStyle="body3Semi">Quantity</Text>
-              </GridItem>
-            </Grid>
+            {
+              orders?.length ?
+              <>
+                {console.log(orders[orderIndex])}
+                <Text>Order Id: {orders[orderIndex].order_id}</Text>
+                <Text>Date: {new Date(orders[orderIndex].date).toLocaleString()}</Text>
+                <Text>Staff: {orders[orderIndex].staff_id}</Text>
+                <Text>Customer: {orders[orderIndex].customer_id}</Text>
+                <Grid templateColumns='repeat(3, 1fr)' gap={0} pt={5}>
+                  <GridItem>
+                    <Text textStyle="body3Semi">Item</Text>
+                  </GridItem>
+                  <GridItem>
+                    <Text textStyle="body3Semi">Price</Text>
+                  </GridItem>
+                  <GridItem>
+                    <Text textStyle="body3Semi">Quantity</Text>
+                  </GridItem>
+                </Grid>
+                {
+                  orders[orderIndex].menuItems.map(
+                    menuItem => 
+                    <Grid templateColumns='repeat(3, 1fr)' gap={0}>
+                      <GridItem>
+                        <Text textStyle="body3">{menuItem.menu_item.name}</Text>
+                      </GridItem>
+                      <GridItem>
+                        <Text textStyle="body3">{menuItem.menu_item.price}</Text>
+                      </GridItem>
+                      <GridItem>
+                        <Text textStyle="body3">{menuItem.quantity}</Text>
+                      </GridItem>
+                    </Grid>
+                  )
+                }
+                <Text textStyle="body3" my="2.5em"><b>Total Price:</b> {orders[orderIndex].cost_total}</Text>
+              </>
+              : ""
+            }
+            <Flex justify='center' gap={1} pt={5}>
+              <Button 
+                size="md" fontSize="1.5rem" 
+                colorScheme='primary' variant='solid'
+                onClick={() => setOrderIndex(i => Math.max(0, i-1))}
+                p={3} px="2em"
+              >{"<"}</Button>
+              <Button 
+                size="md" fontSize="1.5rem"
+                colorScheme='primary' variant='solid'
+                onClick={() => setOrderIndex(i => Math.min(i+1, orders?.length))}
+                p={3} px="2em"
+              >{">"}</Button>
+            </Flex>
           </ModalBody>
           <ModalFooter justifyContent="center">
             <Button colorScheme="primary" onClick={onClose}>
