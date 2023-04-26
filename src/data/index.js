@@ -22,6 +22,11 @@ export default class Database {
     return res;
   }
 
+  static async getMenuItemsForOrder(order_id) {
+    let res = await this._getModel(`menu/order/${order_id}`);
+    return res;
+  }
+
   static async getInventoryItems() {
     let res = await this._getModel('inventory');
     return res;
@@ -29,6 +34,11 @@ export default class Database {
 
   static async getOrders() {
     let res = await this._getModel('orders');
+    return res;
+  }
+
+  static async getRecentOrders() {
+    let res = await this._getModel('orders/recent');
     return res;
   }
 
@@ -43,6 +53,11 @@ export default class Database {
       res => res.json()
     ).catch((err) => console.log(err));
     return message;
+  }
+  
+  static async getRestockReport(){
+    const response = await fetch("restaurant/restockreport");
+    return response;
   }
 }
 
@@ -59,3 +74,4 @@ export const getUID = () => {
   let uid = localStorage.getItem('uid');
   return uid;
 }
+
