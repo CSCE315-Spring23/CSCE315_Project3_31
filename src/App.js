@@ -4,6 +4,7 @@ import CustomerPage from "./pages/CustomerPage";
 import ManagerPage from "./pages/ManagerPage";
 import ServerPage from "./pages/ServerPage";
 import MenuPage from "./pages/MenuPage";
+import './index.css';
 
 function App() {
   return (
