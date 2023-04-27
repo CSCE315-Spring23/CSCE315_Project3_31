@@ -74,16 +74,16 @@ const CreateMenuItemForm = () => {
       return;
     }
 
-    const ingredientsArray = itemIngredients.split("\n").map((line) => {
-      const [ingredientName, quantity] = line.split(" | ");
-      return [ingredientName.trim(), quantity.trim()];
-    });
+    // const ingredientsArray = itemIngredients.split("\n").map((line) => {
+    //   const [ingredientName, quantity] = line.split(" | ");
+    //   return [ingredientName.trim(), quantity.trim()];
+    // });
 
     setItemData({
       name: itemName,
       cost: itemCost,
       type: itemType,
-      ingredients: ingredientsArray
+      ingredients: itemIngredients
     });
 
     const createStatus = await Database.addMenuItem(itemData.name, itemData.cost, itemData.type, itemData.ingredients);
