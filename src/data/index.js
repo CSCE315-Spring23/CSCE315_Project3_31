@@ -84,8 +84,18 @@ export default class Database {
 		return message;
 	}
 
-	static async getRestockReport() {
-		const response = await fetch("restaurant/restockreport");
+	static async getRestockReport(minimumQty) {
+    console.log(minimumQty);
+		const response = await fetch(`${backendOrigin}/restaurant/restockreport?minimumQty=${minimumQty}`)
+    .then(
+      res => res.json()
+    ).then(
+      json => { return json; }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
 		return response;
 	}
 }
