@@ -73,14 +73,6 @@ const CreateMenuItemForm = () => {
       });
       return;
     }
-<<<<<<< HEAD
-=======
-    // console.log(itemIngredients);
-    // const ingredientsArray = itemIngredients.split("\n").map((line) => {
-    //   const [ingredientName, quantity] = line.split(" | ");
-    //   return [ingredientName.trim(), quantity.trim()];
-    // });
->>>>>>> 36fd739b3f86cac59637be3c8d43c81089dfbda9
 
     setItemData({
       name: itemName,
