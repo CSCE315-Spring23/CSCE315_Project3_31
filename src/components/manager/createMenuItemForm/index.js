@@ -73,11 +73,6 @@ const CreateMenuItemForm = () => {
       });
       return;
     }
-    // console.log(itemIngredients);
-    // const ingredientsArray = itemIngredients.split("\n").map((line) => {
-    //   const [ingredientName, quantity] = line.split(" | ");
-    //   return [ingredientName.trim(), quantity.trim()];
-    // });
 
     setItemData({
       name: itemName,
@@ -86,8 +81,7 @@ const CreateMenuItemForm = () => {
       ingredients: itemIngredients
     });
 
-    const createStatus = await Database.addMenuItem(itemData.name, itemData.cost, itemData.type, itemData.ingredients);
-    if (!createStatus) {
+    if (!(await Database.addMenuItem(itemData.name, itemData.cost, itemData.type, itemData.ingredients))) {
       toast({
         title: "Item Not Created",
         description: "Issues with provided menu item information.",
@@ -96,14 +90,15 @@ const CreateMenuItemForm = () => {
         isClosable: true,
       })
       return;
+    } else {
+      toast({
+        title: "Item Created",
+        description: itemData.name + " added to the menu.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      })
     }
-    toast({
-      title: "Item Created",
-      description: itemData.name + " added to the menu.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    })
     onClose();
   };
 
