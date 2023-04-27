@@ -73,7 +73,7 @@ const CreateMenuItemForm = () => {
       });
       return;
     }
-
+    console.log(itemIngredients);
     const ingredientsArray = itemIngredients.split("\n").map((line) => {
       const [ingredientName, quantity] = line.split(" | ");
       return [ingredientName.trim(), quantity.trim()];
