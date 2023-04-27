@@ -46,12 +46,12 @@ export default class Database {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: 
-				{"name": name,
+			body: JSON.stringify({
+				"name": name,
 				"price": price,
 				"type": type,
-				"inventory_items": inventory_items}
-			})
+				"inventory_items": inventory_items
+			})})
 				.then((res) => res.json())
 				.catch((err) => console.log(err));
 			return response;
