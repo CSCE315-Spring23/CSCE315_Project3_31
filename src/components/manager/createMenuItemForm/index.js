@@ -10,16 +10,102 @@ import {
   ModalFooter,
   useDisclosure,
   Textarea,
-  Grid
+  useToast
 } from "@chakra-ui/react";
+import Database from "../../../data";
 
 const CreateMenuItemForm = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [inventoryItems, setInventoryItems] = useState([]);
+  const [itemData, setItemData] = useState({
+    name: "",
+    cost: "",
+    type: "",
+    ingredients: []
+  });
 
-  const [menuItems, setMenuItems] = useState([]);
+  const toast = useToast();
+
+  const handleSubmit = async () => {
+    const itemName = document.querySelector("#item-name").value;
+
+    const itemCost = document.querySelector("#item-cost").value;
+
+    const itemType = document.querySelector("#item-type").value;
+
+    const itemIngredients = document.querySelector("#item-ingredients").value;
+    
+    if (!itemName) {
+      toast({
+        title: "ERROR",
+        description: "No name for new menu item provided.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    } else if (!itemCost) {
+      toast({
+        title: "ERROR",
+        description: "No cost for new menu item provided.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    } else if (!itemType) {
+      toast({
+        title: "ERROR",
+        description: "No type for new menu item provided.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    } else if (!itemIngredients) {
+      toast({
+        title: "ERROR",
+        description: "No ingredients for new menu item provided.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const ingredientsArray = itemIngredients.split("\n").map((line) => {
+      const [ingredientName, quantity] = line.split(" | ");
+      return [ingredientName.trim(), quantity.trim()];
+    });
+
+    setItemData({
+      name: itemName,
+      cost: itemCost,
+      type: itemType,
+      ingredients: ingredientsArray
+    });
+
+    const createStatus = await Database.addMenuItem(itemData.name, itemData.cost, itemData.type, itemData.ingredients);
+    if (!createStatus) {
+      toast({
+        title: "Item Not Created",
+        description: "Issues with provided menu item information.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      })
+      return;
+    }
+    toast({
+      title: "Item Created",
+      description: itemData.name + " added to the menu.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    })
+    onClose();
+  };
 
   useEffect(() => {
     
@@ -49,7 +135,7 @@ const CreateMenuItemForm = () => {
                 }}
               >
                 <Text textStyle="body3">Item Name</Text>
-                <input type="text" name="itemName"
+                <input type="text" name="item-name" id="item-name"
                       placeholder="Chicken Sandwich"
                       style={{
                         background: "#f3f3f3",
@@ -69,7 +155,7 @@ const CreateMenuItemForm = () => {
                 <Text textStyle="body3">Cost</Text>
                 <Flex flexDirection="row" justify="center">
                   <Text textStyle="body3">$</Text>
-                  <input type="number" name="cost"
+                  <input type="number" name="item-cost" id="item-cost"
                         placeholder="00.00"
                         style={{
                           background: "#f3f3f3",
@@ -86,10 +172,8 @@ const CreateMenuItemForm = () => {
               <Box mt={2} style={{
                     width: "70%"
                   }}>
-                <multi-input>
                   <Text textStyle="body3">Item Type</Text>
-                  <select type="text" name="type" 
-                        list="item-categories" 
+                  <select type="text" name="type" id="item-type"
                         style={{
                           background: "#f3f3f3",
                           borderRadius: "0.25rem",
@@ -107,7 +191,6 @@ const CreateMenuItemForm = () => {
                     <option value="Drinks">Drinks</option>
                     <option value="Other">Other</option>
                   </select>
-                </multi-input>
               </Box>
               <Box mt={2} 
                 style={{
@@ -115,7 +198,7 @@ const CreateMenuItemForm = () => {
                 }}
               >
                 <Text textStyle="body3">Ingredients</Text>
-                <Textarea type="text" name="ingredients"
+                <Textarea type="text" name="item-ingredients" id="item-ingredients"
                       placeholder="Ingredient | QTY&#10;Ingredient | QTY&#10;Ingredient | QTY&#10;..."
                       style={{
                         background: "#f3f3f3",
@@ -131,7 +214,7 @@ const CreateMenuItemForm = () => {
             </Box>
           </ModalBody>
           <ModalFooter justifyContent="center">
-            <Button colorScheme="primary" onClick={onClose}>
+            <Button colorScheme="primary" onClick={handleSubmit}>
               Confirm
             </Button>
           </ModalFooter>

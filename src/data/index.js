@@ -40,6 +40,23 @@ export default class Database {
 		return res;
 	}
 
+	static async addMenuItem(name, price, type, inventory_items) {
+		const response = await fetch(`${backendOrigin}/menu/add`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: 
+				{"name": name,
+				"price": price,
+				"type": type,
+				"inventory_items": inventory_items}
+			})
+				.then((res) => res.json())
+				.catch((err) => console.log(err));
+			return response;
+	}
+
 	static async postGoogleAuth(params) {
 		const message = await fetch(`${backendOrigin}/auth/google-login`, {
 			method: "POST",
