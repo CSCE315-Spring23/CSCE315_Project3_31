@@ -47,14 +47,15 @@ export default class Database {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				"name": name,
-				"price": price,
-				"type": type,
-				"inventory_items": inventory_items
-			})})
-				.then((res) => res.json())
-				.catch((err) => console.log(err));
-			return response;
+				name: name,
+				price: price,
+				type: type,
+				inventory_items: inventory_items,
+			}),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
 	}
 
 	static async postGoogleAuth(params) {
