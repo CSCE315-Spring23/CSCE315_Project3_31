@@ -23,19 +23,16 @@ const ExcessReportDisplay = () => {
   }, []);
 
   return (
-    <Flex flexDirection="column" justify="center" py="0.5em" border="solid 1px" borderColor="grey.100" rounded="md" boxShadow="lg">
-      <Box fontSize="1.2rem" my={2} mx="auto">
-        <Button 
-          onClick={() => onOpen()}
-          size="lg"
-          fontSize="md"
-          variant="solid"
-          colorScheme="primary"
-          boxShadow="0 4px 7px rgb(79 114 205 / 40%)"
-        >
-          Excess Report
-        </Button>
-      </Box>
+    <Flex flexDirection="column" justify="center" justifyContent="center" alignItems="center" textAlign="center" py="0.5em">
+      <Button
+        onClick={() => onOpen()}
+        size="md" fontSize="md" 
+        width="75%"
+        colorScheme="primary" variant="solid"
+        p={3} px="2em"
+      >
+        Excess Report
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
@@ -44,7 +41,7 @@ const ExcessReportDisplay = () => {
             </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Grid templateColumns='repeat(3, 1fr)' gap={0}>
+            <Grid templateColumns="repeat(3, 1fr)" gap={0}>
               <GridItem>
                 <Text textStyle="body3Semi">Item</Text>
               </GridItem>
