@@ -23,6 +23,7 @@ import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 import nameToUrl from "../imageMapping";
+import LoginPopup from "../components/manager/loginPopup";
 
 
 const ServerPage = () => {
@@ -66,7 +67,7 @@ const ServerPage = () => {
     <BaseLayout
       content={
         <>
-          {console.log(order)}
+			    <LoginPopup userType="SERVER" />
           <Box position='fixed'>
             <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
             <Box mt="1em">

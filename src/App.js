@@ -5,7 +5,6 @@ import ManagerPage from "./pages/ManagerPage";
 import ServerPage from "./pages/ServerPage";
 import MenuPage from "./pages/MenuPage";
 import './index.css';
-import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Route path="/customer" exact element={<CustomerPage />} />
         <Route path="/manager" exact element={<ManagerPage />} />
         <Route path="/server" exact element={<ServerPage />} />
-        <Route path="/login" exact element={<LoginPage />} />
         <Route path="/*" element={<CustomerPage />} />
       </Routes>
     </Router>

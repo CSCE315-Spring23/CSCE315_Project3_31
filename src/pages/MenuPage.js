@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 import nameToUrl from "../imageMapping";
+import LoginPopup from "../components/manager/loginPopup";
 
 
 const MenuPage = () => {
@@ -44,7 +45,7 @@ const MenuPage = () => {
     <BaseLayout
       content={
         <>
-          {console.log(order)}
+			    <LoginPopup userType="MENU" />
           <Box position="fixed">
             <MenuCategorySelectionDisplay
               selectedCategory={category}
