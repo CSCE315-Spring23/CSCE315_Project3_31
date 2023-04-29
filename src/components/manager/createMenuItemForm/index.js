@@ -108,7 +108,7 @@ const CreateMenuItemForm = ({ onSubmit }) => {
       <Button 
         onClick={() => onOpen()}
         size="md" fontSize="1.5rem" 
-        colorScheme='primary' variant='solid'
+        colorScheme="primary" variant="solid"
         p={3} px="2em"
       >
         New Menu Item
