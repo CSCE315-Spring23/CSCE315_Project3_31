@@ -5,8 +5,7 @@ import {
   ButtonGroup,
   Text,
   useColorMode,
-  useColorModeValue,
-  useMediaQuery,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -20,7 +19,6 @@ const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
     { boxShadow: "0 8px 50px" },
     { borderColor: "#ffd543", boxShadow: "#ffd543 0 8px 50px" }
   );
-  const [isMobile] = useMediaQuery("(max-width: 991px)");
 
   return (
     <Box
@@ -30,7 +28,7 @@ const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
       width="18em"
       height="fit-content"
       paddingBottom={5}
-      _hover={isMobile ? "" : onHover}
+      _hover={onHover}
       transition="border-color 0.25s ease, box-shadow 0.25s ease"
     >
       <Box

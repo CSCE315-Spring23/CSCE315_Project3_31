@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../data";
 
-const CreateMenuItemForm = () => {
+const CreateMenuItemForm = ({ onSubmit }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -100,11 +100,8 @@ const CreateMenuItemForm = () => {
       })
     }
     onClose();
+    onSubmit();
   };
-
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <Flex flexDirection="column" justify="center" py="0.5em">

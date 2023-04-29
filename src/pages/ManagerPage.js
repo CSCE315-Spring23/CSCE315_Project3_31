@@ -105,7 +105,7 @@ const ManagerPage = () => {
               lookingAtMenu ?
                 <Flex flexDirection="column" justify="center" gap="1em">
                   <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
-                  <CreateMenuItemForm/>
+                  <CreateMenuItemForm onSubmit={() => setMenuItems([])} />
                 </Flex> 
                 : ""
             }
