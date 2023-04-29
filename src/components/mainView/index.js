@@ -192,19 +192,16 @@ const MainView = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	const switchViews = (user) => {
-		if (user !== userType) {
-			if (user === 'SERVER') setContent(<ServerPage />);
-			else if (user === 'MANAGER') setContent(<ManagerPage />);
-			else if (user === 'CUSTOMER') setContent(<CustomerPage />);
-			else if (user === 'MENU') setContent(<MenuPage />);
+		if (user === 'SERVER') setContent(<ServerPage />);
+		else if (user === 'MANAGER') setContent(<ManagerPage />);
+		else if (user === 'CUSTOMER') setContent(<CustomerPage />);
+		else if (user === 'MENU') setContent(<MenuPage />);
 
-			setUserType(user);
-			setLoggedIn(true);
-		}
+		setUserType(user);
+		setLoggedIn(true);
 	};
 
 	const enterLoginPopup = () => {
-		console.log("Entering login...");
 		setLoggedIn(false);
 	}
 
@@ -215,7 +212,7 @@ const MainView = () => {
 				m={0}
 				p={0}
 			>
-				<Navbar userType={userType} onEnter={(user) => switchViews(user)} loggedIn={loggedIn} onSwitching={() => enterLoginPopup()} />
+				<Navbar userType={userType} onEnter={switchViews} loggedIn={loggedIn} onSwitching={enterLoginPopup} />
 				<ContentContainer content={content} />
 				<Footer />
 			</Box>
