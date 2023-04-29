@@ -30,7 +30,6 @@ import ZReportDisplay from "../components/manager/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import { GoogleLogin } from "@react-oauth/google";
-import LoginPopup from "../components/manager/loginPopup";
 
 
 const ManagerPage = () => {
@@ -85,7 +84,6 @@ const ManagerPage = () => {
     <BaseLayout
       content={
         <>
-			<LoginPopup userType="MANAGER" />
           	<Box position='fixed' width="15em">
 				<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
 					<Text textStyle="body3Semi" textAlign="center">Viewing:</Text>

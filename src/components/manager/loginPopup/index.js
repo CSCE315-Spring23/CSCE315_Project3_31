@@ -1,14 +1,21 @@
 import { Flex, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Button, ModalBody, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPopup = ({ userType }) => {
     const [user, setUser] = useState(userType ? userType : "SERVER");
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const navigate = useNavigate();
 
     useEffect(() => {
         onOpen();
     }, []);
+
+    const handleEnter = (user) => {
+        if (user === "MENU") navigate('/menu');
+        else if (user === "CUSTOMER") navigate('/customer');
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl" closeOnOverlayClick={false}>

@@ -22,7 +22,6 @@ import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 import nameToUrl from "../imageMapping";
-import LoginPopup from "../components/manager/loginPopup";
 
 
 const CustomerPage = () => {
@@ -62,7 +61,6 @@ const CustomerPage = () => {
     <BaseLayout
       content={
         <>
-          <LoginPopup userType="CUSTOMER" />
           <Box position="fixed">
             <MenuCategorySelectionDisplay
               selectedCategory={category}
