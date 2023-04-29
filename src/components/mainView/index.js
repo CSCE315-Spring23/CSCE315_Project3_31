@@ -12,21 +12,36 @@ import GoogleTranslate from "../common/googleTranslate";
 
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import CustomerPage from "../../pages/CustomerPage";
+import ServerPage from "../../pages/ServerPage";
+import ManagerPage from "../../pages/ManagerPage";
+import MenuPage from "../../pages/MenuPage";
 
-const LoginPopup = ({ userType }) => {
+const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
     const [user, setUser] = useState(userType ? userType : "SERVER");
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        onOpen();
-    }, []);
+		if (!loggedIn && !isOpen) {
+	        onOpen();
+		}
+    }, [loggedIn]);
+
+	const handleEnter = () => {
+		onEnter(user);
+		onClose();
+	}
+
+	const handleLogin = () => {
+		//Login
+		onEnter(user);
+		onClose();
+	}
 
     return (
 		<>
-			<Button colorScheme='primary' p={2} width='10em'>Switch Views</Button>
+			<Button colorScheme='primary' p={2} width='10em' onClick={onSwitching}>Switch Views</Button>
 			<Modal isOpen={isOpen} onClose={onClose} size="xl" closeOnOverlayClick={false}>
 				<ModalOverlay backdropFilter='blur(10px)' />
 				<ModalContent>
@@ -84,12 +99,12 @@ const LoginPopup = ({ userType }) => {
 							{
 								user === "MANAGER" || user === "SERVER"
 								?
-								<Button colorScheme="primary" width='10em' height='3em' onClick={onClose}>
+								<Button colorScheme="primary" width='10em' height='3em' onClick={() => handleLogin()}>
 									<Text textStyle='body3Semi'>
 									Login
 									</Text>
 								</Button> :
-								<Button colorScheme="primary" width='10em' height='3em' onClick={onClose}>
+								<Button colorScheme="primary" width='10em' height='3em' onClick={() => handleEnter()}>
 									<Text textStyle='body3Semi'>
 									Enter
 									</Text>
@@ -108,7 +123,7 @@ const LoginPopup = ({ userType }) => {
     );
 };
 
-const BaseNavbar = () => {
+const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	return (
 		<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
 			<HStack
@@ -117,18 +132,18 @@ const BaseNavbar = () => {
 				spacing="1.5em"
 				width="fit-content"
 			>
-				<LoginPopup />
+				<LoginPopup userType={userType} onEnter={onEnter} loggedIn={loggedIn} onSwitching={onSwitching} />
 				<GoogleTranslate />
 			</HStack>
 		</Flex>
 	);
 };
 
-const BaseContainer = ({ content }) => {
+const ContentContainer = ({ content }) => {
 	return <Box mt={2}>{content}</Box>;
 };
 
-const BaseFooter = () => {
+const Footer = () => {
 	return (
 		<Flex width="100%" justify="center" pt={5} pb={1}>
 			<Text fontSize="md" mb={4} align="center" mx="auto">
@@ -171,7 +186,28 @@ const BaseFooter = () => {
 	);
 };
 
-const BaseLayout = ({ content }) => {
+const MainView = () => {
+	const [userType, setUserType] = useState("SERVER");
+	const [content, setContent] = useState(<ServerPage />);
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	const switchViews = (user) => {
+		if (user !== userType) {
+			if (user === 'SERVER') setContent(<ServerPage />);
+			else if (user === 'MANAGER') setContent(<ManagerPage />);
+			else if (user === 'CUSTOMER') setContent(<CustomerPage />);
+			else if (user === 'MENU') setContent(<MenuPage />);
+
+			setUserType(user);
+			setLoggedIn(true);
+		}
+	};
+
+	const enterLoginPopup = () => {
+		console.log("Entering login...");
+		setLoggedIn(false);
+	}
+
 	return (
 		<Flex justifyContent="center" overflowX="hidden" overflowY="hidden">
 			<Box
@@ -179,13 +215,13 @@ const BaseLayout = ({ content }) => {
 				m={0}
 				p={0}
 			>
-				<BaseNavbar />
-				<BaseContainer content={content} />
-				<BaseFooter />
+				<Navbar userType={userType} onEnter={(user) => switchViews(user)} loggedIn={loggedIn} onSwitching={() => enterLoginPopup()} />
+				<ContentContainer content={content} />
+				<Footer />
 			</Box>
 		</Flex>
 	);
 };
 
-export default BaseLayout;
-export { BaseNavbar, BaseContainer, BaseFooter };
+export default MainView;
+export { Navbar, ContentContainer, Footer };

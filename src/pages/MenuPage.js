@@ -15,7 +15,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import BaseLayout from "../components/baseLayout";
+import BaseLayout from "../components/mainView";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
@@ -41,26 +41,22 @@ const MenuPage = () => {
   }, []);
 
   return (
-    <BaseLayout
-      content={
-        <>
-          <Box position="fixed">
-            <MenuCategorySelectionDisplay
-              selectedCategory={category}
-              onSelectCategory={setCategory}
-            />
-          </Box>
-          <Flex justify="flex-end">
-            <MenuItemSelectionDisplay
-              menuItems={menuItems}
-              readOnly={true}
-              category={category}
-              order={order}
-            />
-          </Flex>
-        </>
-      }
-    />
+    <>
+      <Box position="fixed">
+        <MenuCategorySelectionDisplay
+          selectedCategory={category}
+          onSelectCategory={setCategory}
+        />
+      </Box>
+      <Flex justify="flex-end">
+        <MenuItemSelectionDisplay
+          menuItems={menuItems}
+          readOnly={true}
+          category={category}
+          order={order}
+        />
+      </Flex>
+    </>
   );
 };
 
