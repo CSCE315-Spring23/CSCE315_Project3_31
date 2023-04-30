@@ -24,14 +24,15 @@ const CreateMenuItemForm = ({ onSubmit }) => {
 
   const toast = useToast();
 
-  const handleSubmit = async () => {
-    const itemName = document.querySelector("#item-name").value;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const itemName = document.getElementById("item-name").value;
 
-    const itemCost = document.querySelector("#item-cost").value;
+    const itemCost = document.getElementById("item-cost").value;
 
-    const itemType = document.querySelector("#item-type").value;
+    const itemType = document.getElementById("item-type").value;
 
-    const itemIngredients = document.querySelector("#item-ingredients").value;
+    const itemIngredients = document.getElementById("item-ingredients").value;
     
     if (!itemName) {
       toast({
