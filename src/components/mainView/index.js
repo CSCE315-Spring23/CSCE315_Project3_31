@@ -6,10 +6,18 @@ import {
 	HStack,
 	Text,
 	Link,
-	useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Button, ModalBody
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	Button,
+	ModalBody,
 } from "@chakra-ui/react";
 import GoogleTranslate from "../common/googleTranslate";
-
+import { GoogleLogin } from "@react-oauth/google";
+import Database from "../../data";
 
 import { useState, useEffect } from "react";
 import CustomerPage from "../../pages/CustomerPage";
@@ -18,109 +26,143 @@ import ManagerPage from "../../pages/ManagerPage";
 import MenuPage from "../../pages/MenuPage";
 
 const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
-    const [user, setUser] = useState(userType ? userType : "SERVER");
+	const [user, setUser] = useState(userType ? userType : "SERVER");
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
-    useEffect(() => {
+	useEffect(() => {
 		if (!loggedIn && !isOpen) {
-	        onOpen();
+			onOpen();
 		}
-    }, [loggedIn]);
+	}, [loggedIn]);
 
 	const handleEnter = () => {
 		onEnter(user);
 		onClose();
-	}
+	};
 
 	const handleLogin = () => {
 		//Login
 		onEnter(user);
 		onClose();
-	}
+	};
 
-    return (
+	return (
 		<>
-			<Button colorScheme='primary' p={2} width='10em' onClick={onSwitching}>Switch Views</Button>
-			<Modal isOpen={isOpen} onClose={onClose} size="xl" closeOnOverlayClick={false} closeOnEsc={false}>
-				<ModalOverlay backdropFilter='blur(10px)' />
+			<Button
+				colorScheme="primary"
+				p={2}
+				width="10em"
+				onClick={onSwitching}
+			>
+				Switch Views
+			</Button>
+			<Modal
+				isOpen={isOpen}
+				onClose={onClose}
+				size="xl"
+				closeOnOverlayClick={false}
+				closeOnEsc={false}
+			>
+				<ModalOverlay backdropFilter="blur(10px)" />
 				<ModalContent>
 					<ModalHeader>
-						<Flex justify='center' gap='0' align='center'>
-							<Button colorScheme="primary"
-								variant={
-									user === 'MENU'
-									? "solid" : "outline"
-								}
-								borderRightRadius={0} p={1} onClick={() => setUser("MENU")}
-								width='7em'
+						<Flex justify="center" gap="0" align="center">
+							<Button
+								colorScheme="primary"
+								variant={user === "MENU" ? "solid" : "outline"}
+								borderRightRadius={0}
+								p={1}
+								onClick={() => setUser("MENU")}
+								width="7em"
 							>
-							Menu
+								Menu
 							</Button>
-							<Button colorScheme="primary" 
+							<Button
+								colorScheme="primary"
 								variant={
-									user === 'CUSTOMER'
-									? "solid" : "outline"
+									user === "CUSTOMER" ? "solid" : "outline"
 								}
-								borderRadius={0} p={1} onClick={() => setUser("CUSTOMER")}
-								width='7em'
+								borderRadius={0}
+								p={1}
+								onClick={() => setUser("CUSTOMER")}
+								width="7em"
 							>
-							Customer
+								Customer
 							</Button>
-							<Button colorScheme="primary"
+							<Button
+								colorScheme="primary"
 								variant={
-									user === 'SERVER'
-									? "solid" : "outline"
+									user === "SERVER" ? "solid" : "outline"
 								}
-								borderRadius={0} p={1} onClick={() => setUser("SERVER")}
-								width='7em'
+								borderRadius={0}
+								p={1}
+								onClick={() => setUser("SERVER")}
+								width="7em"
 							>
-							Server
+								Server
 							</Button>
-							<Button colorScheme="primary" 
+							<Button
+								colorScheme="primary"
 								variant={
-									user === 'MANAGER'
-									? "solid" : "outline"
+									user === "MANAGER" ? "solid" : "outline"
 								}
-								borderLeftRadius={0} p={1} onClick={() => setUser("MANAGER")}
-								width='7em'
+								borderLeftRadius={0}
+								p={1}
+								onClick={() => setUser("MANAGER")}
+								width="7em"
 							>
-							Manager
+								Manager
 							</Button>
 						</Flex>
-						<Text width='fit-content' mx='auto' textAlign='center' textStyle='body1'
-							py='1em'
+						<Text
+							width="fit-content"
+							mx="auto"
+							textAlign="center"
+							textStyle="body1"
+							py="1em"
 						>
-						Welcome to Chick-Fil-A!
+							Welcome to Chick-Fil-A!
 						</Text>
 					</ModalHeader>
 					<ModalBody>
-						<Flex justifyContent='center'>
-							{
-								user === "MANAGER" || user === "SERVER"
-								?
-								<Button colorScheme="primary" width='10em' height='3em' onClick={() => handleLogin()}>
-									<Text textStyle='body3Semi'>
-									Login
-									</Text>
-								</Button> :
-								<Button colorScheme="primary" width='10em' height='3em' onClick={() => handleEnter()}>
-									<Text textStyle='body3Semi'>
-									Enter
-									</Text>
+						<Flex justifyContent="center">
+							{user === "MANAGER" || user === "SERVER" ? (
+								<GoogleLogin
+									onSuccess={async (credentialResponse) => {
+										let res = await Database.postGoogleAuth(
+											credentialResponse
+										);
+										if (res.message === 69) {
+											handleLogin();
+										}
+									}}
+									onError={() => {
+										console.log("Login Failed");
+									}}
+								/>
+							) : (
+								<Button
+									colorScheme="primary"
+									width="10em"
+									height="3em"
+									onClick={() => handleEnter()}
+								>
+									<Text textStyle="body3Semi">Enter</Text>
 								</Button>
-							}
+							)}
 						</Flex>
 					</ModalBody>
 					<ModalFooter justifyContent="center">
-						<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png'
-							width='200px'
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
+							width="200px"
 						/>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
 		</>
-    );
+	);
 };
 
 const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
@@ -132,7 +174,12 @@ const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 				spacing="1.5em"
 				width="fit-content"
 			>
-				<LoginPopup userType={userType} onEnter={onEnter} loggedIn={loggedIn} onSwitching={onSwitching} />
+				<LoginPopup
+					userType={userType}
+					onEnter={onEnter}
+					loggedIn={loggedIn}
+					onSwitching={onSwitching}
+				/>
 				<GoogleTranslate />
 			</HStack>
 		</Flex>
@@ -148,35 +195,19 @@ const Footer = () => {
 		<Flex width="100%" justify="center" pt={5} pb={1}>
 			<Text fontSize="md" mb={4} align="center" mx="auto">
 				Developed by{" "}
-				<Text
-					as="span"
-					fontWeight="bold"
-					color="primary.500"
-				>
+				<Text as="span" fontWeight="bold" color="primary.500">
 					David Chi
 				</Text>
 				{", "}
-				<Text
-					as="span"
-					fontWeight="bold"
-					color="primary.500"
-				>
+				<Text as="span" fontWeight="bold" color="primary.500">
 					Jeffrey Li
 				</Text>
 				{", "}
-				<Text
-					as="span"
-					fontWeight="bold"
-					color="primary.500"
-				>
+				<Text as="span" fontWeight="bold" color="primary.500">
 					Art Young
 				</Text>
 				{", and "}
-				<Text
-					as="span"
-					fontWeight="bold"
-					color="primary.500"
-				>
+				<Text as="span" fontWeight="bold" color="primary.500">
 					Andrew Mao
 				</Text>
 				<br />
@@ -192,10 +223,10 @@ const MainView = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	const switchViews = (user) => {
-		if (user === 'SERVER') setContent(<ServerPage />);
-		else if (user === 'MANAGER') setContent(<ManagerPage />);
-		else if (user === 'CUSTOMER') setContent(<CustomerPage />);
-		else if (user === 'MENU') setContent(<MenuPage />);
+		if (user === "SERVER") setContent(<ServerPage />);
+		else if (user === "MANAGER") setContent(<ManagerPage />);
+		else if (user === "CUSTOMER") setContent(<CustomerPage />);
+		else if (user === "MENU") setContent(<MenuPage />);
 
 		setUserType(user);
 		setLoggedIn(true);
@@ -203,16 +234,17 @@ const MainView = () => {
 
 	const enterLoginPopup = () => {
 		setLoggedIn(false);
-	}
+	};
 
 	return (
 		<Flex justifyContent="center" overflowX="hidden" overflowY="hidden">
-			<Box
-				width="1150px"
-				m={0}
-				p={0}
-			>
-				<Navbar userType={userType} onEnter={switchViews} loggedIn={loggedIn} onSwitching={enterLoginPopup} />
+			<Box width="1150px" m={0} p={0}>
+				<Navbar
+					userType={userType}
+					onEnter={switchViews}
+					loggedIn={loggedIn}
+					onSwitching={enterLoginPopup}
+				/>
 				<ContentContainer content={content} />
 				<Footer />
 			</Box>
