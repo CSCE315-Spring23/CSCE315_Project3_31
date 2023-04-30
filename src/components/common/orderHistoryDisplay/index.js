@@ -94,7 +94,7 @@ const OrderHistoryDisplay = () => {
                         <Text textStyle="body4">{menuItem.menuItem.name}</Text>
                       </GridItem>
                       <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                        <Text textStyle="body4">${menuItem.menuItem.price.toFixed(2)}</Text>
+                        <Text textStyle="body4">${menuItem.menuItem.price ? menuItem.menuItem.price.toFixed(2) : "0.00"}</Text>
                       </GridItem>
                       <GridItem borderBottomWidth="1px" borderColor="gray.300">
                         <Text textStyle="body4">{menuItem.quantity}</Text>
@@ -102,7 +102,7 @@ const OrderHistoryDisplay = () => {
                     </Grid>
                   )
                 }
-                <Text textStyle="body3" my="2.5em"><b>Total Price:</b> ${orders[orderIndex].cost_total.toFixed(2)}</Text>
+                <Text textStyle="body3" my="2.5em"><b>Total Price:</b> ${orders[orderIndex].cost_total ? orders[orderIndex].cost_total.toFixed(2) : "0.00"}</Text>
               </>
               : ""
             }

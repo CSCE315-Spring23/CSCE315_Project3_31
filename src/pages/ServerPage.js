@@ -44,7 +44,11 @@ const ServerPage = () => {
     }
   }, [menuItems]);
 
-  const handleUpdate = (menuItemName, price, add) => {
+  const handleUpdate = (menuItemName, menuId, price, add) => {
+    // console.log("menuItemName:", menuItemName);
+    // console.log("menu_id:", menuId);
+    // console.log("price:", price);
+    // console.log("add:", add);
     let new_order;
     for (let i = 0; i < order.length; i++) {
       if (order.at(i).name === menuItemName) {
@@ -58,7 +62,7 @@ const ServerPage = () => {
         return;
       }
     }
-    new_order = [...order, { name: menuItemName, price: price, quantity: 1}];
+    new_order = [...order, { name: menuItemName, menu_id: menuId, price: price, quantity: 1}];
     setOrder(new_order);
   }
 

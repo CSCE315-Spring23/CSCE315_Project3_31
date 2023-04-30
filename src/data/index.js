@@ -40,6 +40,25 @@ export default class Database {
 		return res;
 	}
 
+	static async makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items) {
+		const response = await fetch(`${backendOrigin}/orders/makeorder`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				cost_total: cost_total,
+				timestamp: timestamp,
+				customer_id: customer_id,
+				staff_id: staff_id,
+				menu_items: menu_items,
+			}),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
 	static async addMenuItem(name, price, type, inventory_items) {
 		const response = await fetch(`${backendOrigin}/menu/add`, {
 			method: "POST",

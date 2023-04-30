@@ -58,13 +58,13 @@ const MenuItemCard = ({ info, readOnly, menuOnly, subtract, onUpdate }) => {
                 <Button 
                   size="md" fontSize="1.5rem" 
                   colorScheme='primary' variant='solid'
-                  onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
+                  onClick={() => onUpdate(info.name, info.menu_id, info.price, false)} isDisabled={!subtract}
                   p={3} px="2em"
                 >{"-"}</Button>
                 <Button 
                   size="md" fontSize="1.5rem"
                   colorScheme='primary' variant='solid'
-                  onClick={() => onUpdate(info.name, info.price, true)}
+                  onClick={() => onUpdate(info.name, info.menu_id, info.price, true)}
                   p={3} px="2em"
                 >{"+"}</Button>
             </Flex>
@@ -106,13 +106,13 @@ const MenuItemCard = ({ info, readOnly, menuOnly, subtract, onUpdate }) => {
                 <Button 
                   size="md" fontSize="1.5rem" 
                   colorScheme='primary' variant='solid'
-                  onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
+                  onClick={() => onUpdate(info.name, info.menu_id, info.price, false)} isDisabled={!subtract}
                   p={3} px="2em"
                 >{"-"}</Button>
                 <Button 
                   size="md" fontSize="1.5rem"
                   colorScheme='primary' variant='solid'
-                  onClick={() => onUpdate(info.name, info.price, true)}
+                  onClick={() => onUpdate(info.name, info.menu_id, info.price, true)}
                   p={3} px="2em"
                 >{"+"}</Button>
             </Flex>
