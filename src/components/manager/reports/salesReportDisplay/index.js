@@ -25,25 +25,42 @@ import Database from "../../../../data";
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [minimumQty, setMinimumQty] = useState(5000);
-  const [refillItems, setRefillItems] = useState([]);
+  const [saleItems, setSaleItems] = useState([]);
   const toast = useToast();
   const handleSubmit = async (e) => {
-    if (!minimumQty) {
+    e.preventDefault();
+    const startDate = document.getElementById("startDate-input").value;
+    
+    const endDate = document.getElementById("endDate-input").value;
+
+    if (!startDate) {
       toast({
         title: "ERROR",
-        description: "No minimum value provided.",
+        description: "No start date provided.",
         status: "error",
         duration: 5000,
         isClosable: true,
-      })
+      });
+      return;
+    } else if (!endDate) {
+      toast({
+        title: "ERROR",
+        description: "No end date provided.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return;
     }
-    e.preventDefault();
-    const items = await Database.getRestockReport(minimumQty);
-    console.log(items);
-    setRefillItems(items);
-    onClose();
+    const sales = Database.getSalesReport(startDate, endDate);
+    setSaleItems(sales);
+    toast({
+      title: "Sales Report Made",
+      description: "Showing sales from " + startDate + " to " + endDate,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    })
   };
 
   return (
@@ -62,7 +79,7 @@ const RestockReportDisplay = () => {
         <ModalContent>
           <form onSubmit={handleSubmit}>
             <ModalHeader>
-              <Text textStyle="body2Semi">Excess Report</Text>
+              <Text textStyle="body2Semi">Sales Report</Text>
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -71,8 +88,7 @@ const RestockReportDisplay = () => {
                   <Text textStyle="body3">Start Date:</Text>
                   <Input
                     type="date"
-                    placeholder="Start Date"
-                    onChange={(e) => setMinimumQty(e.target.value)}
+                    id="startDate-input"
                     style={{
                       background: "#f3f3f3",
                       border: "1px solid",
@@ -84,8 +100,7 @@ const RestockReportDisplay = () => {
                   <Text textStyle="body3">End Date:</Text>
                   <Input
                     type="date"
-                    placeholder="Start Date"
-                    onChange={(e) => setMinimumQty(e.target.value)}
+                    id="endDate-input"
                     style={{
                       background: "#f3f3f3",
                       border: "1px solid",
@@ -94,7 +109,7 @@ const RestockReportDisplay = () => {
                   />
                 </GridItem>
               </Flex>
-              {refillItems ? (
+              {saleItems.length !== 0 ? (
                   <Box my={4}>
                     <Grid templateColumns="repeat(3, 1fr)" gap={0}>
                       <GridItem>
@@ -105,9 +120,9 @@ const RestockReportDisplay = () => {
                         <Text textStyle="body3Semi">Total Sales</Text>
                       </GridItem>
                     </Grid>
-                    {refillItems.map((item) => (
+                    {saleItems.map((item) => (
                       <Grid
-                        key={item.inventory_id}
+                        key={item.menu_id}
                         templateColumns="repeat(3, 1fr)"
                         gap={0}
                       >

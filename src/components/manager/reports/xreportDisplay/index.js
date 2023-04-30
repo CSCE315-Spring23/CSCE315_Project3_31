@@ -21,25 +21,10 @@ import Database from "../../../../data";
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [minimumQty, setMinimumQty] = useState(5000);
-  const [refillItems, setRefillItems] = useState([]);
   const toast = useToast();
   const handleSubmit = async (e) => {
-    if (!minimumQty) {
-      toast({
-        title: "ERROR",
-        description: "No minimum value provided.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      })
-      return;
-    }
+    
     e.preventDefault();
-    const items = await Database.getRestockReport(minimumQty);
-    console.log(items);
-    setRefillItems(items);
-    onClose();
   };
 
   return (

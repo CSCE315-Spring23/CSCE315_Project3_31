@@ -136,7 +136,7 @@ export default class Database {
 
 	static async getSalesReport(sDate, eDate) {
 		const response = await fetch(
-			`${backendOrigin}/restaurant/excessreport?sDate=${sDate}?eDate=${eDate}`
+			`${backendOrigin}/restaurant/salesreport?sDate=${sDate}&eDate=${eDate}`
 		)
 			.then((res) => res.json())
 			.catch((err) => console.log(err));

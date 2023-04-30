@@ -41,7 +41,6 @@ const RestockReportDisplay = () => {
     }
     e.preventDefault();
     const items = await Database.getRestockReport(minimumQty);
-    console.log(items);
     setRefillItems(items);
   };
 
