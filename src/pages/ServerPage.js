@@ -15,7 +15,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import BaseLayout from "../components/baseLayout";
+import BaseLayout from "../components/mainView";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 import OrderTotalDisplay from "../components/common/orderTotalDisplay";
@@ -63,25 +63,20 @@ const ServerPage = () => {
   }
 
   return (
-    <BaseLayout
-      content={
-        <>
-          {console.log(order)}
-          <Box position='fixed'>
-            <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
-            <Box mt="1em">
-              <OrderTotalDisplay order={order} />
-            </Box>
-            <Box mt="1em">
-              <OrderHistoryDisplay />
-            </Box>
-          </Box>
-          <Flex justify='flex-end'>
-            <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
-          </Flex>
-        </>
-      }
-    />
+    <>
+      <Box position='fixed'>
+        <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
+        <Box mt="1em">
+          <OrderTotalDisplay order={order} />
+        </Box>
+        <Box mt="1em">
+          <OrderHistoryDisplay />
+        </Box>
+      </Box>
+      <Flex justify='flex-end'>
+        <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
+      </Flex>
+    </>
   );
 };
 

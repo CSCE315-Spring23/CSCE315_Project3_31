@@ -5,7 +5,7 @@ import {
 	Text,
 	Button,
 } from "@chakra-ui/react";
-import BaseLayout from "../components/baseLayout";
+import BaseLayout from "../components/mainView";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
@@ -19,7 +19,6 @@ import ZReportDisplay from "../components/manager/reports/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import { GoogleLogin } from "@react-oauth/google";
-
 
 
 const ManagerPage = () => {
@@ -71,57 +70,53 @@ const ManagerPage = () => {
 	};
 
   return (
-    <BaseLayout
-      content={
-        <>
-          <Box position='fixed' width="15em">
-            <Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-              <Text textStyle="body3Semi" textAlign="center">Viewing:</Text>
-              <Button 
-                size="md" fontSize="1.5rem" 
-                colorScheme='primary' variant='solid'
-                onClick={() => setLookingAtMenu(true)} isDisabled={lookingAtMenu === true}
-                p={3} px="2em"
-              >Menu</Button>
-              <Button 
-                size="md" fontSize="1.5rem" 
-                colorScheme='primary' variant='solid'
-                onClick={() => setLookingAtMenu(false)} isDisabled={lookingAtMenu === false}
-                p={3} px="2em"
-              >Inventory</Button>
-            </Flex>
-            {
-              lookingAtMenu ?
-                <Flex flexDirection="column" justify="center" gap="1em">
-                  <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
-                  <CreateMenuItemForm onSubmit={() => setMenuItems([])} />
-                </Flex> 
-                : ""
-            }
-            <Box mt="1em">
-              <OrderHistoryDisplay />
-            </Box>
-          </Box>
-          <Flex justify='center'>
-            <ItemSelectionDisplay 
-              isMenu={lookingAtMenu} 
-              items={lookingAtMenu ? menuItems : inventoryItems} 
-              category={category} onUpdate={handleUpdate} 
-            />
-          </Flex>
-          <Box position="absolute" right="10em" top="4em" width="15em">
-            <Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-              <Text textStyle="body3Semi" textAlign="center">Reports:</Text>
-              <XReportDisplay/>
-              <ZReportDisplay/>
-              <SalesReportDisplay/>
-              <ExcessReportDisplay/>
-              <RestockReportDisplay/>
-            </Flex>
-          </Box>
-        </>
-      }
-    />
+	<>
+		<Box position='fixed' width="15em">
+			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
+				<Text textStyle="body3Semi" textAlign="center">Viewing:</Text>
+				<Button 
+					size="md" fontSize="1.5rem" 
+					colorScheme='primary' variant='solid'
+					onClick={() => setLookingAtMenu(true)} isDisabled={lookingAtMenu === true}
+					p={3} px="2em"
+				>Menu</Button>
+				<Button 
+					size="md" fontSize="1.5rem" 
+					colorScheme='primary' variant='solid'
+					onClick={() => setLookingAtMenu(false)} isDisabled={lookingAtMenu === false}
+					p={3} px="2em"
+				>Inventory</Button>
+			</Flex>
+			{
+				lookingAtMenu ?
+					<Flex flexDirection="column" justify="center" gap="1em">
+					<MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
+					<CreateMenuItemForm onSubmit={() => setMenuItems([])} />
+					</Flex> 
+					: ""
+			}
+			<Box mt="1em">
+				<OrderHistoryDisplay />
+			</Box>
+		</Box>
+		<Flex justify='center'>
+			<ItemSelectionDisplay 
+				isMenu={lookingAtMenu} 
+				items={lookingAtMenu ? menuItems : inventoryItems} 
+				category={category} onUpdate={handleUpdate} 
+			/>
+		</Flex>
+		<Box position="absolute" right="10em" top="4em" width="15em">
+			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
+			<Text textStyle="body3Semi" textAlign="center">Reports:</Text>
+			<XReportDisplay/>
+			<ZReportDisplay/>
+			<SalesReportDisplay/>
+			<ExcessReportDisplay/>
+			<RestockReportDisplay/>
+			</Flex>
+		</Box>
+	</>
   );
 };
 
