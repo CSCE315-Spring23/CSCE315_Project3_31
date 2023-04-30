@@ -73,17 +73,16 @@ const ManagerPage = () => {
 	<>
 		<Box position='fixed' width="15em">
 			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-				<Text textStyle="body3Semi" textAlign="center">Viewing:</Text>
 				<Button 
 					size="md" fontSize="1.5rem" 
-					colorScheme='primary' variant='solid'
-					onClick={() => setLookingAtMenu(true)} isDisabled={lookingAtMenu === true}
+					colorScheme='primary'
+					onClick={() => setLookingAtMenu(true)} variant={lookingAtMenu ? "solid" : "outline"}
 					p={3} px="2em"
 				>Menu</Button>
 				<Button 
 					size="md" fontSize="1.5rem" 
-					colorScheme='primary' variant='solid'
-					onClick={() => setLookingAtMenu(false)} isDisabled={lookingAtMenu === false}
+					colorScheme='primary'
+					onClick={() => setLookingAtMenu(false)} variant={!lookingAtMenu ? "solid" : "outline"}
 					p={3} px="2em"
 				>Inventory</Button>
 			</Flex>
@@ -106,9 +105,8 @@ const ManagerPage = () => {
 				category={category} onUpdate={handleUpdate} 
 			/>
 		</Flex>
-		<Box position="absolute" right="10em" top="4em" width="15em">
+		<Box position="fixed" right="10em" top="7em" width="15em">
 			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-			<Text textStyle="body3Semi" textAlign="center">Reports:</Text>
 			<XReportDisplay/>
 			<ZReportDisplay/>
 			<SalesReportDisplay/>
