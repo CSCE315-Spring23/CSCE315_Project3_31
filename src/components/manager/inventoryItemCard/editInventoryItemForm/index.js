@@ -108,7 +108,7 @@ const EditInventoryItemForm = ({ onSubmit, itemName, itemQuantity }) => {
                  alignItems="center"
                  textAlign="center"
             >
-              <Box mt={10} style={{
+              <Box style={{
                   width: "50%"
                 }}
               >
