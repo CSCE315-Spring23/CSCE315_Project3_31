@@ -40,7 +40,6 @@ export default class Database {
 		return res;
 	}
 
-
 	static async addMenuItem(name, price, type, inventory_items) {
 		const response = await fetch(`${backendOrigin}/menu/add`, {
 			method: "POST",
@@ -76,16 +75,19 @@ export default class Database {
 	}
 
 	static async updateInventoryQuantityByName(name, quantity) {
-		const response = await fetch(`${backendOrigin}/inventory/edit/quantity`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				name: name,
-				quantity: quantity,
-			}),
-		})
+		const response = await fetch(
+			`${backendOrigin}/inventory/edit/quantity`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: name,
+					quantity: quantity,
+				}),
+			}
+		)
 			.then((res) => res.json())
 			.catch((err) => console.log(err));
 		return response;
@@ -118,32 +120,26 @@ export default class Database {
 	}
 
 	static async getRestockReport(minimumQty) {
-    // console.log(minimumQty);
-		const response = await fetch(`${backendOrigin}/restaurant/restockreport?minimumQty=${minimumQty}`)
-    .then(
-      res => res.json()
-    ).then(
-      json => { return json; }
-    ).catch(
-      err => {
-        console.log(err);
-      }
-    );
+		// console.log(minimumQty);
+		const response = await fetch(
+			`${backendOrigin}/restaurant/restockreport?minimumQty=${minimumQty}`
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				return json;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		return response;
 	}
 
-	// TODO: Check if this is working
 	static async getExcessReport(timestamp) {
-		const response = await fetch(`${backendOrigin}/restaurant/excessreport?timestamp=${timestamp}`)
-		.then(
-			res => res.json()
-		).then(
-			json => { return json; }
-		).catch(
-			err => {
-				console.log(err);
-			}
-		);
+		const response = await fetch(
+			`${backendOrigin}/restaurant/excessreport?timestamp=${timestamp}`
+		)
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
 		return response;
 	}
 }
