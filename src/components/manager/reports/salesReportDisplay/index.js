@@ -16,12 +16,9 @@ import {
   GridItem,
   Input,
   useToast,
-  IconButton
 } from "@chakra-ui/react";
-import {
-  InfoIcon
-} from "@chakra-ui/icons";
 import Database from "../../../../data";
+import InfoButton from "../../../common/infoButton";
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -133,51 +130,47 @@ const RestockReportDisplay = () => {
                   />
                 </GridItem>
               </Flex>
-                <Box my={4}>
-                  <Grid templateColumns="repeat(3, 1fr)" gap={0}>
-                    <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
-                      <Text textStyle="body3Semi">Item</Text>
-                    </GridItem>
-                    <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                      <Text textStyle="body3Semi">Total Sales</Text>
-                    </GridItem>
-                  </Grid>
-                  {saleItems.length !== 0 ? (
-                    saleItems.map((item) => (
-                      <Grid
-                        key={item.menu_id}
-                        templateColumns="repeat(3, 1fr)"
-                        gap={0}
-                      >
-                        <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
-                          <Text textStyle="body4">{item.name}</Text>
-                        </GridItem>
-                        <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                          <Text textStyle="body4">{item.total_qty}</Text>
-                        </GridItem>
-                      </Grid>
-                    ))
+              <Box my={4}>
+                <Grid templateColumns="repeat(3, 1fr)" gap={0}>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+                    <Text textStyle="body3Semi">Item</Text>
+                  </GridItem>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                    <Text textStyle="body3Semi">Total Sales</Text>
+                  </GridItem>
+                </Grid>
+                {saleItems.length !== 0 ? (
+                  saleItems.map((item) => (
+                    <Grid
+                      key={item.menu_id}
+                      templateColumns="repeat(3, 1fr)"
+                      gap={0}
+                    >
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+                        <Text textStyle="body4">{item.name}</Text>
+                      </GridItem>
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                        <Text textStyle="body4">{item.total_qty}</Text>
+                      </GridItem>
+                    </Grid>
+                  ))
+                ) : (
+                  !startDate || !endDate ? (
+                    <Text/>
                   ) : (
-                    !startDate || !endDate ? (
-                      <Text/>
-                    ) : (
-                      <Text>No Sales In Time Period</Text>
-                    )
-                  )}
-                </Box>
+                    <Text>No Sales In Time Period</Text>
+                  )
+                )}
+              </Box>
             </ModalBody>
             <ModalFooter justifyContent="center" gap={1}>
               <Button type="submit" colorScheme="primary">
                 Generate Report
               </Button>
-              <IconButton 
-                aria-label="Info"
-                icon={<InfoIcon color="blue.500"/>}
-                size="lg"
-                variant="ghost"
-                _hover={{ bg: "transparent" }}
-              >
-              </IconButton>
+              <InfoButton 
+                title={"What is a Sales Report?"}
+                description={"A sales report provides a historical report of all sales that were processed. Should an item not be found in the report, then the item was never ordered in the time period."}
+              />
             </ModalFooter>
           </form>
         </ModalContent>

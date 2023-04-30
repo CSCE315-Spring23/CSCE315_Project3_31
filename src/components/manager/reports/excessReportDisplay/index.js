@@ -16,10 +16,9 @@ import {
 	GridItem,
 	Input,
 	useToast,
-	IconButton,
 } from "@chakra-ui/react";
-import { InfoIcon } from "@chakra-ui/icons";
 import Database from "../../../../data";
+import InfoButton from "../../../common/infoButton";
 
 const RestockReportDisplay = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -110,24 +109,24 @@ const RestockReportDisplay = () => {
 									/>
 								</GridItem>
 							</Flex>
-							{excessItems ? (
-								<Box my={4}>
-									<Grid
-										templateColumns="repeat(3, 1fr)"
-										gap={0}
-									>
-										<GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
-											<Text textStyle="body3Semi">
-												Item
-											</Text>
-										</GridItem>
-										<GridItem borderBottomWidth="1px" borderColor="gray.300">
-											<Text textStyle="body3Semi">
-												Amount Sold
-											</Text>
-										</GridItem>
-									</Grid>
-									{excessItems.map((item) => (
+							<Box my={4}>
+								<Grid
+									templateColumns="repeat(3, 1fr)"
+									gap={0}
+								>
+									<GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+										<Text textStyle="body3Semi">
+											Item
+										</Text>
+									</GridItem>
+									<GridItem borderBottomWidth="1px" borderColor="gray.300">
+										<Text textStyle="body3Semi">
+											Amount Sold
+										</Text>
+									</GridItem>
+								</Grid>
+								{excessItems ? (
+									excessItems.map((item) => (
 										<Grid
 											key={item.inventory_id}
 											templateColumns="repeat(3, 1fr)"
@@ -144,23 +143,20 @@ const RestockReportDisplay = () => {
 												</Text>
 											</GridItem>
 										</Grid>
-									))}
-								</Box>
-							) : (
-								<Text>No Excess Inventory</Text>
-							)}
+									))
+								) : (
+									<Text>No Excess Inventory</Text>
+								)}
+							</Box>
 						</ModalBody>
 						<ModalFooter justifyContent="center" gap={1}>
 							<Button type="submit" colorScheme="primary">
 								Generate Report
 							</Button>
-							<IconButton
-								aria-label="Info"
-								icon={<InfoIcon color="blue.500" />}
-								size="lg"
-								variant="ghost"
-								_hover={{ bg: "transparent" }}
-							></IconButton>
+							<InfoButton 
+                title={"What is an Excess Report?"}
+                description={"An excess report is a historical report of all inventory items that have an excess quantity remaining or lack of total sales since a specified start date. The threshold for an item to have excess quantity is to have less than 10% sales."}
+              />
 						</ModalFooter>
 					</form>
 				</ModalContent>

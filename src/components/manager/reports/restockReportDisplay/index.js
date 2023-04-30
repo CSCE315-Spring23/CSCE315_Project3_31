@@ -16,12 +16,9 @@ import {
   GridItem,
   Input,
   useToast,
-  IconButton
 } from "@chakra-ui/react";
-import {
-  InfoIcon
-} from "@chakra-ui/icons";
 import Database from "../../../../data";
+import InfoButton from "../../../common/infoButton";
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -137,14 +134,10 @@ const RestockReportDisplay = () => {
               <Button type="submit" colorScheme="primary">
                 Generate Report
               </Button>
-              <IconButton 
-                aria-label="Info"
-                icon={<InfoIcon color="blue.500"/>}
-                size="lg"
-                variant="ghost"
-                _hover={{ bg: "transparent" }}
-              >
-              </IconButton>
+              <InfoButton 
+                title={"What is a Restock Report?"}
+                description={"A restock report is a report of all items that may require restock. The report provides a list of all items' stock that is currently under a specified minimum quantity."}
+              />
             </ModalFooter>
           </form>
         </ModalContent>
