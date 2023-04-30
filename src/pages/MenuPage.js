@@ -41,22 +41,14 @@ const MenuPage = () => {
   }, []);
 
   return (
-    <>
-      <Box position="fixed">
-        <MenuCategorySelectionDisplay
-          selectedCategory={category}
-          onSelectCategory={setCategory}
-        />
-      </Box>
-      <Flex justify="flex-end">
-        <MenuItemSelectionDisplay
-          menuItems={menuItems}
-          readOnly={true}
-          category={category}
-          order={order}
-        />
-      </Flex>
-    </>
+    <Flex justify="flex-end">
+      <MenuItemSelectionDisplay
+        menuItems={menuItems}
+        readOnly={true}
+        menuOnly={true}
+        order={order}
+      />
+    </Flex>
   );
 };
 

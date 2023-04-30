@@ -42,7 +42,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
     return (
 		<>
 			<Button colorScheme='primary' p={2} width='10em' onClick={onSwitching}>Switch Views</Button>
-			<Modal isOpen={isOpen} onClose={onClose} size="xl" closeOnOverlayClick={false}>
+			<Modal isOpen={isOpen} onClose={onClose} size="xl" closeOnOverlayClick={false} closeOnEsc={false}>
 				<ModalOverlay backdropFilter='blur(10px)' />
 				<ModalContent>
 					<ModalHeader>
