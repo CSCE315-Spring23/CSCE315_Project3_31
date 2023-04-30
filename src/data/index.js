@@ -134,10 +134,33 @@ export default class Database {
 		return response;
 	}
 
+	static async getSalesReport(sDate, eDate) {
+		const response = await fetch(
+			`${backendOrigin}/restaurant/excessreport?sDate=${sDate}?eDate=${eDate}`
+		)
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
 	static async getExcessReport(timestamp) {
 		const response = await fetch(
 			`${backendOrigin}/restaurant/excessreport?timestamp=${timestamp}`
 		)
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
+	static async getXReport() {
+		const response = await fetch(`${backendOrigin}/restaurant/xreport`)
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
+	static async getZReport() {
+		const response = await fetch(`${backendOrigin}/restaurant/zreport`)
 			.then((res) => res.json())
 			.catch((err) => console.log(err));
 		return response;
