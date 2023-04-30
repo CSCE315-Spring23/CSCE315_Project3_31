@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
+const MenuItemCard = ({ info, readOnly, menuOnly, subtract, onUpdate }) => {
   const border = useColorModeValue(
     "solid 1px rgb(0, 0, 0, 0.5)",
     "solid 1px #7d7dff"
@@ -21,54 +21,105 @@ const MenuItemCard = ({ info, readOnly, subtract, onUpdate }) => {
   );
 
   return (
-    <Box
-      rounded="md"
-      border={border}
-      boxShadow={shadow}
-      width="18em"
-      height="fit-content"
-      paddingBottom={5}
-      _hover={onHover}
-      transition="border-color 0.25s ease, box-shadow 0.25s ease"
-    >
-      <Box
-        mx="auto"
-        width="18em"
-        height="18em"
-        rounded='md'
-        overflow="hidden"
-        bg="white"
-      >
-        <img src={info.image ? info.image : "https://cdn.cookielaw.org/logos/63dc78c7-5612-4181-beae-47dead0569ee/666a8744-979e-4263-b2c2-093036f7ec5f/d5e0c553-41c6-41f7-b91f-be2f73c122c6/Chick-fil-A-Logo.png"} />
-      </Box>
-      <Text width='10em' mx='auto' textAlign='center' textStyle="body2Semi">
-        {info.name}
-      </Text>
-      <Text
-        mx="auto"
-        width="fit-content"
-        textStyle="body3"
-      >
-        Price: ${info.price.toFixed(2)}
-      </Text>
+    <>
       {
-        readOnly ? "" :
-        <Flex justify='center' gap={1} pt={2}>
-            <Button 
-              size="md" fontSize="1.5rem" 
-              colorScheme='primary' variant='solid'
-              onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
-              p={3} px="2em"
-            >{"-"}</Button>
-            <Button 
-              size="md" fontSize="1.5rem"
-              colorScheme='primary' variant='solid'
-              onClick={() => onUpdate(info.name, info.price, true)}
-              p={3} px="2em"
-            >{"+"}</Button>
-        </Flex>
+        menuOnly ?
+        <Box
+          rounded="md"
+          border={border}
+          boxShadow={shadow}
+          width="5em"
+          height="fit-content"
+          _hover={onHover}
+          transition="border-color 0.25s ease, box-shadow 0.25s ease"
+        >
+          <Box
+            mx="auto"
+            width="5em"
+            height="5em"
+            rounded='md'
+            overflow="hidden"
+            bg="white"
+          >
+            <img src={info.image ? info.image : "https://cdn.cookielaw.org/logos/63dc78c7-5612-4181-beae-47dead0569ee/666a8744-979e-4263-b2c2-093036f7ec5f/d5e0c553-41c6-41f7-b91f-be2f73c122c6/Chick-fil-A-Logo.png"} />
+          </Box>
+          <Text width='5em' mx='auto' textAlign='center'>
+            {info.name}
+          </Text>
+          <Text
+            mx="auto"
+            width="fit-content"
+          >
+            ${info.price.toFixed(2)}
+          </Text>
+          {
+            readOnly ? "" :
+            <Flex justify='center' gap={1} pt={2}>
+                <Button 
+                  size="md" fontSize="1.5rem" 
+                  colorScheme='primary' variant='solid'
+                  onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
+                  p={3} px="2em"
+                >{"-"}</Button>
+                <Button 
+                  size="md" fontSize="1.5rem"
+                  colorScheme='primary' variant='solid'
+                  onClick={() => onUpdate(info.name, info.price, true)}
+                  p={3} px="2em"
+                >{"+"}</Button>
+            </Flex>
+          }
+        </Box> :
+        <Box
+          rounded="md"
+          border={border}
+          boxShadow={shadow}
+          width="18em"
+          height="fit-content"
+          paddingBottom={5}
+          _hover={onHover}
+          transition="border-color 0.25s ease, box-shadow 0.25s ease"
+        >
+          <Box
+            mx="auto"
+            width="18em"
+            height="18em"
+            rounded='md'
+            overflow="hidden"
+            bg="white"
+          >
+            <img src={info.image ? info.image : "https://cdn.cookielaw.org/logos/63dc78c7-5612-4181-beae-47dead0569ee/666a8744-979e-4263-b2c2-093036f7ec5f/d5e0c553-41c6-41f7-b91f-be2f73c122c6/Chick-fil-A-Logo.png"} />
+          </Box>
+          <Text width='10em' mx='auto' textAlign='center' textStyle="body2Semi">
+            {info.name}
+          </Text>
+          <Text
+            mx="auto"
+            width="fit-content"
+            textStyle="body3"
+          >
+            Price: ${info.price.toFixed(2)}
+          </Text>
+          {
+            readOnly ? "" :
+            <Flex justify='center' gap={1} pt={2}>
+                <Button 
+                  size="md" fontSize="1.5rem" 
+                  colorScheme='primary' variant='solid'
+                  onClick={() => onUpdate(info.name, info.price, false)} isDisabled={!subtract}
+                  p={3} px="2em"
+                >{"-"}</Button>
+                <Button 
+                  size="md" fontSize="1.5rem"
+                  colorScheme='primary' variant='solid'
+                  onClick={() => onUpdate(info.name, info.price, true)}
+                  p={3} px="2em"
+                >{"+"}</Button>
+            </Flex>
+          }
+        </Box>
       }
-    </Box>
+    </>
   );
 };
 

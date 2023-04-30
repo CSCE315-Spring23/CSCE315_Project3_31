@@ -6,7 +6,7 @@ const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, ord
         <>
             {
                 menuOnly ?
-                <Grid templateColumns='repeat(6, 1fr)' gap={1}>
+                <Grid templateColumns='repeat(12, 1fr)' gap={1}>
                     {
                         menuItems?.length ? menuItems.map(
                             menuItem =>
@@ -14,6 +14,7 @@ const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, ord
                                 <MenuItemCard 
                                     info={menuItem} 
                                     readOnly={readOnly}
+                                    menuOnly={menuOnly}
                                     subtract={
                                         order.some(
                                             item => item.name === menuItem.name
