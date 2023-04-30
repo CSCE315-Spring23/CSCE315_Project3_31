@@ -76,13 +76,13 @@ const OrderHistoryDisplay = () => {
                 <Text>Staff: {orders[orderIndex].staff_id}</Text>
                 <Text>Customer: {orders[orderIndex].customer_id}</Text>
                 <Grid templateColumns='repeat(3, 1fr)' gap={0} pt={5}>
-                  <GridItem>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300">
                     <Text textStyle="body3Semi">Item</Text>
                   </GridItem>
-                  <GridItem>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300">
                     <Text textStyle="body3Semi">Price</Text>
                   </GridItem>
-                  <GridItem>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300">
                     <Text textStyle="body3Semi">Quantity</Text>
                   </GridItem>
                 </Grid>
@@ -90,19 +90,19 @@ const OrderHistoryDisplay = () => {
                   orders[orderIndex].menuItems.map(
                     menuItem => 
                     <Grid templateColumns='repeat(3, 1fr)' gap={0}>
-                      <GridItem>
-                        <Text textStyle="body3">{menuItem.menuItem.name}</Text>
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                        <Text textStyle="body4">{menuItem.menuItem.name}</Text>
                       </GridItem>
-                      <GridItem>
-                        <Text textStyle="body3">{menuItem.menuItem.price}</Text>
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                        <Text textStyle="body4">${menuItem.menuItem.price.toFixed(2)}</Text>
                       </GridItem>
-                      <GridItem>
-                        <Text textStyle="body3">{menuItem.quantity}</Text>
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                        <Text textStyle="body4">{menuItem.quantity}</Text>
                       </GridItem>
                     </Grid>
                   )
                 }
-                <Text textStyle="body3" my="2.5em"><b>Total Price:</b> {orders[orderIndex].cost_total}</Text>
+                <Text textStyle="body3" my="2.5em"><b>Total Price:</b> ${orders[orderIndex].cost_total.toFixed(2)}</Text>
               </>
               : ""
             }

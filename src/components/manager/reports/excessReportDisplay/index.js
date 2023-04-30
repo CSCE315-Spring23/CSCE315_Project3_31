@@ -23,10 +23,14 @@ import Database from "../../../../data";
 
 const RestockReportDisplay = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [selectedDate, setSelectedDate] = useState(5000);
 	const [excessItems, setExcessItems] = useState([]);
 	const toast = useToast();
 	const handleSubmit = async (e) => {
+		e.preventDefault();
+    const selectedDate = document.getElementById("selectDate-input").value;
+
+    const today = new Date();
+
 		if (!selectedDate) {
 			toast({
 				title: "ERROR",
@@ -36,12 +40,27 @@ const RestockReportDisplay = () => {
 				isClosable: true,
 			});
 			return;
-		}
-		e.preventDefault();
+		} else if (new Date(selectedDate).getTime() > today.getTime()) {
+      toast({
+        title: "ERROR",
+        description: "Dates provided can not be in the future.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
 		const items = await Database.getExcessReport(selectedDate);
 		console.log("easdf");
 		console.log(items);
 		setExcessItems(items);
+		toast({
+      title: "Excess Report Generated",
+      description: "Showing excess inventory from sales since " + selectedDate,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    })
 	};
 
 	return (
@@ -81,13 +100,8 @@ const RestockReportDisplay = () => {
 								<GridItem>
 									<Input
 										type="date"
+										id="selectDate-input"
 										placeholder="Select date"
-										onChange={(e) => {
-											const date = new Date(
-												e.target.value
-											);
-											setSelectedDate(date);
-										}}
 										style={{
 											background: "#f3f3f3",
 											border: "1px solid",
@@ -102,15 +116,14 @@ const RestockReportDisplay = () => {
 										templateColumns="repeat(3, 1fr)"
 										gap={0}
 									>
-										<GridItem>
+										<GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
 											<Text textStyle="body3Semi">
 												Item
 											</Text>
 										</GridItem>
-										<GridItem></GridItem>
-										<GridItem>
+										<GridItem borderBottomWidth="1px" borderColor="gray.300">
 											<Text textStyle="body3Semi">
-												Sold (%)
+												Amount Sold
 											</Text>
 										</GridItem>
 									</Grid>
@@ -120,22 +133,21 @@ const RestockReportDisplay = () => {
 											templateColumns="repeat(3, 1fr)"
 											gap={0}
 										>
-											<GridItem>
-												<Text textStyle="body3">
+											<GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+												<Text textStyle="body4">
 													{item.name}
 												</Text>
 											</GridItem>
-											<GridItem></GridItem>
-											<GridItem>
-												<Text textStyle="body3">
-													{item.percentage_sold}
+											<GridItem borderBottomWidth="1px" borderColor="gray.300">
+												<Text textStyle="body4">
+													{item.percentage_sold.toFixed(4)}%
 												</Text>
 											</GridItem>
 										</Grid>
 									))}
 								</Box>
 							) : (
-								<Text>No Excess Sales</Text>
+								<Text>No Excess Inventory</Text>
 							)}
 						</ModalBody>
 						<ModalFooter justifyContent="center" gap={1}>

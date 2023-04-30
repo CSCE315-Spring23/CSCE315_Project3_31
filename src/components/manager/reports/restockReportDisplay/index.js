@@ -25,11 +25,13 @@ import Database from "../../../../data";
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [minimumQty, setMinimumQty] = useState(5000);
   const [refillItems, setRefillItems] = useState([]);
+  const [minimumQty, setMinimumQty] = useState(0);
   const toast = useToast();
   const handleSubmit = async (e) => {
-    if (!minimumQty) {
+    const minQty = document.getElementById("minQty-input").value;
+    e.preventDefault();
+    if (!minQty) {
       toast({
         title: "ERROR",
         description: "No minimum value provided.",
@@ -38,10 +40,26 @@ const RestockReportDisplay = () => {
         isClosable: true,
       })
       return;
+    } else if (minQty <= 0) {
+      toast({
+        title: "ERROR",
+        description: "Minimum quantity must be greater than zero.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      })
+      return;
     }
-    e.preventDefault();
-    const items = await Database.getRestockReport(minimumQty);
+    setMinimumQty(minQty);
+    const items = await Database.getRestockReport(minQty);
     setRefillItems(items);
+    toast({
+      title: "Restock Report Generated",
+      description: "Showing inventory items with stock under " + minQty,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    })
   };
 
   return (
@@ -71,8 +89,8 @@ const RestockReportDisplay = () => {
                 <GridItem>
                   <Input
                     type="number"
+                    id="minQty-input"
                     placeholder="5000"
-                    onChange={(e) => setMinimumQty(e.target.value)}
                     style={{
                       background: "#f3f3f3",
                       border: "1px solid",
@@ -82,36 +100,38 @@ const RestockReportDisplay = () => {
                   />
                 </GridItem>
               </Flex>
-              {refillItems ? (
-                  <Box my={4}>
-                    <Grid templateColumns="repeat(3, 1fr)" gap={0}>
-                      <GridItem>
-                        <Text textStyle="body3Semi">Item</Text>
+              <Box my={4}>
+                <Grid templateColumns="repeat(3, 1fr)" gap={0}>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+                    <Text textStyle="body3Semi">Item</Text>
+                  </GridItem>
+                  <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                    <Text textStyle="body3Semi">Quantity</Text>
+                  </GridItem>
+                </Grid>
+                {refillItems.length !== 0 ? (
+                  refillItems.map((item) => (
+                    <Grid
+                      key={item.inventory_id}
+                      templateColumns="repeat(3, 1fr)"
+                      gap={0}
+                    >
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300" colSpan={2}>
+                        <Text textStyle="body4">{item.name}</Text>
                       </GridItem>
-                      <GridItem></GridItem>
-                      <GridItem>
-                        <Text textStyle="body3Semi">Quantity</Text>
+                      <GridItem borderBottomWidth="1px" borderColor="gray.300">
+                        <Text textStyle="body4">{item.quantity}</Text>
                       </GridItem>
                     </Grid>
-                    {refillItems.map((item) => (
-                      <Grid
-                        key={item.inventory_id}
-                        templateColumns="repeat(3, 1fr)"
-                        gap={0}
-                      >
-                        <GridItem>
-                          <Text textStyle="body3">{item.name}</Text>
-                        </GridItem>
-                        <GridItem></GridItem>
-                        <GridItem>
-                          <Text textStyle="body3">{item.quantity}</Text>
-                        </GridItem>
-                      </Grid>
-                    ))}
-                  </Box>
+                  ))
                 ) : (
-                  <Text>No Items to Refill</Text>
+                  minimumQty <= 0 ? (
+                    <Text/>
+                  ) : (
+                    <Text>No Items to Restock</Text>
+                  )
                 )}
+              </Box>
             </ModalBody>
             <ModalFooter justifyContent="center" gap={1}>
               <Button type="submit" colorScheme="primary">
