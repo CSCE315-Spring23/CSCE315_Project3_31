@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { 
-  Box, Text, Flex, Button,
+  Box,
+  Text,
+  Flex,
+  Button,
   Modal,
   ModalOverlay,
   ModalBody,
@@ -10,6 +13,7 @@ import {
   ModalFooter,
   useDisclosure,
   Textarea,
+  Input,
   useToast
 } from "@chakra-ui/react";
 import Database from "../../../data";
@@ -17,13 +21,6 @@ import Database from "../../../data";
 const CreateMenuItemForm = ({ onSubmit }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [itemData, setItemData] = useState({
-    name: "",
-    cost: "",
-    type: "",
-    ingredients: ""
-  });
 
   const toast = useToast();
 
@@ -74,14 +71,7 @@ const CreateMenuItemForm = ({ onSubmit }) => {
       return;
     }
 
-    setItemData({
-      name: itemName,
-      cost: itemCost,
-      type: itemType,
-      ingredients: itemIngredients
-    });
-
-    if (!(await Database.addMenuItem(itemData.name, itemData.cost, itemData.type, itemData.ingredients))) {
+    if (!(await Database.addMenuItem(itemName, itemCost, itemType, itemIngredients))) {
       toast({
         title: "Item Not Created",
         description: "Issues with provided menu item information.",
@@ -93,7 +83,7 @@ const CreateMenuItemForm = ({ onSubmit }) => {
     } else {
       toast({
         title: "Item Created",
-        description: itemData.name + " added to the menu.",
+        description: itemName + " added to the menu.",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -127,7 +117,7 @@ const CreateMenuItemForm = ({ onSubmit }) => {
                 }}
               >
                 <Text textStyle="body3">Item Name</Text>
-                <input type="text" name="item-name" id="item-name"
+                <Input type="text" name="item-name" id="item-name"
                       placeholder="Chicken Sandwich"
                       style={{
                         background: "#f3f3f3",
@@ -147,7 +137,7 @@ const CreateMenuItemForm = ({ onSubmit }) => {
                 <Text textStyle="body3">Cost</Text>
                 <Flex flexDirection="row" justify="center">
                   <Text textStyle="body3">$</Text>
-                  <input type="number" name="item-cost" id="item-cost"
+                  <Input type="number" name="item-cost" id="item-cost"
                         placeholder="00.00"
                         style={{
                           background: "#f3f3f3",

@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
 	Flex,
-	Tabs,
-	TabList,
-	TabPanels,
-	TabPanel,
-	Tab,
-	useColorModeValue,
 	Box,
 	Text,
-	Alert,
-	AlertIcon,
-	AlertTitle,
-	AlertDescription,
 	Button,
-	Center,
 } from "@chakra-ui/react";
 import BaseLayout from "../components/baseLayout";
 import Database, { getUID } from "../data";
@@ -22,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import ItemSelectionDisplay from "../components/manager/itemSelectionDisplay";
-import RestockReportDisplay from "../components/manager/restockReportDisplay";
-import SalesReportDisplay from "../components/manager/salesReportDisplay";
-import ExcessReportDisplay from "../components/manager/excessReportDisplay";
-import XReportDisplay from "../components/manager/xreportDisplay";
-import ZReportDisplay from "../components/manager/zreportDisplay";
+import RestockReportDisplay from "../components/manager/reports/restockReportDisplay";
+import SalesReportDisplay from "../components/manager/reports/salesReportDisplay";
+import ExcessReportDisplay from "../components/manager/reports/excessReportDisplay";
+import XReportDisplay from "../components/manager/reports/xreportDisplay";
+import ZReportDisplay from "../components/manager/reports/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import { GoogleLogin } from "@react-oauth/google";

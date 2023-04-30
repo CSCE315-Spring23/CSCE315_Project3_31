@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Box,
     Flex,
@@ -6,8 +7,9 @@ import {
     Text,
     useColorMode,
     useColorModeValue,
-  } from "@chakra-ui/react";
-  import React from "react";
+} from "@chakra-ui/react";
+import EditInventoryItemForm from "./editInventoryItemForm";
+import Database from "../../../data";
   
   const InventoryItemCard = ({ info, onUpdate }) => {
     const border = useColorModeValue(
@@ -26,7 +28,7 @@ import {
         border={border}
         boxShadow={shadow}
         width="18em"
-        height="fit-content"
+        height="100%"
         paddingBottom={5}
         _hover={onHover}
         transition="border-color 0.25s ease, box-shadow 0.25s ease"
@@ -44,20 +46,10 @@ import {
         <Text width='10em' mx='auto' textAlign='center' textStyle="body2Semi">
           {info.name}
         </Text>
-        <Flex justify='center' gap={1} pt={2}>
-            <Button 
-              size="md" fontSize="1.5rem" 
-              colorScheme='primary' variant='solid'
-              onClick={() => {}} isDisabled={false}
-              p={3} px="2em"
-            >{"-"}</Button>
-            <Button 
-              size="md" fontSize="1.5rem"
-              colorScheme='primary' variant='solid'
-              onClick={() => {}}
-              p={3} px="2em"
-            >{"+"}</Button>
-        </Flex>
+        <EditInventoryItemForm 
+          itemName={info.name} 
+          itemQuantity={info.quantity}
+        />
       </Box>
     );
   };

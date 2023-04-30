@@ -39,7 +39,14 @@ const OrderHistoryDisplay = () => {
   }, [orders, orderIndex]);
 
   return (
-    <Flex flexDirection="column" justify="center" py="0.5em" border="solid 1px" borderColor="grey.100" rounded="md" boxShadow="lg">
+    <Flex flexDirection="column"
+          justify="center"
+          py="0.5em"
+          border="solid 1px"
+          borderColor="grey.100"
+          rounded="md"
+          boxShadow="lg"
+    >
       <Box fontSize="1.2rem" my={2} mx="auto">
         <Button 
           onClick={() => onOpen()}
