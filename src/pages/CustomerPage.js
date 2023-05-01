@@ -41,7 +41,7 @@ const CustomerPage = () => {
     updateMenu();
   }, []);
 
-  const handleUpdate = (menuItemName, price, add) => {
+  const handleUpdate = (menuItemName, menuId, price, add) => {
     let new_order;
     for (let i = 0; i < order.length; i++) {
       if (order.at(i).name === menuItemName) {
@@ -53,7 +53,7 @@ const CustomerPage = () => {
         return;
       }
     }
-    new_order = [...order, { name: menuItemName, price: price, quantity: 1 }];
+    new_order = [...order, { name: menuItemName, menu_id: menuId, price: price, quantity: 1 }];
     setOrder(new_order);
   };
 
