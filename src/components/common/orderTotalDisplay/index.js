@@ -48,7 +48,7 @@ const OrderTotalDisplay = ({ order }) => {
         isClosable: true,
       })
       console.log("here1");
-      const order_id = await Database.makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items);
+      const { order_id } = await Database.makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items);
       console.log("here2");
       if (!order_id || order_id < 0) {
         toast({
