@@ -19,11 +19,14 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
+import { ComposedChart, XAxis, YAxis, Line, CartesianGrid, Tooltip, Legend, Bar } from "recharts";
+
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [refillItems, setRefillItems] = useState([]);
   const [minimumQty, setMinimumQty] = useState(0);
+  const [chartData, setChartData] = useState([]);
   const toast = useToast();
   const handleSubmit = async (e) => {
     const minQty = document.getElementById("minQty-input").value;
@@ -50,6 +53,17 @@ const RestockReportDisplay = () => {
     setMinimumQty(minQty);
     const items = await Database.getRestockReport(minQty);
     setRefillItems(items);
+
+    const newChartData = items.map((item) => ({
+      name: item.name,
+      Quantity: parseInt(item.quantity),
+      Minimum: minQty,
+    }));
+    console.log("newChartData: ")
+    console.log(newChartData);
+
+    setChartData(newChartData);
+
     toast({
       title: "Restock Report Generated",
       description: "Showing inventory items with stock under " + minQty,
@@ -129,6 +143,17 @@ const RestockReportDisplay = () => {
                   )
                 )}
               </Box>
+              {refillItems.length !== 0 && (
+              <ComposedChart width={450} height={250} data={chartData}>
+                <XAxis dataKey="name" hide="true"/>
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <CartesianGrid stroke="#f5f5f5" />
+                <Bar dataKey="Quantity" barSize={20} fill="#413ea0" />
+                <Line type="monotone" dataKey="Minimum" stroke="#ff7300" />
+              </ComposedChart>
+            )}
             </ModalBody>
             <ModalFooter justifyContent="center" gap={1}>
               <Button type="submit" colorScheme="primary">
