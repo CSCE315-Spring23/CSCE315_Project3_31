@@ -20,6 +20,11 @@ export default class Database {
 		return res;
 	}
 
+	static async getMenuItemByName(name) {
+		let res = await this._getModel(`menu/name/${name}`);
+		return res;
+	}
+
 	static async getMenuItemsForOrder(order_id) {
 		let res = await this._getModel(`menu/order/${order_id}`);
 		return res;
@@ -40,7 +45,13 @@ export default class Database {
 		return res;
 	}
 
-	static async makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items) {
+	static async makeOrder(
+		cost_total,
+		timestamp,
+		customer_id,
+		staff_id,
+		menu_items
+	) {
 		const response = await fetch(`${backendOrigin}/orders/makeorder`, {
 			method: "POST",
 			headers: {
