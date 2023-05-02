@@ -75,10 +75,14 @@ const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
                 <Text textStyle="body3Semi">Item</Text>
               </GridItem>
               <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                <Text textStyle="body3Semi">Qty</Text>
+                <Text textStyle="body3Semi" textAlign="center">
+                  Qty
+                </Text>
               </GridItem>
               <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                <Text textStyle="body3Semi">Price</Text>
+                <Text textStyle="body3Semi" textAlign="center">
+                  Price
+                </Text>
               </GridItem>
             </Grid>
             {
@@ -89,10 +93,26 @@ const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
                     <Text textStyle="body4">{menuItem.name}</Text>
                   </GridItem>
                   <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                    <Text textStyle="body4">{menuItem.quantity}</Text>
+                    <Flex flexDirection="row" justify="center" alignItems="center" gap={0}>
+                      <Button 
+                        size="xs" fontSize="1rem" 
+                        colorScheme='primary' variant='ghost'
+                        // onClick={() => onUpdate(false)}
+                      >{"-"}</Button>
+                      <Text textStyle="body4" textAlign="center">
+                        {menuItem.quantity}
+                      </Text>
+                      <Button 
+                        size="xs" fontSize="1rem" 
+                        colorScheme='primary' variant='ghost'
+                        // onClick={() => onUpdate(true)}
+                      >{"+"}</Button>
+                    </Flex>
                   </GridItem>
                   <GridItem borderBottomWidth="1px" borderColor="gray.300">
-                    <Text textStyle="body4">${menuItem.price * menuItem.quantity ? (menuItem.price * menuItem.quantity).toFixed(2) : "0.00"}</Text>
+                    <Text textStyle="body4" textAlign="center">
+                      ${menuItem.price * menuItem.quantity ? (menuItem.price * menuItem.quantity).toFixed(2) : "0.00"}
+                    </Text>
                   </GridItem>
                 </Grid>
               )

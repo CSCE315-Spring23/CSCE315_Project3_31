@@ -113,7 +113,7 @@ const EditInventoryItemForm = ({ onSubmit, itemName, itemQuantity }) => {
                 }}
               >
                 <Text textStyle="body3">Edit Quantity</Text>
-                <Flex flexDirection="row" justify="center" gap={2}>
+                <Flex flexDirection="row" justify="center" alignItems="center" gap={2}>
                   <Button 
                     size="sm" fontSize="1rem" 
                     colorScheme='primary' variant='solid'
