@@ -144,9 +144,15 @@ const RestockReportDisplay = () => {
                 )}
               </Box>
               {refillItems.length !== 0 && (
-              <ComposedChart width={450} height={250} data={chartData}>
-                <XAxis dataKey="name" hide="true"/>
-                <YAxis />
+              <ComposedChart 
+                width={500} 
+                height={500} 
+                data={chartData} 
+                layout="vertical"
+                margin={{top: 5, bottom: 5}}
+              >
+                <XAxis type ="number"/>
+                <YAxis type="category" dataKey="name" hide="true"/>
                 <Tooltip />
                 <Legend />
                 <CartesianGrid stroke="#f5f5f5" />
