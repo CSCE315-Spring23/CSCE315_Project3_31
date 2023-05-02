@@ -113,11 +113,11 @@ const EditMenuItemForm = ({ onSubmit, itemName }) => {
 									width: "40%",
 								}}
 							>
-								<Text textStyle="body3">Current Cost: </Text>
-								<Text textStyle="body3">{itemCost}</Text>
+								<Text textStyle="body3" textDecoration="underline">Current Cost: </Text>
+								<Text textStyle="body3">${itemCost}</Text>
 							</Box>
 							<Box
-								mt={10}
+								mt={5}
 								style={{
 									width: "40%",
 								}}
