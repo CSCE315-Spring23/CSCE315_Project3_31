@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { 
-  Box, Text, Flex, Button,
+  Box,
+  Text,
+  Flex,
+  Button,
   Modal,
   ModalOverlay,
   ModalBody,
@@ -10,11 +13,10 @@ import {
   useDisclosure,
   Grid,
   GridItem,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
-import Database from "../../../data";
 
-const OrderTotalDisplay = ({ order }) => {
+const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -40,43 +42,8 @@ const OrderTotalDisplay = ({ order }) => {
     const timestamp = new Date();
     const customer_id = Math.floor(Math.random() * (999 - 1 + 1)) + 1;
     const staff_id = Math.floor(Math.random() * (18 - 1 + 1)) + 1;
-    try {
-      const loadToastId = toast({
-        description: "Order Processing",
-        status: "loading",
-        duration: 500,
-        isClosable: true,
-      })
-      console.log("here1");
-      const { order_id } = await Database.makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items);
-      console.log("here2");
-      if (!order_id || order_id < 0) {
-        toast({
-          title: "Order Failed",
-          description: "There was an issue with processing your order.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          onClose: () => {
-            toast.close(loadToastId);
-          },
-        })
-        return;
-      }
-      toast({
-        title: "Order Received",
-        description: "Your has been received and will be ready shortly. Your order id is " + order_id + ".",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        onClose: () => {
-          toast.close(loadToastId);
-        },
-      })
-      onClose();
-    } catch (err) {
-      console.error(err);
-    }
+    await onOrderSubmit(e, cost_total, timestamp, customer_id, staff_id, menu_items);
+    onClose();
   }
 
   return (

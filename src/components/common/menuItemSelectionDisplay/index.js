@@ -1,7 +1,9 @@
+import React, { useEffect } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import MenuItemCard from '../menuItemCard';
 
 const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, order, onUpdate }) => {
+  useEffect(() => {}, [order]);
   return (
     <> {
       menuOnly ?
