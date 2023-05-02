@@ -104,7 +104,6 @@ const ManagerPage = () => {
 							onSelectCategory={setCategory}
 						/>
 						<CreateMenuItemForm onSubmit={() => setMenuItems([])} />
-						<AddStaffForm />
 					</Flex>
 				) : (
 					""
@@ -121,7 +120,9 @@ const ManagerPage = () => {
 					onUpdate={handleUpdate}
 				/>
 			</Flex>
+
 			<Box position="fixed" right="12em" top="10em" width="15em">
+				<AddStaffForm />
 				<Flex
 					flexDirection="column"
 					justify="center"
