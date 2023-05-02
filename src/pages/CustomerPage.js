@@ -82,6 +82,23 @@ const CustomerPage = () => {
     return;
   }
 
+  const handleQuantityUpdate = async (menuItem, shouldIncrease) => {
+    const new_order = [...order];
+    const menuItemToModifyIndex = new_order.findIndex(item => item.name === menuItem.name);
+    const qty = menuItem.quantity;
+    if (shouldIncrease) {
+      new_order.at(menuItemToModifyIndex).quantity += 1;
+    } else {
+      if (qty <= 1) {
+        new_order.splice(menuItemToModifyIndex, 1);
+      } else {
+        new_order.at(menuItemToModifyIndex).quantity -= 1;
+      }
+    }
+    setOrder(new_order);
+    return;
+  }
+
   return (
       <>
         <Box position="fixed">
@@ -90,7 +107,7 @@ const CustomerPage = () => {
             onSelectCategory={setCategory}
           />
           <Box mt="1em">
-            <OrderTotalDisplay order={order} onOrderSubmit={handleOrderSubmit} />
+            <OrderTotalDisplay order={order} onOrderSubmit={handleOrderSubmit} onQuantityUpdate={handleQuantityUpdate} />
           </Box>
         </Box>
         <Flex justify="flex-end">
