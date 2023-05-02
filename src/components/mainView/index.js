@@ -14,6 +14,8 @@ import {
 	ModalFooter,
 	Button,
 	ModalBody,
+	Img,
+	Grid,
 } from "@chakra-ui/react";
 import GoogleTranslate from "../common/googleTranslate";
 import { GoogleLogin } from "@react-oauth/google";
@@ -154,7 +156,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 						</Flex>
 					</ModalBody>
 					<ModalFooter justifyContent="center">
-						<img
+						<Img
 							src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
 							width="200px"
 						/>
@@ -167,22 +169,29 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 
 const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	return (
-		<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
-			<HStack
-				fontSize="1.5rem"
-				fontWeight="800"
-				spacing="1.5em"
-				width="fit-content"
-			>
-				<LoginPopup
-					userType={userType}
-					onEnter={onEnter}
-					loggedIn={loggedIn}
-					onSwitching={onSwitching}
-				/>
-				<GoogleTranslate />
-			</HStack>
-		</Flex>
+		<Grid templateColumns="repeat(3, 1fr)">
+			<Img
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
+				width="150px"
+				alignSelf="center"
+			/>
+			<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
+				<HStack
+					fontSize="1.5rem"
+					fontWeight="800"
+					spacing="1.5em"
+					width="fit-content"
+				>
+					<LoginPopup
+						userType={userType}
+						onEnter={onEnter}
+						loggedIn={loggedIn}
+						onSwitching={onSwitching}
+					/>
+					<GoogleTranslate />
+				</HStack>
+			</Flex>
+		</Grid>
 	);
 };
 
