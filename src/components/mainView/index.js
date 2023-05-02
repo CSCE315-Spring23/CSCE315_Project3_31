@@ -16,6 +16,7 @@ import {
 	ModalBody,
 	Img,
 	Grid,
+	useToast,
 } from "@chakra-ui/react";
 import GoogleTranslate from "../common/googleTranslate";
 import { GoogleLogin } from "@react-oauth/google";
@@ -28,8 +29,8 @@ import ManagerPage from "../../pages/ManagerPage";
 import MenuPage from "../../pages/MenuPage";
 import WeatherDisplay from "../common/weatherDisplay";
 
-
 const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
+	const toast = useToast();
 	const [user, setUser] = useState(userType ? userType : "CUSTOMER");
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -137,12 +138,39 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 										let res = await Database.postGoogleAuth(
 											credentialResponse
 										);
+										console.log(res);
 										if (res.message === 69) {
-											handleLogin();
+											if (
+												user === "MANAGER" &&
+												res.user.is_manager
+											) {
+												handleLogin();
+											} else if (
+												user === "SERVER" &&
+												!res.user.is_manager
+											) {
+												handleLogin();
+											} else {
+												toast({
+													title: "Access Denied",
+													description:
+														"You don't have the necessary permissions.",
+													status: "error",
+													duration: 5000,
+													isClosable: true,
+												});
+											}
 										}
 									}}
 									onError={() => {
-										console.log("Login Failed");
+										toast({
+											title: "Login Failed",
+											description:
+												"An error occurred during login.",
+											status: "error",
+											duration: 5000,
+											isClosable: true,
+										});
 									}}
 								/>
 							) : (
@@ -169,7 +197,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	);
 };
 
-const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {	
+const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	return (
 		<Grid templateColumns="repeat(3, 1fr)">
 			<Img
@@ -177,7 +205,14 @@ const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 				width="200px"
 				alignSelf="center"
 			/>
-			<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
+			<Flex
+				width="100%"
+				mt="1"
+				justify="center"
+				align="center"
+				px={2}
+				pt={2}
+			>
 				<HStack
 					fontSize="1.5rem"
 					fontWeight="800"
