@@ -174,7 +174,7 @@ const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 		<Grid templateColumns="repeat(3, 1fr)">
 			<Img
 				src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
-				width="150px"
+				width="200px"
 				alignSelf="center"
 			/>
 			<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
@@ -204,7 +204,7 @@ const ContentContainer = ({ content }) => {
 
 const Footer = () => {
 	return (
-		<Flex width="100%" justify="center" pt={5} pb={1}>
+		<Flex flexDirection="column" width="100%" justify="center" pt={5} pb={1}>
 			<Text fontSize="md" mb={4} align="center" mx="auto">
 				Developed by{" "}
 				<Text as="span" fontWeight="bold" color="primary.500">
@@ -225,6 +225,11 @@ const Footer = () => {
 				<br />
 				a.k.a. Team 31
 			</Text>
+			<Img
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
+				width="100px"
+				alignSelf="center"
+			/>
 		</Flex>
 	);
 };

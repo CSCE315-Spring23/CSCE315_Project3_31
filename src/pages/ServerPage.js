@@ -32,7 +32,7 @@ const ServerPage = () => {
     }
   }, [menuItems]);
 
-  const handleUpdate = (menuItemName, menuId, price, add) => {
+  const handleOrderUpdate = (menuItemName, menuId, price, add) => {
     let new_order;
     for (let i = 0; i < order.length; i++) {
       if (order.at(i).name === menuItemName) {
@@ -87,19 +87,36 @@ const ServerPage = () => {
     return;
   }
 
+  const handleQuantityUpdate = async (menuItem, shouldIncrease) => {
+    const new_order = [...order];
+    const menuItemToModifyIndex = new_order.findIndex(item => item.name === menuItem.name);
+    const qty = menuItem.quantity;
+    if (shouldIncrease) {
+      new_order.at(menuItemToModifyIndex).quantity += 1;
+    } else {
+      if (qty <= 1) {
+        new_order.splice(menuItemToModifyIndex, 1);
+      } else {
+        new_order.at(menuItemToModifyIndex).quantity -= 1;
+      }
+    }
+    setOrder(new_order);
+    return;
+  }
+
   return (
     <>
       <Box position='fixed'>
         <MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} />
         <Box mt="1em">
-          <OrderTotalDisplay order={order} onOrderSubmit={handleOrderSubmit} />
+          <OrderTotalDisplay order={order} onOrderSubmit={handleOrderSubmit} onQuantityUpdate={handleQuantityUpdate} />
         </Box>
         <Box mt="1em">
           <OrderHistoryDisplay />
         </Box>
       </Box>
       <Flex justify='flex-end'>
-        <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleUpdate} />
+        <MenuItemSelectionDisplay menuItems={menuItems} category={category} order={order} onUpdate={handleOrderUpdate} />
       </Flex>
     </>
   );

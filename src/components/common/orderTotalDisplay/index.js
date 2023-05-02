@@ -16,7 +16,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
+const OrderTotalDisplay = ({ order, onOrderSubmit, onQuantityUpdate }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -97,7 +97,7 @@ const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
                       <Button 
                         size="xs" fontSize="1rem" 
                         colorScheme='primary' variant='ghost'
-                        // onClick={() => onUpdate(false)}
+                        onClick={() => onQuantityUpdate(menuItem, false)}
                       >{"-"}</Button>
                       <Text textStyle="body4" textAlign="center">
                         {menuItem.quantity}
@@ -105,7 +105,7 @@ const OrderTotalDisplay = ({ order, onOrderSubmit }) => {
                       <Button 
                         size="xs" fontSize="1rem" 
                         colorScheme='primary' variant='ghost'
-                        // onClick={() => onUpdate(true)}
+                        onClick={() => onQuantityUpdate(menuItem, true)}
                       >{"+"}</Button>
                     </Flex>
                   </GridItem>
