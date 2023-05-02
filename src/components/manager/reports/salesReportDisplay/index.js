@@ -178,13 +178,19 @@ const SalesReportDisplay = () => {
                 )}
               </Box>
               {saleItems.length !== 0 && (
-              <BarChart width={450} height={300} data={chartData}>
+              <BarChart 
+                width={500} 
+                height={600} 
+                data={chartData}
+                layout="vertical"
+                margin={{top: 25, bottom: 25}}
+              >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" hide="true"/>
-                <YAxis />
+                <XAxis type="number"/>
+                <YAxis type="category" dataKey="name" hide="true"/>
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="sales" fill="#8884d8" />
+                <Bar dataKey="sales" fill="#e51636" />
               </BarChart>
               )}
             </ModalBody>

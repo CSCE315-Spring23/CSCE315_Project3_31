@@ -149,15 +149,15 @@ const RestockReportDisplay = () => {
                 height={500} 
                 data={chartData} 
                 layout="vertical"
-                margin={{top: 5, bottom: 5}}
+                margin={{top: 25, bottom: 25}}
               >
                 <XAxis type ="number"/>
                 <YAxis type="category" dataKey="name" hide="true"/>
                 <Tooltip />
                 <Legend />
                 <CartesianGrid stroke="#f5f5f5" />
-                <Bar dataKey="Quantity" barSize={20} fill="#413ea0" />
-                <Line type="monotone" dataKey="Minimum" stroke="#ff7300" />
+                <Bar dataKey="Quantity" barSize={20} fill="#e51636" />
+                <Line type="monotone" dataKey="Minimum" stroke="#e51636" />
               </ComposedChart>
             )}
             </ModalBody>
