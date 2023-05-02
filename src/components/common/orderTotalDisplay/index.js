@@ -13,6 +13,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Database from "../../../data";
+import OrderHistoryDisplay from "../orderHistoryDisplay";
 
 const OrderTotalDisplay = ({ order }) => {
 
@@ -47,9 +48,7 @@ const OrderTotalDisplay = ({ order }) => {
         duration: 500,
         isClosable: true,
       })
-      console.log("here1");
       const { order_id } = await Database.makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items);
-      console.log("here2");
       if (!order_id || order_id < 0) {
         toast({
           title: "Order Failed",
@@ -57,9 +56,6 @@ const OrderTotalDisplay = ({ order }) => {
           status: "error",
           duration: 5000,
           isClosable: true,
-          onClose: () => {
-            toast.close(loadToastId);
-          },
         })
         return;
       }
@@ -69,10 +65,8 @@ const OrderTotalDisplay = ({ order }) => {
         status: "success",
         duration: 5000,
         isClosable: true,
-        onClose: () => {
-          toast.close(loadToastId);
-        },
       })
+      order.length = 0;
       onClose();
     } catch (err) {
       console.error(err);
