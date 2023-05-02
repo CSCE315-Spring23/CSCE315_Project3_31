@@ -26,9 +26,11 @@ import CustomerPage from "../../pages/CustomerPage";
 import ServerPage from "../../pages/ServerPage";
 import ManagerPage from "../../pages/ManagerPage";
 import MenuPage from "../../pages/MenuPage";
+import WeatherDisplay from "../common/weatherDisplay";
+
 
 const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
-	const [user, setUser] = useState(userType ? userType : "SERVER");
+	const [user, setUser] = useState(userType ? userType : "CUSTOMER");
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -167,7 +169,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	);
 };
 
-const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
+const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {	
 	return (
 		<Grid templateColumns="repeat(3, 1fr)">
 			<Img
@@ -191,6 +193,7 @@ const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
 					<GoogleTranslate />
 				</HStack>
 			</Flex>
+			<WeatherDisplay />
 		</Grid>
 	);
 };

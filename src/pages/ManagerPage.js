@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	Flex,
-	Box,
-	Text,
-	Button,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import BaseLayout from "../components/mainView";
 import Database, { getUID } from "../data";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +13,8 @@ import XReportDisplay from "../components/manager/reports/xreportDisplay";
 import ZReportDisplay from "../components/manager/reports/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
-import { GoogleLogin } from "@react-oauth/google";
-
+import AddStaffForm from "../components/manager/createStaffForm";
+import WeatherDisplay from "../components/common/weatherDisplay";
 
 const ManagerPage = () => {
 	const [lookingAtMenu, setLookingAtMenu] = useState(true);
@@ -69,53 +64,80 @@ const ManagerPage = () => {
 		setOrder(new_order);
 	};
 
-  return (
-	<>
-		<Box position='fixed' width="15em">
-			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-				<Button 
-					size="md" fontSize="1.5rem" 
-					colorScheme='primary'
-					onClick={() => setLookingAtMenu(true)} variant={lookingAtMenu ? "solid" : "outline"}
-					p={3} px="2em"
-				>Menu</Button>
-				<Button 
-					size="md" fontSize="1.5rem" 
-					colorScheme='primary'
-					onClick={() => setLookingAtMenu(false)} variant={!lookingAtMenu ? "solid" : "outline"}
-					p={3} px="2em"
-				>Inventory</Button>
-			</Flex>
-			{
-				lookingAtMenu ?
+	return (
+		<>
+			<Box position="fixed" width="15em">
+				<Flex
+					flexDirection="column"
+					justify="center"
+					gap={1}
+					pt={2}
+					mb={2}
+				>
+					<Button
+						size="md"
+						fontSize="1.5rem"
+						colorScheme="primary"
+						onClick={() => setLookingAtMenu(true)}
+						variant={lookingAtMenu ? "solid" : "outline"}
+						p={3}
+						px="2em"
+					>
+						Menu
+					</Button>
+					<Button
+						size="md"
+						fontSize="1.5rem"
+						colorScheme="primary"
+						onClick={() => setLookingAtMenu(false)}
+						variant={!lookingAtMenu ? "solid" : "outline"}
+						p={3}
+						px="2em"
+					>
+						Inventory
+					</Button>
+				</Flex>
+				{lookingAtMenu ? (
 					<Flex flexDirection="column" justify="center" gap="1em">
-					<MenuCategorySelectionDisplay selectedCategory={category} onSelectCategory={setCategory} /> 
-					<CreateMenuItemForm onSubmit={() => setMenuItems([])} />
-					</Flex> 
-					: ""
-			}
-			<Box mt="1em">
-				<OrderHistoryDisplay />
+						<MenuCategorySelectionDisplay
+							selectedCategory={category}
+							onSelectCategory={setCategory}
+						/>
+						<CreateMenuItemForm onSubmit={() => setMenuItems([])} />
+						<AddStaffForm />
+					</Flex>
+				) : (
+					""
+				)}
+				<Box mt="1em">
+					<OrderHistoryDisplay />
+				</Box>
 			</Box>
-		</Box>
-		<Flex justify='center'>
-			<ItemSelectionDisplay 
-				isMenu={lookingAtMenu} 
-				items={lookingAtMenu ? menuItems : inventoryItems} 
-				category={category} onUpdate={handleUpdate} 
-			/>
-		</Flex>
-		<Box position="fixed" right="10em" top="7em" width="15em">
-			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-			<XReportDisplay/>
-			<ZReportDisplay/>
-			<SalesReportDisplay/>
-			<ExcessReportDisplay/>
-			<RestockReportDisplay/>
+			<Flex justify="center">
+				<ItemSelectionDisplay
+					isMenu={lookingAtMenu}
+					items={lookingAtMenu ? menuItems : inventoryItems}
+					category={category}
+					onUpdate={handleUpdate}
+				/>
 			</Flex>
-		</Box>
-	</>
-  );
+			<Box position="fixed" right="12em" top="10em" width="15em">
+				<Flex
+					flexDirection="column"
+					justify="center"
+					gap={1}
+					pt={2}
+					mb={2}
+				>
+					<XReportDisplay />
+					<ZReportDisplay />
+					<SalesReportDisplay />
+					<ExcessReportDisplay />
+					<RestockReportDisplay />
+				</Flex>
+			</Box>
+		</>
+	);
 };
 
 export default ManagerPage;

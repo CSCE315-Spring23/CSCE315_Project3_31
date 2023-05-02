@@ -123,6 +123,24 @@ export default class Database {
 		return response;
 	}
 
+	static async addStaffMember(restaurant_id, is_manager, name, email) {
+		const response = await fetch(`${backendOrigin}/auth/add`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				restaurant_id: restaurant_id,
+				is_manager: is_manager,
+				name: name,
+				email: email,
+			}),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
 	static async postGoogleAuth(params) {
 		const message = await fetch(`${backendOrigin}/auth/google-login`, {
 			method: "POST",
