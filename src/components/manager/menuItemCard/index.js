@@ -62,7 +62,7 @@ const MenuItemCard = ({ info, onUpdate, onItemUpdate }) => {
 				textAlign="center"
 				textStyle="body2Semi"
 			>
-				${price.toFixed(2)}
+				${price}
 			</Text>
 			<EditMenuItemForm
 				itemName={info.name}
