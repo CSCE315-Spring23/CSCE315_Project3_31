@@ -17,8 +17,9 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import Database from "../../../../data";
+import DeleteMenuItemConfirm from "./deleteMenuItemConfirm";
 
-const EditMenuItemForm = ({ onSubmit, itemName, onUpdate }) => {
+const EditMenuItemForm = ({ onSubmit, itemName, onUpdate, onItemUpdate }) => {
 	const [itemCost, setItemCost] = useState(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [submitCount, setSubmitCount] = useState(0);
@@ -80,6 +81,11 @@ const EditMenuItemForm = ({ onSubmit, itemName, onUpdate }) => {
 
 		return;
 	};
+
+	const handleConfirmDelete = async () => {
+		onClose();
+		return;
+	}
 
 	return (
 		<Flex justify="center" pt={2}>
@@ -150,10 +156,11 @@ const EditMenuItemForm = ({ onSubmit, itemName, onUpdate }) => {
 							</Box>
 						</Box>
 					</ModalBody>
-					<ModalFooter justifyContent="center">
+					<ModalFooter justifyContent="center" gap={2}>
 						<Button colorScheme="primary" onClick={handleSubmit}>
 							Confirm Change
 						</Button>
+						<DeleteMenuItemConfirm itemName={itemName} onConfirmDelete={handleConfirmDelete} onItemUpdate={onItemUpdate}/>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

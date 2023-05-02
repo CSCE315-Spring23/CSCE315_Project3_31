@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import EditMenuItemForm from "./editMenuItemForm";
 
-const MenuItemCard = ({ info, onUpdate }) => {
+const MenuItemCard = ({ info, onUpdate, onItemUpdate }) => {
 	const [price, setPrice] = useState(info.price);
 
 	const handleUpdate = (newPrice) => {
@@ -68,6 +68,7 @@ const MenuItemCard = ({ info, onUpdate }) => {
 				itemName={info.name}
 				itemCost={info.price}
 				onUpdate={handleUpdate}
+				onItemUpdate={onItemUpdate}
 			/>
 		</Box>
 	);

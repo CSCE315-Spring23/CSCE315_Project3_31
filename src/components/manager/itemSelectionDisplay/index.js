@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import MenuItemCard from '../menuItemCard';
 import InventoryItemCard from '../inventoryItemCard';
 
-const ItemSelectionDisplay = ({ isMenu, items, category, onUpdate }) => {
+const ItemSelectionDisplay = ({ isMenu, items, category, onUpdate, onItemUpdate }) => {
     return (
         <Grid templateColumns='repeat(2, 1fr)' gap={2}>
             {
@@ -15,6 +15,7 @@ const ItemSelectionDisplay = ({ isMenu, items, category, onUpdate }) => {
                                     <MenuItemCard 
                                         info={menuItem}
                                         onUpdate={onUpdate}
+                                        onItemUpdate={onItemUpdate}
                                     />
                                 </GridItem>
                                 : ""

@@ -88,6 +88,21 @@ export default class Database {
 		return response;
 	}
 
+	static async removeMenuItem(menu_id) {
+		const response = await fetch(`${backendOrigin}/menu/remove`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				menu_id: menu_id,
+			}),
+		})
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
+		return response;
+	}
+
 	static async updateMenuPriceByName(name, newPrice) {
 		const response = await fetch(`${backendOrigin}/menu/edit/price`, {
 			method: "POST",

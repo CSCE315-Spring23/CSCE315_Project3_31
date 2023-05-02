@@ -64,6 +64,19 @@ const ManagerPage = () => {
 		setOrder(new_order);
 	};
 
+	const handleItemUpdate = () => {
+		const updateMenu = async () => {
+			const menu = await Database.getMenuItems();
+			for (let i = 0; i < menu?.length; i++) {
+				let imageUrl = nameToUrl[menu[i].name];
+				if (imageUrl) menu[i].image = imageUrl;
+			}
+			setMenuItems(menu);
+		};
+		updateMenu();
+		return;
+	}
+
 	return (
 		<>
 			<Box position="fixed" width="15em">
@@ -118,6 +131,7 @@ const ManagerPage = () => {
 					items={lookingAtMenu ? menuItems : inventoryItems}
 					category={category}
 					onUpdate={handleUpdate}
+					onItemUpdate={handleItemUpdate}
 				/>
 			</Flex>
 
