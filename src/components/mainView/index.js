@@ -145,10 +145,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 												res.user.is_manager
 											) {
 												handleLogin();
-											} else if (
-												user === "SERVER" &&
-												!res.user.is_manager
-											) {
+											} else if (user === "SERVER") {
 												handleLogin();
 											} else {
 												toast({
@@ -239,7 +236,13 @@ const ContentContainer = ({ content }) => {
 
 const Footer = () => {
 	return (
-		<Flex flexDirection="column" width="100%" justify="center" pt={5} pb={1}>
+		<Flex
+			flexDirection="column"
+			width="100%"
+			justify="center"
+			pt={5}
+			pb={1}
+		>
 			<Text fontSize="md" mb={4} align="center" mx="auto">
 				Developed by{" "}
 				<Text as="span" fontWeight="bold" color="primary.500">
