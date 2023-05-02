@@ -169,6 +169,7 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 											isClosable: true,
 										});
 									}}
+									useOneTap
 								/>
 							) : (
 								<Button
