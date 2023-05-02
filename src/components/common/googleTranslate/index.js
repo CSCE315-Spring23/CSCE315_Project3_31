@@ -6,6 +6,7 @@ const StyledButton = styled(Button)`
   position: relative;
   width: 10em;
   padding: 2;
+  overflow: hidden;
 
   .container {
 	width: 100%;
