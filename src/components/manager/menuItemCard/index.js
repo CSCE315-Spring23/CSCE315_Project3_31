@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import EditMenuItemForm from "./editMenuItemForm";
 
 const MenuItemCard = ({ info, onUpdate }) => {
+	const [price, setPrice] = useState(info.price);
+
+	const handleUpdate = (newPrice) => {
+		setPrice(newPrice);
+		onUpdate(newPrice);
+	};
+
 	console.log(info);
 	const border = useColorModeValue(
 		"solid 1px rgb(0, 0, 0, 0.5)",
@@ -55,9 +62,13 @@ const MenuItemCard = ({ info, onUpdate }) => {
 				textAlign="center"
 				textStyle="body2Semi"
 			>
-				${info.price}
+				${price}
 			</Text>
-			<EditMenuItemForm itemName={info.name} itemCost={info.price} />
+			<EditMenuItemForm
+				itemName={info.name}
+				itemCost={info.price}
+				onUpdate={handleUpdate}
+			/>
 		</Box>
 	);
 };

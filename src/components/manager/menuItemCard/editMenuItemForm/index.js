@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../../data";
 
-const EditMenuItemForm = ({ onSubmit, itemName }) => {
+const EditMenuItemForm = ({ onSubmit, itemName, onUpdate }) => {
 	const [itemCost, setItemCost] = useState(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [submitCount, setSubmitCount] = useState(0);
@@ -74,6 +74,7 @@ const EditMenuItemForm = ({ onSubmit, itemName }) => {
 				duration: 5000,
 				isClosable: true,
 			});
+			onUpdate(newPrice);
 			setSubmitCount(submitCount + 1);
 		}
 
@@ -113,7 +114,12 @@ const EditMenuItemForm = ({ onSubmit, itemName }) => {
 									width: "40%",
 								}}
 							>
-								<Text textStyle="body3" textDecoration="underline">Current Cost: </Text>
+								<Text
+									textStyle="body3"
+									textDecoration="underline"
+								>
+									Current Cost:{" "}
+								</Text>
 								<Text textStyle="body3">${itemCost}</Text>
 							</Box>
 							<Box
