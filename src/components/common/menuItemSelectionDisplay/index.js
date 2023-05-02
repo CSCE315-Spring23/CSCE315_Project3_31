@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem, Box } from '@chakra-ui/react';
 import MenuItemCard from '../menuItemCard';
 
 const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, order, onUpdate }) => {
@@ -7,7 +7,7 @@ const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, ord
   return (
     <> {
       menuOnly ?
-      <Grid templateColumns='repeat(12, 1fr)' gap={1}> {
+      <Grid templateColumns='repeat(7, 1fr)' gap={1}> {
         menuItems?.length ? menuItems.map(
         menuItem =>
         <GridItem>
@@ -44,7 +44,8 @@ const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, ord
         ) : ""
         }
       </Grid>
-    } </>
+      }
+    </>
   );
 }
 
