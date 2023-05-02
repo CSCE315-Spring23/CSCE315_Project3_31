@@ -19,12 +19,15 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
+import { BarChart, Bar, CartesianGrid, YAxis, XAxis, Tooltip, Legend } from 'recharts';
+
 
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [saleItems, setSaleItems] = useState([]);
+  const [chartData, setChartData] = useState([]);
   const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +85,19 @@ const RestockReportDisplay = () => {
       duration: 5000,
       isClosable: true,
     })
+
+    const newChartData = sales.map((item) => ({
+      name: item.name,
+      sales: parseInt(item.total_qty),
+    }));
+    console.log("newChartData: ")
+    console.log(newChartData);
+
+    setChartData(newChartData);
+
   };
+
+  
 
   return (
     <Flex flexDirection="column" justify="center" justifyContent="center" alignItems="center" textAlign="center" py="0.5em">
@@ -162,6 +177,16 @@ const RestockReportDisplay = () => {
                   )
                 )}
               </Box>
+              {saleItems.length !== 0 && (
+              <BarChart width={450} height={300} data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" hide="true"/>
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="sales" fill="#8884d8" />
+              </BarChart>
+              )}
             </ModalBody>
             <ModalFooter justifyContent="center" gap={1}>
               <Button type="submit" colorScheme="primary">
