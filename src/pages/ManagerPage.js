@@ -19,6 +19,7 @@ import ZReportDisplay from "../components/manager/reports/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import { GoogleLogin } from "@react-oauth/google";
+import WeatherDisplay from "../components/common/weatherDisplay";
 
 
 const ManagerPage = () => {
@@ -105,13 +106,13 @@ const ManagerPage = () => {
 				category={category} onUpdate={handleUpdate} 
 			/>
 		</Flex>
-		<Box position="fixed" right="10em" top="7em" width="15em">
+		<Box position="fixed" right="12em" top="10em" width="15em">
 			<Flex flexDirection="column" justify='center' gap={1} pt={2} mb={2}>
-			<XReportDisplay/>
-			<ZReportDisplay/>
-			<SalesReportDisplay/>
-			<ExcessReportDisplay/>
-			<RestockReportDisplay/>
+				<XReportDisplay/>
+				<ZReportDisplay/>
+				<SalesReportDisplay/>
+				<ExcessReportDisplay/>
+				<RestockReportDisplay/>
 			</Flex>
 		</Box>
 	</>

@@ -23,6 +23,7 @@ import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
 import nameToUrl from "../imageMapping";
+import WeatherDisplay from "../components/common/weatherDisplay";
 
 
 const ServerPage = () => {

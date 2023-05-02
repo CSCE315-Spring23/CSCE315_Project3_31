@@ -24,9 +24,11 @@ import CustomerPage from "../../pages/CustomerPage";
 import ServerPage from "../../pages/ServerPage";
 import ManagerPage from "../../pages/ManagerPage";
 import MenuPage from "../../pages/MenuPage";
+import WeatherDisplay from "../common/weatherDisplay";
+
 
 const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
-	const [user, setUser] = useState(userType ? userType : "SERVER");
+	const [user, setUser] = useState(userType ? userType : "CUSTOMER");
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -165,23 +167,21 @@ const LoginPopup = ({ userType, onEnter, loggedIn, onSwitching }) => {
 	);
 };
 
-const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {
+const Navbar = ({ userType, onEnter, loggedIn, onSwitching }) => {	
 	return (
-		<Flex width="100%" mt="1" justify="center" align="center" px={2} pt={2}>
-			<HStack
-				fontSize="1.5rem"
-				fontWeight="800"
-				spacing="1.5em"
-				width="fit-content"
-			>
-				<LoginPopup
-					userType={userType}
-					onEnter={onEnter}
-					loggedIn={loggedIn}
-					onSwitching={onSwitching}
-				/>
-				<GoogleTranslate />
-			</HStack>
+		<Flex width="100%" mt="1" justify="space-between" align="center" px={2} pt={2}>
+			<WeatherDisplay />
+			<img
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Chick-fil-A_Logo.svg/582px-Chick-fil-A_Logo.svg.png"
+				width="200px"
+			/>
+			<LoginPopup
+				userType={userType}
+				onEnter={onEnter}
+				loggedIn={loggedIn}
+				onSwitching={onSwitching}
+			/>
+			<GoogleTranslate />
 		</Flex>
 	);
 };
