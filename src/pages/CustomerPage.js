@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-  useColorModeValue,
   Box,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Button,
-  Center,
+  useToast,
 } from "@chakra-ui/react";
-import BaseLayout from "../components/mainView";
 import Database, { getUID } from "../data";
-import { useNavigate } from "react-router-dom";
 import OrderTotalDisplay from "../components/common/orderTotalDisplay";
 import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
 import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisplay";
@@ -57,6 +44,43 @@ const CustomerPage = () => {
     setOrder(new_order);
   };
 
+  const toast = useToast();
+  
+  const handleOrderSubmit = async (e, cost_total, timestamp, customer_id, staff_id, menu_items) => {
+    e.preventDefault();
+    try {
+      const loadToastId = toast({
+        description: "Order Processing",
+        status: "loading",
+        duration: 500,
+        isClosable: true,
+      })
+      const { order_id } = await Database.makeOrder(cost_total, timestamp, customer_id, staff_id, menu_items);
+      if (!order_id || order_id < 0) {
+        toast({
+          title: "Order Failed",
+          description: "There was an issue with processing your order.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        })
+        return;
+      }
+      toast({
+        title: "Order Received",
+        description: "Your has been received and will be ready shortly. Your order id is " + order_id + ".",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      })
+      const new_order = [];
+      setOrder(new_order);
+    } catch (err) {
+      console.error(err);
+    }
+    return;
+  }
+
   return (
       <>
         <Box position="fixed">
@@ -65,7 +89,7 @@ const CustomerPage = () => {
             onSelectCategory={setCategory}
           />
           <Box mt="1em">
-            <OrderTotalDisplay order={order} />
+            <OrderTotalDisplay order={order} onOrderSubmit={handleOrderSubmit} />
           </Box>
         </Box>
         <Flex justify="flex-end">
