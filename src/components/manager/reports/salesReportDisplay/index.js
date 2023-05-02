@@ -22,7 +22,7 @@ import InfoButton from "../../../common/infoButton";
 import { BarChart, Bar, CartesianGrid, YAxis, XAxis, Tooltip, Legend } from 'recharts';
 
 
-const RestockReportDisplay = () => {
+const SalesReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -204,4 +204,4 @@ const RestockReportDisplay = () => {
   );
 };
 
-export default RestockReportDisplay;
+export default SalesReportDisplay;

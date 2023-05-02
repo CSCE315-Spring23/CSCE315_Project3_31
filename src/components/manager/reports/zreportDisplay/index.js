@@ -16,7 +16,7 @@ import {
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 
-const RestockReportDisplay = () => {
+const ZReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [totalSales, setTotalSales] = useState(0);
   const toast = useToast();
@@ -24,6 +24,8 @@ const RestockReportDisplay = () => {
     e.preventDefault();
     try {
       const report = await Database.getZReport();
+      console.log("REPORT: ", report);
+      console.log("TOTAL SALES: ", report.totalSales);
       const sales = report.total_sales;
       if (sales < 0) {
         toast({
@@ -89,4 +91,4 @@ const RestockReportDisplay = () => {
   );
 };
 
-export default RestockReportDisplay;
+export default ZReportDisplay;

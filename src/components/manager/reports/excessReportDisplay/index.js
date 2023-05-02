@@ -20,7 +20,7 @@ import {
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 
-const RestockReportDisplay = () => {
+const ExcessReportDisplay = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [excessItems, setExcessItems] = useState([]);
 	const toast = useToast();
@@ -165,4 +165,4 @@ const RestockReportDisplay = () => {
 	);
 };
 
-export default RestockReportDisplay;
+export default ExcessReportDisplay;

@@ -16,7 +16,7 @@ import {
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 
-const RestockReportDisplay = () => {
+const XReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [totalSales, setTotalSales] = useState(0);
   const toast = useToast();
@@ -89,4 +89,4 @@ const RestockReportDisplay = () => {
   );
 };
 
-export default RestockReportDisplay;
+export default XReportDisplay;
