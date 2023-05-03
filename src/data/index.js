@@ -208,7 +208,7 @@ export default class Database {
 	 * @param email {string}
 	 */
 	static async addStaffMember(restaurant_id, is_manager, name, email) {
-		const response = await fetch(`${backendOrigin}/auth/add`, {
+		const response = await fetch(`${backendOrigin}/staff/add`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
