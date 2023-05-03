@@ -12,8 +12,8 @@ Jeffrey Li
 
 Meeting Agenda Items:
 
-Discussing Google Translate API and its application
-Researching weather API and how to use it with React
+Finish up the implementation of the translate GUI and wider language support
+Implement the inventory and menu modularity in the manager view
 
 Status Update Since Last Meeting:
 
@@ -32,7 +32,11 @@ Implement info/help buttons
 
 Task Assignments:
 
-Implement GUI translate functionalities with Google Translate API: Assigned to David, Not started
-Implement 
+Implement GUI translate functionalities, Assigned to: David/Andrew
+Add more language support, Assigned to: Jeffrey
+Implement create menu items functionalities, Assigned to: Art/Jeffrey
+Implement edit menu items functionalities, Assigned to: Art/David
+Implement edit inventory item functionalities, Assigned to: Art
+
 
 End of Meeting
