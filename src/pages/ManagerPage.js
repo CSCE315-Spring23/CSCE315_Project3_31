@@ -14,6 +14,7 @@ import ZReportDisplay from "../components/manager/reports/zreportDisplay";
 import CreateMenuItemForm from "../components/manager/createMenuItemForm";
 import nameToUrl from "../imageMapping";
 import AddStaffForm from "../components/manager/createStaffForm";
+import StaffTable from "../components/manager/staffTable";
 import WeatherDisplay from "../components/common/weatherDisplay";
 
 /**
@@ -78,7 +79,7 @@ const ManagerPage = () => {
 		};
 		updateMenu();
 		return;
-	}
+	};
 
 	return (
 		<>
@@ -139,6 +140,7 @@ const ManagerPage = () => {
 			</Flex>
 
 			<Box position="fixed" right="12em" top="10em" width="15em">
+				<StaffTable />
 				<AddStaffForm />
 				<Flex
 					flexDirection="column"

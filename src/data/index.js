@@ -4,8 +4,8 @@ import uuid from "react-uuid";
 export default class Database {
 	/**
 	 * Basic function to fetch model with params
-	 * @param model {string} 
-	 * @param params {json} 
+	 * @param model {string}
+	 * @param params {json}
 	 */
 	static async _getModel(model, params) {
 		let time = Date.now();
@@ -30,7 +30,7 @@ export default class Database {
 
 	/**
 	 * Gets menu item by name
-	 * @param name {string} 
+	 * @param name {string}
 	 */
 	static async getMenuItemByName(name) {
 		let res = await this._getModel(`menu/name/${name}`);
@@ -63,6 +63,14 @@ export default class Database {
 	}
 
 	/**
+	 * Gets all staff
+	 */
+	static async getStaff() {
+		let res = await this._getModel("staff");
+		return res;
+	}
+
+	/**
 	 * Gets all recent orders
 	 */
 	static async getRecentOrders() {
@@ -72,11 +80,11 @@ export default class Database {
 
 	/**
 	 * Posts new order with parameters
-	 * @param cost_total {number} 
-	 * @param timestamp {date} 
-	 * @param customer_id {number} 
-	 * @param staff_id {number} 
-	 * @param menu_items {array} 
+	 * @param cost_total {number}
+	 * @param timestamp {date}
+	 * @param customer_id {number}
+	 * @param staff_id {number}
+	 * @param menu_items {array}
 	 */
 	static async makeOrder(
 		cost_total,
@@ -105,10 +113,10 @@ export default class Database {
 
 	/**
 	 * Posts new menu item with parameters
-	 * @param name {string} 
-	 * @param price {number} 
-	 * @param type {string} 
-	 * @param inventory_items {array} 
+	 * @param name {string}
+	 * @param price {number}
+	 * @param type {string}
+	 * @param inventory_items {array}
 	 */
 	static async addMenuItem(name, price, type, inventory_items) {
 		const response = await fetch(`${backendOrigin}/menu/add`, {
@@ -130,7 +138,7 @@ export default class Database {
 
 	/**
 	 * Posts to remove menu item with menu_id from the menu
-	 * @param menu_id {number} 
+	 * @param menu_id {number}
 	 */
 	static async removeMenuItem(menu_id) {
 		const response = await fetch(`${backendOrigin}/menu/remove`, {
@@ -149,8 +157,8 @@ export default class Database {
 
 	/**
 	 * Posts new price for menu item with name
-	 * @param name {string} 
-	 * @param newPrice {number} 
+	 * @param name {string}
+	 * @param newPrice {number}
 	 */
 	static async updateMenuPriceByName(name, newPrice) {
 		const response = await fetch(`${backendOrigin}/menu/edit/price`, {
@@ -170,8 +178,8 @@ export default class Database {
 
 	/**
 	 * Posts new quantity of inventory item with name
-	 * @param name {string} 
-	 * @param quantity {number} 
+	 * @param name {string}
+	 * @param quantity {number}
 	 */
 	static async updateInventoryQuantityByName(name, quantity) {
 		const response = await fetch(
@@ -194,9 +202,9 @@ export default class Database {
 
 	/**
 	 * Posts new staff member with params
-	 * @param restaurant_id {number} 
-	 * @param is_manager {boolean} 
-	 * @param name {string} 
+	 * @param restaurant_id {number}
+	 * @param is_manager {boolean}
+	 * @param name {string}
 	 * @param email {string}
 	 */
 	static async addStaffMember(restaurant_id, is_manager, name, email) {
@@ -219,11 +227,11 @@ export default class Database {
 
 	/**
 	 * Makes new order with parameters
-	 * @param cost_total {number} 
-	 * @param timestamp {date} 
-	 * @param customer_id {number} 
-	 * @param staff_id {number} 
-	 * @param menu_items {array} 
+	 * @param cost_total {number}
+	 * @param timestamp {date}
+	 * @param customer_id {number}
+	 * @param staff_id {number}
+	 * @param menu_items {array}
 	 */
 	static async postGoogleAuth(params) {
 		const message = await fetch(`${backendOrigin}/auth/google-login`, {
@@ -240,7 +248,7 @@ export default class Database {
 
 	/**
 	 * Gets restock report
-	 * @param minimumQty {number} 
+	 * @param minimumQty {number}
 	 */
 	static async getRestockReport(minimumQty) {
 		// console.log(minimumQty);
@@ -259,8 +267,8 @@ export default class Database {
 
 	/**
 	 * Gets sales report between sDate and eDate
-	 * @param sDate {date} 
-	 * @param eDate {date} 
+	 * @param sDate {date}
+	 * @param eDate {date}
 	 */
 	static async getSalesReport(sDate, eDate) {
 		const response = await fetch(
@@ -273,7 +281,7 @@ export default class Database {
 
 	/**
 	 * Gets excess report with timestamp
-	 * @param timestamp {date} 
+	 * @param timestamp {date}
 	 */
 	static async getExcessReport(timestamp) {
 		const response = await fetch(

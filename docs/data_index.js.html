@@ -32,8 +32,8 @@ import uuid from "react-uuid";
 export default class Database {
 	/**
 	 * Basic function to fetch model with params
-	 * @param model {string} 
-	 * @param params {json} 
+	 * @param model {string}
+	 * @param params {json}
 	 */
 	static async _getModel(model, params) {
 		let time = Date.now();
@@ -58,7 +58,7 @@ export default class Database {
 
 	/**
 	 * Gets menu item by name
-	 * @param name {string} 
+	 * @param name {string}
 	 */
 	static async getMenuItemByName(name) {
 		let res = await this._getModel(`menu/name/${name}`);
@@ -91,6 +91,14 @@ export default class Database {
 	}
 
 	/**
+	 * Gets all staff
+	 */
+	static async getStaff() {
+		let res = await this._getModel("staff");
+		return res;
+	}
+
+	/**
 	 * Gets all recent orders
 	 */
 	static async getRecentOrders() {
@@ -100,11 +108,11 @@ export default class Database {
 
 	/**
 	 * Posts new order with parameters
-	 * @param cost_total {number} 
-	 * @param timestamp {date} 
-	 * @param customer_id {number} 
-	 * @param staff_id {number} 
-	 * @param menu_items {array} 
+	 * @param cost_total {number}
+	 * @param timestamp {date}
+	 * @param customer_id {number}
+	 * @param staff_id {number}
+	 * @param menu_items {array}
 	 */
 	static async makeOrder(
 		cost_total,
@@ -133,10 +141,10 @@ export default class Database {
 
 	/**
 	 * Posts new menu item with parameters
-	 * @param name {string} 
-	 * @param price {number} 
-	 * @param type {string} 
-	 * @param inventory_items {array} 
+	 * @param name {string}
+	 * @param price {number}
+	 * @param type {string}
+	 * @param inventory_items {array}
 	 */
 	static async addMenuItem(name, price, type, inventory_items) {
 		const response = await fetch(`${backendOrigin}/menu/add`, {
@@ -158,7 +166,7 @@ export default class Database {
 
 	/**
 	 * Posts to remove menu item with menu_id from the menu
-	 * @param menu_id {number} 
+	 * @param menu_id {number}
 	 */
 	static async removeMenuItem(menu_id) {
 		const response = await fetch(`${backendOrigin}/menu/remove`, {
@@ -177,8 +185,8 @@ export default class Database {
 
 	/**
 	 * Posts new price for menu item with name
-	 * @param name {string} 
-	 * @param newPrice {number} 
+	 * @param name {string}
+	 * @param newPrice {number}
 	 */
 	static async updateMenuPriceByName(name, newPrice) {
 		const response = await fetch(`${backendOrigin}/menu/edit/price`, {
@@ -198,8 +206,8 @@ export default class Database {
 
 	/**
 	 * Posts new quantity of inventory item with name
-	 * @param name {string} 
-	 * @param quantity {number} 
+	 * @param name {string}
+	 * @param quantity {number}
 	 */
 	static async updateInventoryQuantityByName(name, quantity) {
 		const response = await fetch(
@@ -222,9 +230,9 @@ export default class Database {
 
 	/**
 	 * Posts new staff member with params
-	 * @param restaurant_id {number} 
-	 * @param is_manager {boolean} 
-	 * @param name {string} 
+	 * @param restaurant_id {number}
+	 * @param is_manager {boolean}
+	 * @param name {string}
 	 * @param email {string}
 	 */
 	static async addStaffMember(restaurant_id, is_manager, name, email) {
@@ -247,11 +255,11 @@ export default class Database {
 
 	/**
 	 * Makes new order with parameters
-	 * @param cost_total {number} 
-	 * @param timestamp {date} 
-	 * @param customer_id {number} 
-	 * @param staff_id {number} 
-	 * @param menu_items {array} 
+	 * @param cost_total {number}
+	 * @param timestamp {date}
+	 * @param customer_id {number}
+	 * @param staff_id {number}
+	 * @param menu_items {array}
 	 */
 	static async postGoogleAuth(params) {
 		const message = await fetch(`${backendOrigin}/auth/google-login`, {
@@ -268,7 +276,7 @@ export default class Database {
 
 	/**
 	 * Gets restock report
-	 * @param minimumQty {number} 
+	 * @param minimumQty {number}
 	 */
 	static async getRestockReport(minimumQty) {
 		// console.log(minimumQty);
@@ -287,8 +295,8 @@ export default class Database {
 
 	/**
 	 * Gets sales report between sDate and eDate
-	 * @param sDate {date} 
-	 * @param eDate {date} 
+	 * @param sDate {date}
+	 * @param eDate {date}
 	 */
 	static async getSalesReport(sDate, eDate) {
 		const response = await fetch(
@@ -301,7 +309,7 @@ export default class Database {
 
 	/**
 	 * Gets excess report with timestamp
-	 * @param timestamp {date} 
+	 * @param timestamp {date}
 	 */
 	static async getExcessReport(timestamp) {
 		const response = await fetch(
@@ -342,13 +350,13 @@ export default class Database {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddStaffForm">AddStaffForm</a></li><li><a href="global.html#ContentContainer">ContentContainer</a></li><li><a href="global.html#CreateMenuItemForm">CreateMenuItemForm</a></li><li><a href="global.html#CustomerPage">CustomerPage</a></li><li><a href="global.html#DEBUG">DEBUG</a></li><li><a href="global.html#DeleteMenuItemConfirm">DeleteMenuItemConfirm</a></li><li><a href="global.html#EditInventoryItemForm">EditInventoryItemForm</a></li><li><a href="global.html#EditMenuItemForm">EditMenuItemForm</a></li><li><a href="global.html#ExcessReportDisplay">ExcessReportDisplay</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#GoogleTranslate">GoogleTranslate</a></li><li><a href="global.html#InfoButton">InfoButton</a></li><li><a href="global.html#InventoryItemCard">InventoryItemCard</a></li><li><a href="global.html#ItemSelectionDisplay">ItemSelectionDisplay</a></li><li><a href="global.html#LoginPopup">LoginPopup</a></li><li><a href="global.html#MainView">MainView</a></li><li><a href="global.html#ManagerPage">ManagerPage</a></li><li><a href="global.html#MenuCategorySelectionDisplay">MenuCategorySelectionDisplay</a></li><li><a href="global.html#MenuItemCard">MenuItemCard</a></li><li><a href="global.html#MenuItemSelectionDisplay">MenuItemSelectionDisplay</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#OrderHistoryDisplay">OrderHistoryDisplay</a></li><li><a href="global.html#OrderTotalDisplay">OrderTotalDisplay</a></li><li><a href="global.html#RestockReportDisplay">RestockReportDisplay</a></li><li><a href="global.html#SalesReportDisplay">SalesReportDisplay</a></li><li><a href="global.html#ServerPage">ServerPage</a></li><li><a href="global.html#WeatherDisplay">WeatherDisplay</a></li><li><a href="global.html#XReportDisplay">XReportDisplay</a></li><li><a href="global.html#ZReportDisplay">ZReportDisplay</a></li><li><a href="global.html#_getModel">_getModel</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#addStaffMember">addStaffMember</a></li><li><a href="global.html#backendOrigin">backendOrigin</a></li><li><a href="global.html#getExcessReport">getExcessReport</a></li><li><a href="global.html#getInventoryItems">getInventoryItems</a></li><li><a href="global.html#getMenuItemByName">getMenuItemByName</a></li><li><a href="global.html#getMenuItems">getMenuItems</a></li><li><a href="global.html#getMenuItemsForOrder">getMenuItemsForOrder</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getRecentOrders">getRecentOrders</a></li><li><a href="global.html#getRestockReport">getRestockReport</a></li><li><a href="global.html#getSalesReport">getSalesReport</a></li><li><a href="global.html#getXReport">getXReport</a></li><li><a href="global.html#getZReport">getZReport</a></li><li><a href="global.html#makeOrder">makeOrder</a></li><li><a href="global.html#nameToUrl">nameToUrl</a></li><li><a href="global.html#postGoogleAuth">postGoogleAuth</a></li><li><a href="global.html#removeMenuItem">removeMenuItem</a></li><li><a href="global.html#updateInventoryQuantityByName">updateInventoryQuantityByName</a></li><li><a href="global.html#updateMenuPriceByName">updateMenuPriceByName</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddStaffForm">AddStaffForm</a></li><li><a href="global.html#ContentContainer">ContentContainer</a></li><li><a href="global.html#CreateMenuItemForm">CreateMenuItemForm</a></li><li><a href="global.html#CustomerPage">CustomerPage</a></li><li><a href="global.html#DEBUG">DEBUG</a></li><li><a href="global.html#DeleteMenuItemConfirm">DeleteMenuItemConfirm</a></li><li><a href="global.html#EditInventoryItemForm">EditInventoryItemForm</a></li><li><a href="global.html#EditMenuItemForm">EditMenuItemForm</a></li><li><a href="global.html#ExcessReportDisplay">ExcessReportDisplay</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#GoogleTranslate">GoogleTranslate</a></li><li><a href="global.html#InfoButton">InfoButton</a></li><li><a href="global.html#InventoryItemCard">InventoryItemCard</a></li><li><a href="global.html#ItemSelectionDisplay">ItemSelectionDisplay</a></li><li><a href="global.html#LoginPopup">LoginPopup</a></li><li><a href="global.html#MainView">MainView</a></li><li><a href="global.html#ManagerPage">ManagerPage</a></li><li><a href="global.html#MenuCategorySelectionDisplay">MenuCategorySelectionDisplay</a></li><li><a href="global.html#MenuItemCard">MenuItemCard</a></li><li><a href="global.html#MenuItemSelectionDisplay">MenuItemSelectionDisplay</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#OrderHistoryDisplay">OrderHistoryDisplay</a></li><li><a href="global.html#OrderTotalDisplay">OrderTotalDisplay</a></li><li><a href="global.html#RestockReportDisplay">RestockReportDisplay</a></li><li><a href="global.html#SalesReportDisplay">SalesReportDisplay</a></li><li><a href="global.html#ServerPage">ServerPage</a></li><li><a href="global.html#StaffTable">StaffTable</a></li><li><a href="global.html#WeatherDisplay">WeatherDisplay</a></li><li><a href="global.html#XReportDisplay">XReportDisplay</a></li><li><a href="global.html#ZReportDisplay">ZReportDisplay</a></li><li><a href="global.html#_getModel">_getModel</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#addStaffMember">addStaffMember</a></li><li><a href="global.html#backendOrigin">backendOrigin</a></li><li><a href="global.html#getExcessReport">getExcessReport</a></li><li><a href="global.html#getInventoryItems">getInventoryItems</a></li><li><a href="global.html#getMenuItemByName">getMenuItemByName</a></li><li><a href="global.html#getMenuItems">getMenuItems</a></li><li><a href="global.html#getMenuItemsForOrder">getMenuItemsForOrder</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getRecentOrders">getRecentOrders</a></li><li><a href="global.html#getRestockReport">getRestockReport</a></li><li><a href="global.html#getSalesReport">getSalesReport</a></li><li><a href="global.html#getStaff">getStaff</a></li><li><a href="global.html#getXReport">getXReport</a></li><li><a href="global.html#getZReport">getZReport</a></li><li><a href="global.html#makeOrder">makeOrder</a></li><li><a href="global.html#nameToUrl">nameToUrl</a></li><li><a href="global.html#postGoogleAuth">postGoogleAuth</a></li><li><a href="global.html#removeMenuItem">removeMenuItem</a></li><li><a href="global.html#updateInventoryQuantityByName">updateInventoryQuantityByName</a></li><li><a href="global.html#updateMenuPriceByName">updateMenuPriceByName</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 19:23:44 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 21:24:16 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
