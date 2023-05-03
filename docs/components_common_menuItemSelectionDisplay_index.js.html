@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/common/menuItemSelectionDisplay/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,78 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/common/menuItemSelectionDisplay/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect } from 'react';
+import { Grid, GridItem, Box } from '@chakra-ui/react';
+import MenuItemCard from '../menuItemCard';
 
+/**
+ * Returns component for displaying all menu items
+ * @param menuItems {object}
+ * @param readOnly {boolean}
+ * @param menuOnly {boolean}
+ * @param category {string}
+ * @param order {array}
+ * @param onUpdate {function}
+ */
+const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, order, onUpdate }) => {
+  useEffect(() => {}, [order]);
+  return (
+    &lt;> {
+      menuOnly ?
+      &lt;Grid templateColumns='repeat(7, 1fr)' gap={1}> {
+        menuItems?.length ? menuItems.map(
+        menuItem =>
+        &lt;GridItem>
+          &lt;MenuItemCard 
+            info={menuItem} 
+            readOnly={readOnly}
+            menuOnly={menuOnly}
+            subtract={order.some(
+              item => item.name === menuItem.name
+              &amp;&amp; item.quantity > 0
+            )}
+            onUpdate={onUpdate}
+          />
+        &lt;/GridItem>
+        ) : ""
+        }
+      &lt;/Grid> :
+      &lt;Grid templateColumns='repeat(3, 1fr)' gap={2}> {
+        menuItems?.length ? menuItems.map(
+        menuItem =>
+        menuItem.type === category ?
+        &lt;GridItem>
+          &lt;MenuItemCard 
+            info={menuItem} 
+            readOnly={readOnly}
+            subtract={order.some(
+              item => item.name === menuItem.name
+              &amp;&amp; item.quantity > 0
+            )}
+            onUpdate={onUpdate}
+          />
+        &lt;/GridItem>
+        : ""
+        ) : ""
+        }
+      &lt;/Grid>
+      }
+    &lt;/>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default MenuItemSelectionDisplay;</code></pre>
+        </article>
+    </section>
 
 
 

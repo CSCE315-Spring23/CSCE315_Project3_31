@@ -18,6 +18,10 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../data";
 
+/**
+ * Returns component for creating and submitting a new order
+ * @param onSubmit {function}
+ */
 const CreateMenuItemForm = ({ onSubmit }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();

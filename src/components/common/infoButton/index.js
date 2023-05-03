@@ -17,6 +17,11 @@ import {
   InfoIcon
 } from "@chakra-ui/icons";
 
+/**
+	 * Returns button for info
+	 * @param title {string} 
+	 * @param description {string} 
+	 */
 const InfoButton = ({ title, description }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 

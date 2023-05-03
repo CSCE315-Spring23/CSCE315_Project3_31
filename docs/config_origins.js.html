@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: config/origins.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,24 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: config/origins.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import DEBUG from "./debug";
+/**
+ * Check backendOrgin
+ */
+const backendOrigin = DEBUG ? 'http://localhost:8080' : 'https://csce315-project3-31-backend-production.up.railway.app';
+if (DEBUG) console.log(backendOrigin);
+export default backendOrigin;</code></pre>
+        </article>
+    </section>
 
 
 

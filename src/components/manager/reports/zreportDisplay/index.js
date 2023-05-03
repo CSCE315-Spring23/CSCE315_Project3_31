@@ -16,6 +16,9 @@ import {
 import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 
+/**
+ * Returns modal popup for Z Reports
+ */
 const ZReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [totalSales, setTotalSales] = useState(0);

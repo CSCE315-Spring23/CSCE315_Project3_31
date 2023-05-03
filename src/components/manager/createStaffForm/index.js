@@ -18,6 +18,10 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../data";
 
+/**
+ * Returns component for creating staff
+ * @param onSubmit {function}
+ */
 const AddStaffForm = ({ onSubmit }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 

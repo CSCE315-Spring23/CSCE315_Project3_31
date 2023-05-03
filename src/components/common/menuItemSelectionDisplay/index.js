@@ -2,6 +2,15 @@ import React, { useEffect } from 'react';
 import { Grid, GridItem, Box } from '@chakra-ui/react';
 import MenuItemCard from '../menuItemCard';
 
+/**
+ * Returns component for displaying all menu items
+ * @param menuItems {object}
+ * @param readOnly {boolean}
+ * @param menuOnly {boolean}
+ * @param category {string}
+ * @param order {array}
+ * @param onUpdate {function}
+ */
 const MenuItemSelectionDisplay = ({ menuItems, readOnly, menuOnly, category, order, onUpdate }) => {
   useEffect(() => {}, [order]);
   return (

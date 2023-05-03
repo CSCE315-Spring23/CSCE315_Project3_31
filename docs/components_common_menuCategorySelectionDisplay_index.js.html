@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/common/menuCategorySelectionDisplay/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,76 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/common/menuCategorySelectionDisplay/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Box, Text } from "@chakra-ui/react"
 
+/**
+ * Returns component for menu catagory selection
+ * @param selectedCategory {string} 
+ * @param onSelectCategory {function} 
+ */
+const MenuCategorySelectionDisplay = ({ selectedCategory, onSelectCategory }) => {
+    const categories = [
+        "Sandwiches",
+        "Sides",
+        "Desserts",
+        "Drinks",
+        "Other"
+    ];
 
-    <h3> </h3>
+    const handleClick = (categoryName) => {
+        if (selectedCategory !== categoryName) {
+            onSelectCategory(categoryName);
+        }
+    }
 
+    return (
+        &lt;Box
+            width="15em" height="fit-content" 
+            pt="0.5em" border="solid 1px" 
+            borderColor="grey.100" rounded="md" boxShadow="lg"
+        >   
+            &lt;Box mx="auto" borderBottom="solid 1px" borderColor="grey.900">
+                &lt;Text textAlign="center" textStyle="body2Semi">Menu Category&lt;/Text>
+            &lt;/Box>
+            &lt;Box width="100%" height="100%" overlowY="scroll">
+                {
+                    categories.map(
+                        categoryName => 
+                        &lt;Box onClick={
+                            () => handleClick(categoryName)
+                        }
+                        bg={
+                            selectedCategory === categoryName ?
+                                "primary.300" : ""
+                        }
+                        cursor="pointer"
+                        >
+                            &lt;Text
+                                textAlign="center"
+                                textStyle="body3"
+                            >
+                                {categoryName}
+                            &lt;/Text>
+                        &lt;/Box>
+                    )
+                }
+            &lt;/Box>
+        &lt;/Box>
+    )
+}
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default MenuCategorySelectionDisplay;</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,5 +1,10 @@
 import { Box, Text } from "@chakra-ui/react"
 
+/**
+ * Returns component for menu catagory selection
+ * @param selectedCategory {string} 
+ * @param onSelectCategory {function} 
+ */
 const MenuCategorySelectionDisplay = ({ selectedCategory, onSelectCategory }) => {
     const categories = [
         "Sandwiches",

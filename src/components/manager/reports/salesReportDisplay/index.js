@@ -21,7 +21,9 @@ import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 import { BarChart, Bar, CartesianGrid, YAxis, XAxis, Tooltip, Legend } from 'recharts';
 
-
+/**
+ * Returns modal popup for Sales Reports
+ */
 const SalesReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [startDate, setStartDate] = useState();

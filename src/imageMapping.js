@@ -1,3 +1,6 @@
+/**
+ * name to image url mappings
+ */
 const nameToUrl = {
     "Classic Chicken Sandwich": "https://www.cfacdn.com/img/order/menu/Online/Entrees/Jul19_CFASandwich_pdp.png",
     "Spicy Chicken Sandwich": "https://www.cfacdn.com/img/order/menu/Online/Entrees/CFASpicySandwich_1080.png",

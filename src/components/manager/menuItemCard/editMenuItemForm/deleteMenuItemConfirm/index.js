@@ -17,7 +17,13 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../../../data";
 
-const DeleteMenuItemConfirm = ({ onConfirmDelete, itemName, onItemUpdate }) => {
+/**
+ * Returns component for confirming the deletion of a menu item
+ * @param itemName {string}
+ * @param onConfirmDelete {function}
+ * @param onItemUpdate {function}
+ */
+const DeleteMenuItemConfirm = ({ itemName, onConfirmDelete, onItemUpdate }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const toast = useToast();

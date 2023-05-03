@@ -19,6 +19,14 @@ import {
 import Database from "../../../../data";
 import DeleteMenuItemConfirm from "./deleteMenuItemConfirm";
 
+
+/**
+ * Returns component for editing items
+ * @param onSubmit {function}
+ * @param itemName {string}
+ * @param onUpdate {function}
+ * @param onItemUpdate {function}
+ */
 const EditMenuItemForm = ({ onSubmit, itemName, onUpdate, onItemUpdate }) => {
 	const [itemCost, setItemCost] = useState(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();

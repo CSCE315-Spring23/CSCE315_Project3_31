@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/common/infoButton/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,76 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/common/infoButton/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import {
+  Text,
+  Flex,
+  Modal,
+  ModalOverlay,
+  ModalBody,
+  ModalHeader,
+  ModalContent,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  IconButton,
+  ModalFooter,
+} from "@chakra-ui/react";
+import {
+  InfoIcon
+} from "@chakra-ui/icons";
 
+/**
+	 * Returns button for info
+	 * @param title {string} 
+	 * @param description {string} 
+	 */
+const InfoButton = ({ title, description }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    <h3> </h3>
+  return (
+    &lt;Flex>
+      &lt;IconButton 
+        aria-label="Info"
+        icon={&lt;InfoIcon color="blue.500"/>}
+        size="lg"
+        variant="ghost"
+        _hover={{ bg: "transparent" }}
+        onClick={() => onOpen()}
+      >&lt;/IconButton>
+      &lt;Modal isOpen={isOpen} onClose={onClose} size="md">
+        &lt;ModalOverlay/>
+        &lt;ModalContent p={2}>
+          &lt;ModalHeader>
+            &lt;Text textStyle="body2Semi">{title}&lt;/Text>
+          &lt;/ModalHeader>
+          &lt;ModalBody>
+            &lt;Text>{description}&lt;/Text>
+          &lt;/ModalBody>
+          &lt;ModalFooter justifyContent="center">
+            &lt;Button type="submit" colorScheme="primary" onClick={onClose}>
+              Done
+            &lt;/Button>
+          &lt;/ModalFooter>
+        &lt;/ModalContent>
+      &lt;/Modal>
+    &lt;/Flex>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default InfoButton;
+</code></pre>
+        </article>
+    </section>
 
 
 

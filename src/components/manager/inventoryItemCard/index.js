@@ -11,6 +11,11 @@ import {
 import EditInventoryItemForm from "./editInventoryItemForm";
 import Database from "../../../data";
   
+  /**
+   * Returns card component for displaying an inventory item
+   * @param info {object}
+   * @param onUpdate {function}
+   */
   const InventoryItemCard = ({ info, onUpdate }) => {
     const border = useColorModeValue(
       "solid 1px rgb(0, 0, 0, 0.5)",

@@ -12,7 +12,9 @@ import MenuItemSelectionDisplay from "../components/common/menuItemSelectionDisp
 import nameToUrl from "../imageMapping";
 import WeatherDisplay from "../components/common/weatherDisplay";
 
-
+/**
+ * Returns main page component for the Server View
+ */
 const ServerPage = () => {
   const [category, setCategory] = useState("Sandwiches");
   const [order, setOrder] = useState([]);

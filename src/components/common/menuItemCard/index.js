@@ -8,6 +8,14 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+/**
+ * Returns component for menu item card
+ * @param info {object} 
+ * @param readOnly {boolean} 
+ * @param menuOnly {boolean} 
+ * @param subtract {boolean} 
+ * @param onUpdate {function} 
+ */
 const MenuItemCard = ({ info, readOnly, menuOnly, subtract, onUpdate }) => {
   const border = useColorModeValue(
     "solid 1px rgb(0, 0, 0, 0.5)",

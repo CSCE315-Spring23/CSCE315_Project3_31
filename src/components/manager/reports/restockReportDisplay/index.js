@@ -21,7 +21,9 @@ import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 import { ComposedChart, XAxis, YAxis, Line, CartesianGrid, Tooltip, Legend, Bar } from "recharts";
 
-
+/**
+ * Returns modal popup for Restock Reports
+ */
 const RestockReportDisplay = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [refillItems, setRefillItems] = useState([]);

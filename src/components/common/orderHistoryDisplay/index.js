@@ -14,6 +14,10 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../data";
 
+
+/**
+ * Returns component for order history
+ */
 const OrderHistoryDisplay = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();

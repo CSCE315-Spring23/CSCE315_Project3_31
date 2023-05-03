@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/manager/menuItemCard/editMenuItemForm/deleteMenuItemConfirm/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,115 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/manager/menuItemCard/editMenuItemForm/deleteMenuItemConfirm/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import {
+	Box,
+	Text,
+	Flex,
+	Button,
+	Modal,
+	ModalOverlay,
+	ModalBody,
+	ModalHeader,
+	ModalContent,
+	ModalCloseButton,
+	ModalFooter,
+	useDisclosure,
+	Input,
+	useToast,
+} from "@chakra-ui/react";
+import Database from "../../../../../data";
 
+/**
+ * Returns component for confirming the deletion of a menu item
+ * @param itemName {string}
+ * @param onConfirmDelete {function}
+ * @param onItemUpdate {function}
+ */
+const DeleteMenuItemConfirm = ({ itemName, onConfirmDelete, onItemUpdate }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
-    <h3> </h3>
+	const toast = useToast();
 
+	const handleConfirm = async (e) => {
+    e.preventDefault();
+    const menuItem = await Database.getMenuItemByName(itemName);
+    if (!(await Database.removeMenuItem(menuItem.menu_id))) {
+      toast({
+				title: "ERROR",
+				description: "Issue with deleting " + itemName + " from the menu.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			return;
+    } else {
+      toast({
+				title: "Item Deleted",
+				description: itemName + " was deleted from the menu.",
+				status: "success",
+				duration: 5000,
+				isClosable: true,
+			});
+    }
+    onItemUpdate();
+    onConfirmDelete();
+    onClose();
+		return;
+	};
 
+	return (
+    &lt;Flex>
+      &lt;Button
+        colorScheme="primary"
+        onClick={() => onOpen()}
+        border="2px solid darkred"
+      >
+        Delete Item
+      &lt;/Button>
+      &lt;Modal
+        isOpen={isOpen}
+        onClose={onClose}
+				closeOnOverlayClick={false}
+				closeOnEsc={false}
+        size="sm">
+        &lt;ModalOverlay />
+        &lt;ModalContent>
+          &lt;ModalHeader>
+            &lt;Text textStyle="body2Semi">Confirm to delete&lt;/Text>
+            &lt;Text>"{itemName}"&lt;/Text>
+          &lt;/ModalHeader>
+          &lt;ModalFooter justifyContent="center" gap={2}>
+            &lt;Button colorScheme="primary" onClick={handleConfirm}>
+              Confirm
+            &lt;/Button>
+            &lt;Button
+              colorScheme="primary"
+              onClick={onClose}
+              variant="outline"
+            >
+              Cancel
+            &lt;/Button>
+          &lt;/ModalFooter>
+        &lt;/ModalContent>
+      &lt;/Modal>
+    &lt;/Flex>
+	);
+};
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default DeleteMenuItemConfirm;
+</code></pre>
+        </article>
+    </section>
 
 
 

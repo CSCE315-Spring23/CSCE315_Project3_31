@@ -17,6 +17,12 @@ import {
 } from "@chakra-ui/react";
 import Database from "../../../../data";
 
+/**
+ * Returns component for editing inventory
+ * @param onSubmit {function}
+ * @param itemName {function}
+ * @param itemQuantity {number}
+ */
 const EditInventoryItemForm = ({ onSubmit, itemName, itemQuantity }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();

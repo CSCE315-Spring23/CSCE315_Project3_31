@@ -16,6 +16,9 @@ import nameToUrl from "../imageMapping";
 import AddStaffForm from "../components/manager/createStaffForm";
 import WeatherDisplay from "../components/common/weatherDisplay";
 
+/**
+ * Returns main page component for the Manager View
+ */
 const ManagerPage = () => {
 	const [lookingAtMenu, setLookingAtMenu] = useState(true);
 	const [category, setCategory] = useState("Sandwiches");

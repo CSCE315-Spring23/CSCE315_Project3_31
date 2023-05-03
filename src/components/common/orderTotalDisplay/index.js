@@ -16,6 +16,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+/**
+ * Returns component for order total display
+ * @param order {object}
+ * @param onOrderSubmit {function}
+ * @param onQuantityUpdate {function}
+ */
 const OrderTotalDisplay = ({ order, onOrderSubmit, onQuantityUpdate }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();

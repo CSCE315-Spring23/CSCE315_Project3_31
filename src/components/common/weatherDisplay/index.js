@@ -1,6 +1,9 @@
 import { Box, Text, Grid, GridItem } from "@chakra-ui/react";
 import { useState, useEffect } from 'react';
 
+/**
+ * Returns component for showing weather conditions
+ */
 const WeatherDisplay = () => {
     const [weather, setWeather] = useState({});
 

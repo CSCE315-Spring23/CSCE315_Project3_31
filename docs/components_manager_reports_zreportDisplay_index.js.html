@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/manager/reports/zreportDisplay/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,115 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/manager/reports/zreportDisplay/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import {
+  Text,
+  Flex,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalBody,
+  ModalHeader,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import Database from "../../../../data";
+import InfoButton from "../../../common/infoButton";
 
+/**
+ * Returns modal popup for Z Reports
+ */
+const ZReportDisplay = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [totalSales, setTotalSales] = useState(0);
+  const toast = useToast();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const report = await Database.getZReport();
+      console.log("REPORT: ", report);
+      console.log("TOTAL SALES: ", report.totalSales);
+      const sales = report.total_sales;
+      if (sales &lt; 0) {
+        toast({
+          title: "Z Report Not Generated",
+          description: "Issue with saving report.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        })
+      } else {
+        setTotalSales(sales);
+        toast({
+          title: "Z Report Generated",
+          description: "Generated end of day Z Report.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        })
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    <h3> </h3>
+  return (
+    &lt;Flex flexDirection="column" justify="center" justifyContent="center" alignItems="center" textAlign="center" py="0.5em">
+      &lt;Button
+        onClick={() => onOpen()}
+        size="md" fontSize="md"
+        width="75%"
+        colorScheme="primary" variant="solid"
+        p={3} px="2em"
+      >
+        Z Report
+      &lt;/Button>
+      &lt;Modal isOpen={isOpen} onClose={onClose} size="md">
+        &lt;ModalOverlay />
+        &lt;ModalContent>
+          &lt;form onSubmit={handleSubmit}>
+            &lt;ModalHeader>
+              &lt;Text textStyle="body2Semi">Z Report&lt;/Text>
+            &lt;/ModalHeader>
+            &lt;ModalCloseButton />
+            &lt;ModalBody>
+              &lt;Flex flexDirection="row" gap={2}>
+                &lt;Text textStyle="body3Semi">Total Sales:&lt;/Text>
+                &lt;Text textStyle="body3">${totalSales.toFixed(2)}&lt;/Text>
+              &lt;/Flex>
+            &lt;/ModalBody>
+            &lt;ModalFooter justifyContent="center" gap={1}>
+              &lt;Button type="submit" colorScheme="primary">
+                Generate Report
+              &lt;/Button>
+              &lt;InfoButton 
+                title={"What is a Z Report?"}
+                description={"A Z Report is a historical report of all transactions for the current day. The reported number will be a reflection of all sales for today."}
+              />
+            &lt;/ModalFooter>
+          &lt;/form>
+        &lt;/ModalContent>
+      &lt;/Modal>
+    &lt;/Flex>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default ZReportDisplay;
+</code></pre>
+        </article>
+    </section>
 
 
 

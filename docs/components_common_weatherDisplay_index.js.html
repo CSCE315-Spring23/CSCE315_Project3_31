@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/common/weatherDisplay/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,75 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/common/weatherDisplay/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Box, Text, Grid, GridItem } from "@chakra-ui/react";
+import { useState, useEffect } from 'react';
 
+/**
+ * Returns component for showing weather conditions
+ */
+const WeatherDisplay = () => {
+    const [weather, setWeather] = useState({});
 
-    <h3> </h3>
+	useEffect(() => {
+		const getWeather = async () => {
+			const res = await fetch(
+				"http://api.weatherapi.com/v1/current.json?key=44dd80c5f1dd47f8ba104537230205&amp;q=77840&amp;aqi=no"
+			).then(result => result.json());
+			setWeather(res.current);
+		}
 
+		getWeather();
+	}, []);
 
+    return (
+        &lt;Box p="1em" rounded="md" border="solid 1px" borderColor="grey.100" boxShadow='md'
+            w="20em" h="fit=content"
+        >
+            &lt;Text textAlign="center">
+                &lt;b>Weather&lt;/b>
+            &lt;/Text>
+            &lt;Grid templateColumns='repeat(2, 1fr)' gap={1}>
+                &lt;GridItem>
+                    {
+                        weather?.condition?.text ?
+                        &lt;Text mt={1}>&lt;b>Condition:&lt;/b> {weather.condition.text}&lt;/Text> : ""
+                    }
+                &lt;/GridItem>
+                &lt;GridItem>
+                    {
+                        weather?.temp_f ?
+                        &lt;Text mt={1}>&lt;b>Temp:&lt;/b> {weather.temp_f} F&lt;/Text> : ""
+                    }
+                &lt;/GridItem>
+                &lt;GridItem>
+                    {
+                        weather?.wind_mph ?
+                        &lt;Text mt={1}>&lt;b>Wind:&lt;/b> {weather.wind_mph} mph&lt;/Text> : ""
+                    }
+                &lt;/GridItem>
+                &lt;GridItem>
+                    {
+                        weather?.humidity ?
+                        &lt;Text mt={1}>&lt;b>Humidity:&lt;/b> {weather.humidity}%&lt;/Text> : ""
+                    }
+                &lt;/GridItem>
+            &lt;/Grid>
+        &lt;/Box>
+    );
+};
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default WeatherDisplay;</code></pre>
+        </article>
+    </section>
 
 
 

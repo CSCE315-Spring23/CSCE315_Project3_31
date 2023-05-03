@@ -21,6 +21,9 @@ import Database from "../../../../data";
 import InfoButton from "../../../common/infoButton";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
+/**
+ * Returns modal popup for Excess Reports
+ */
 const ExcessReportDisplay = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [excessItems, setExcessItems] = useState([]);

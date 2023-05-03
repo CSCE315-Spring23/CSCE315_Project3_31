@@ -37,6 +37,9 @@ const StyledButton = styled(Button)`
   }
 `;
 
+/**
+ * Returns button for google translate
+ */
 const GoogleTranslate = () => {
 	return (
 		<StyledButton colorScheme="primary">
